@@ -224,6 +224,6 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: com.googol.android.apps.oneplayer.pro
-          releaseFiles: ${{steps.signed_standard_aab.outputs.signedReleaseFile}}
+          releaseFiles: ${{steps.signed_plus_aab.outputs.signedReleaseFile}}
           track: internal
           whatsNewDirectory: ./whatsnew
