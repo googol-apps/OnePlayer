@@ -1,5 +1,5 @@
 [versions]
-agp = "9.3.0"                # Android Gradle Plugin
+agp = "9.3.1"                # Android Gradle Plugin
 kotlin = "2.4.10"             # Kotlin language + Compose plugin
 media3 = "1.10.1"             # Media3 playback libraries
 toolkit = "3.7.14-dev"       # Prime Toolkit modules

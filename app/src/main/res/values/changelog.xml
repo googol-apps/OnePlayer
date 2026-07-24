@@ -12,6 +12,7 @@
 <resources>
     <!--Changelog-->
     <string-array name="changelog" translatable="false">
+        <item>@string/changelog_1_6_3_beta</item>
         <item>@string/changelog_1_6_2_beta</item>
         <item>@string/changelog_1_6_1_beta</item>
         <item>@string/changelog_1_6_0_beta</item>
@@ -40,7 +41,22 @@
     </string-array>
 
     <!--Points to the changelog of current version.-->
-    <string name="release_notes" translatable="false">@string/changelog_1_6_3_beta</string>
+    <string name="release_notes" translatable="false">@string/changelog_1_6_5</string>
+
+    <!--1.6.5-->
+    <string name="changelog_1_6_5" translatable="false">
+    <b>What’s New <font color='green'>(v1.6.5)\n</font></b>
+    <font color='grey'>
+        \n✓ <b>Permissions Update:</b>
+        \n    • Added <b>INTERNET</b> permission for network-related features.
+        \n    • Removed <b>RECEIVE_BOOT_COMPLETED</b> to optimize startup behavior.
+        \n    • Disabled <b>AD_ID</b> permission to enhance user privacy.
+        \n✓ <b>Build Infrastructure:</b>
+        \n    • Upgraded Android Gradle Plugin (AGP) from <b>9.3.0</b> to <b>9.3.1</b>.
+        \n✓ <b>Version Bump:</b>
+        \n    • Incremented internal build version to 32.
+    </font>
+    </string>
 
     <!--1.6.3-beta-->
     <string name="changelog_1_6_3_beta" translatable="false">

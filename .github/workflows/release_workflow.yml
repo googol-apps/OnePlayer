@@ -209,11 +209,21 @@ jobs:
 #            ${{steps.signed_gold_apk.outputs.signedReleaseFile}}
 
       # Uploading Signed AAB to internal track of PlayConsole
-      - name: Deploy to Play Store (Internal)
+      - name: Deploy STANDARD Play Store (Internal)
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: com.googol.android.apps.oneplayer
+          releaseFiles: ${{steps.signed_standard_aab.outputs.signedReleaseFile}}
+          track: internal
+          whatsNewDirectory: ./whatsnew
+
+      # Uploading Signed AAB to internal track of PlayConsole
+      - name: Deploy Plus to Play Store (Internal)
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          packageName: com.googol.android.apps.oneplayer.pro
           releaseFiles: ${{steps.signed_standard_aab.outputs.signedReleaseFile}}
           track: internal
           whatsNewDirectory: ./whatsnew
