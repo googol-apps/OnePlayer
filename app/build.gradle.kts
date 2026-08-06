@@ -73,8 +73,8 @@ android {
         applicationId = "com.googol.android.apps.oneplayer" // Unique app ID
         minSdk = 28                                         // Minimum supported Android version
         targetSdk = 37                                      // Target SDK
-        versionCode = 35                                  // Internal version code
-        versionName = "1.6.7"                               // User-facing version name
+        versionCode = 36                                  // Internal version code
+        versionName = "1.6.8"                               // User-facing version name
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
     }
@@ -114,7 +114,7 @@ android {
 
         // Debug build configuration
         debug {
-           // applicationIdSuffix = ".debug"   // Allows installing debug + release side by side
+            applicationIdSuffix = ".debug"   // Allows installing debug + release side by side
             resValue("string", "launcher_label", "Debug") // Custom launcher label
             versionNameSuffix = "-debug"     // Append suffix to version name
         }

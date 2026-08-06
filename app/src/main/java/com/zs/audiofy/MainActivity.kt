@@ -77,6 +77,8 @@ import com.zs.core.billing.Paymaster
 import com.zs.core.billing.Product
 import com.zs.core.billing.Purchase
 import com.zs.core.billing.purchased
+import com.zs.core.common.isInstalledFromPlayStore
+import com.zs.core.common.isPlayStoreAvailable
 import com.zs.core.common.showPlatformToast
 import com.zs.core.market.AppMarketManager
 import com.zs.core.playback.Remote
@@ -608,7 +610,18 @@ class MainActivity : ComponentActivity(), SystemFacade, NavDestListener {
                     ) // What's new
                     return@launch
                 }
-
+                // check if app is installed from market other than playstore.
+                if(!isInstalledFromPlayStore && isPlayStoreAvailable()){
+                    val res = snackbarHostState.showSnackbar(
+                        resources.getText2(Res.string.msg_playstore_encouragement),
+                        duration = SnackbarDuration.Indefinite,
+                        icon = ImageVector.vectorResource(theme, resources, Res.drawable.ic_shop_two),
+                        action = resources.getString(Res.string.get)
+                    )
+                    if (res == SnackbarResult.ActionPerformed)
+                        launchAppStore("com.googol.android.apps.oneplayer")
+                    return@launch
+                }
                 // Promotional messages are displayed only after the app has been launched
                 // more than 5 times (MIN_LAUNCHES_BEFORE_REVIEW).
                 // This ensures that users have had a chance to familiarize themselves with the app
