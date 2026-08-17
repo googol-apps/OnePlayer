@@ -1,8 +1,8 @@
 [versions]
 agp = "9.3.1"                # Android Gradle Plugin
 kotlin = "2.4.10"             # Kotlin language + Compose plugin
-media3 = "1.10.1"             # Media3 playback libraries
-toolkit = "3.7.14-dev"       # Prime Toolkit modules
+media3 = "1.11.0"             # Media3 playback libraries
+toolkit = "3.7.15-dev"       # Prime Toolkit modules
 material_icons = "1.7.8"     # Material Icons for Compose
 coil = "3.5.0"               # Coil image loader
 room = "2.8.4"               # Room persistence library
@@ -34,7 +34,7 @@ androidx-biometric = { module = "androidx.biometric:biometric-ktx", version = "1
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version = "1.13.0" } # Compose Activity
 androidx-work = { module = "androidx.work:work-runtime-ktx", version = "2.11.2" }    # WorkManager
 androidx-palette = { module = "androidx.palette:palette-ktx", version = "1.0.0" }  # Color palette extraction
-androidx-constraint-layout = { module = "androidx.constraintlayout:constraintlayout-compose", version = "1.1.1" } # ConstraintLayout in Compose
+androidx-constraint-layout = { module = "androidx.constraintlayout:constraintlayout-compose", version = "1.1.2" } # ConstraintLayout in Compose
 androidx-graphics-shapes = { module = "androidx.graphics:graphics-shapes", version = "1.1.0" } # Shape utilities
 
 # ─── Media & Playback ───
@@ -47,7 +47,7 @@ nextlib = { module = "io.github.anilbeesetti:nextlib-media3ext", version = "1.10
 
 # ─── Google Play Services ───
 play-app_update = { module = "com.google.android.play:app-update-ktx", version = "2.1.0" } # In-app updates
-play-app_review = { module = "com.google.android.play:review-ktx", version = "2.0.1" }     # In-app reviews
+play-app_review = { module = "com.google.android.play:review-ktx", version = "2.0.2" }     # In-app reviews
 play-billing_client = { module = "com.android.billingclient:billing-ktx", version = "9.1.0" } # Billing
 play_feature_delivery = { module = "com.google.android.play:feature-delivery-ktx", version = "2.1.0" } # Dynamic delivery
 
@@ -60,7 +60,7 @@ unity_ads_mediation = { module = "com.unity3d.ads-mediation:mediation-sdk", vers
 unity_ads_adquality = { module = "com.unity3d.ads-mediation:adquality-sdk", version = "9.8.0" } # Ad quality SDK
 
 # ─── Jetpack Compose ───
-compose-bom = { module = "androidx.compose:compose-bom", version = "2026.06.01" } # BOM for Compose
+compose-bom = { module = "androidx.compose:compose-bom", version = "2026.08.00" } # BOM for Compose
 compose-ui = { module = "androidx.compose.ui:ui" }                                # Core UI
 compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }              # Graphics utilities
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }                # Preview tooling
@@ -73,7 +73,7 @@ compose-animation = {module = "androidx.compose.animation:animation-graphics"}
 material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "material_icons" } # Core icons
 material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material_icons" } # Extended icons
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version = "6.7.1" } # Lottie animations
-google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version = "1.11.4" } # Google Fonts
+google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version = "1.12.0" } # Google Fonts
 
 # ─── Navigation ───
 nav2-compose = { module = "androidx.navigation:navigation-compose", version = "2.9.8" } # Navigation 2
@@ -98,15 +98,15 @@ coil-avif-coder = { module = "com.github.awxkee:avif-coder-coil", version = "2.1
 
 # ─── Toolkit ───
 # Prime Toolkit modules for foundation, preferences, and theming
-toolkit-foundation = { module = "com.github.prime-zs.toolkit:foundation", version.ref = "toolkit" }   # Core utilities
-toolkit-preferences = { module = "com.github.prime-zs.toolkit:preferences", version.ref = "toolkit" } # Preferences storage
-toolkit-theme = { module = "com.github.prime-zs.toolkit:theme", version.ref = "toolkit" }             # Theming system
+toolkit-foundation = { module = "com.github.googol-apps.toolkit:foundation", version.ref = "toolkit" }   # Core utilities
+toolkit-preferences = { module = "com.github.googol-apps.toolkit:preferences", version.ref = "toolkit" } # Preferences storage
+toolkit-theme = { module = "com.github.googol-apps.toolkit:theme", version.ref = "toolkit" }             # Theming system
 
 # ─── UI Enhancements ───
 # Extra UI libraries for Compose
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version = "0.37.3" } # Runtime permissions
 androidx-koin = { module = "io.insert-koin:koin-androidx-compose", version = "4.2.2" }                     # Dependency injection
-chrisbanes-haze = { module = "dev.chrisbanes.haze:haze", version = "1.6.10" }                              # Blur/haze effects
+chrisbanes-haze = { module = "dev.chrisbanes.haze:haze", version = "1.7.2" }                              # Blur/haze effects
 
 # ─── Glance ───
 # App widgets and Material3 support
