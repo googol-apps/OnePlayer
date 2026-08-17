@@ -2,7 +2,7 @@
 agp = "9.3.1"                # Android Gradle Plugin
 kotlin = "2.4.10"             # Kotlin language + Compose plugin
 media3 = "1.11.0"             # Media3 playback libraries
-toolkit = "3.7.15-dev"       # Prime Toolkit modules
+toolkit = "3.8.1-dev"       # Prime Toolkit modules
 material_icons = "1.7.8"     # Material Icons for Compose
 coil = "3.5.0"               # Coil image loader
 room = "2.8.4"               # Room persistence library
@@ -22,7 +22,7 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 # ─── Codegen & Services ───
 ksp = { id = "com.google.devtools.ksp", version = "2.3.4" }                  # Kotlin Symbol Processing
 google-services = { id = "com.google.gms.google-services", version = "4.5.0" } # Firebase/Play services
-crashanlytics = { id = "com.google.firebase.crashlytics", version = "3.0.6" } # Crashlytics Gradle plugin
+crashanlytics = { id = "com.google.firebase.crashlytics", version = "3.0.7" } # Crashlytics Gradle plugin
 
 [libraries]
 # ─── Core AndroidX ───
@@ -47,7 +47,7 @@ nextlib = { module = "io.github.anilbeesetti:nextlib-media3ext", version = "1.10
 
 # ─── Google Play Services ───
 play-app_update = { module = "com.google.android.play:app-update-ktx", version = "2.1.0" } # In-app updates
-play-app_review = { module = "com.google.android.play:review-ktx", version = "2.0.2" }     # In-app reviews
+play-app_review = { module = "com.google.android.play:review-ktx", version = "2.0.1" }     # In-app reviews
 play-billing_client = { module = "com.android.billingclient:billing-ktx", version = "9.1.0" } # Billing
 play_feature_delivery = { module = "com.google.android.play:feature-delivery-ktx", version = "2.1.0" } # Dynamic delivery
 
@@ -106,7 +106,7 @@ toolkit-theme = { module = "com.github.googol-apps.toolkit:theme", version.ref =
 # Extra UI libraries for Compose
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version = "0.37.3" } # Runtime permissions
 androidx-koin = { module = "io.insert-koin:koin-androidx-compose", version = "4.2.2" }                     # Dependency injection
-chrisbanes-haze = { module = "dev.chrisbanes.haze:haze", version = "1.7.2" }                              # Blur/haze effects
+chrisbanes-haze = { module = "dev.chrisbanes.haze:haze", version = "1.6.10" }                              # Blur/haze effects
 
 # ─── Glance ───
 # App widgets and Material3 support
