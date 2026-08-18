@@ -48,7 +48,17 @@
     <string name="changelog_1_6_10" translatable="false">
     <b>What’s New <font color='green'>(v1.6.10)\n</font></b>
     <font color='grey'>
-        \n✓
+        \n✓ <b>UI &amp; Experience:</b>
+        \n    • Re-enabled smooth resizing animations in the playback queue.
+        \n    • Improved queue list layout to ensure it utilizes all available screen space.
+        \n    • Refined artwork styling in the Recents section with a new unified decorator system.
+        \n✓ <b>Core Dependencies:</b>
+        \n    • Upgraded <b>Media3</b> to 1.11.0 and <b>Compose BOM</b> to 2026.08.00.
+        \n    • Migrated and updated internal <b>Toolkit</b> to v3.8.2-dev under a new organizational namespace.
+        \n    • Updated <b>Google Fonts</b>, <b>Constraint Layout</b>, and <b>Crashlytics</b>.
+        \n✓ <b>Maintenance:</b>
+        \n    • Reverted <b>Haze</b> to 1.6.10 and <b>Play App Review</b> to 2.0.1 for better stability.
+        \n    • Incremented build version to 38.
     </font>
     </string>
 

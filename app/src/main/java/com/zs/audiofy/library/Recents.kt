@@ -47,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.zs.audiofy.common.compose.ContentPadding
 import com.zs.audiofy.common.compose.emit
+import com.zs.compose.foundation.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.text.Text
 import com.zs.core.db.playlists.Playlist.Track
@@ -83,10 +84,14 @@ private fun Recent(
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(66.dp) // Adjust size if needed
-                .border(2.dp, Color.White, RECENT_ICON_SHAPE) // Add white border
-                .shadow(4.dp, RECENT_ICON_SHAPE) // Add subtle shadow
-                .background(AppTheme.colors.background(1.dp))
+                .size(66.dp)
+                .decorator(
+                    backgroundColor = AppTheme.colors.background(1.dp),
+                    elevation = 4.dp,
+                    shape = RECENT_ICON_SHAPE,
+                    borderWidth = 2.dp,
+                    borderColor = Color.White
+                )
         )
 
         // Label below the artwork with padding and styling

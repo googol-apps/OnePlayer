@@ -1,4 +1,7 @@
-* Added INTERNET permission for network features.
-* Removed startup boot receiver to optimize performance.
-* Disabled AD_ID permission to enhance user privacy.
-* Incremented internal build version to 32.
+* Re-enabled smooth resizing animations in the playback queue.
+* Improved queue list layout to utilize all available screen space.
+* Refined artwork styling in Recents with a new decorator system.
+* Upgraded Media3, Compose BOM, and internal Toolkit.
+* Updated Google Fonts, Constraint Layout, and Crashlytics.
+* Reverted Haze and Play App Review for improved stability.
+* Incremented build version to 38.

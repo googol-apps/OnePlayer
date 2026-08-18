@@ -28,6 +28,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -235,6 +236,7 @@ fun Queue(viewState: QueueViewState, shape: Shape, insets: WindowInsets) {
                 contentPadding = insets.only(WIS.Bottom + WIS.End)
                     .asPaddingValues(density),
                 modifier = Modifier
+                    .fillMaxSize()
                     .windowInsetsPadding(WindowInsets.content),
                 content = {
                     val data = emit(true, items) ?: return@LazyColumn
