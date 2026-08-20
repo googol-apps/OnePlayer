@@ -54,10 +54,13 @@ composeCompiler {
 // -----------------------------
 android {
     buildFeatures { compose = true} // Enable Compose and BuildConfig generation
-    packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }  // Exclude redundant license files from packaging
     namespace = "com.zs.audiofy" // Unique namespace for the app
     compileSdk = 37 // Compile against Android SDK level 36 → latest APIs available
     dynamicFeatures += setOf(":feature:codex")
+    packaging {
+        jniLibs.keepDebugSymbols.add("**/*.so")
+        resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" }
+    }  // Exclude redundant license files from packaging
 
     // -----------------------------
     // Java Compatibility Options
