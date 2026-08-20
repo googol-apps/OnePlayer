@@ -22,7 +22,7 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 # ─── Codegen & Services ───
 ksp = { id = "com.google.devtools.ksp", version = "2.3.4" }                  # Kotlin Symbol Processing
 google-services = { id = "com.google.gms.google-services", version = "4.5.0" } # Firebase/Play services
-crashanlytics = { id = "com.google.firebase.crashlytics", version = "3.0.7" } # Crashlytics Gradle plugin
+crashanlytics = { id = "com.google.firebase.crashlytics", version = "3.0.8" } # Crashlytics Gradle plugin
 
 [libraries]
 # ─── Core AndroidX ───
@@ -56,8 +56,8 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", ve
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "19.4.4" } # Crash reporting
 
 # ─── Ads & Monetization ───
-unity_ads_mediation = { module = "com.unity3d.ads-mediation:mediation-sdk", version = "9.5.0" } # Ad mediation
-unity_ads_adquality = { module = "com.unity3d.ads-mediation:adquality-sdk", version = "9.8.0" } # Ad quality SDK
+unity_ads_mediation = { module = "com.unity3d.ads-mediation:mediation-sdk", version = "9.6.0" } # Ad mediation
+unity_ads_adquality = { module = "com.unity3d.ads-mediation:adquality-sdk", version = "9.9.0" } # Ad quality SDK
 
 # ─── Jetpack Compose ───
 compose-bom = { module = "androidx.compose:compose-bom", version = "2026.08.00" } # BOM for Compose
@@ -79,7 +79,7 @@ google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version = 
 nav2-compose = { module = "androidx.navigation:navigation-compose", version = "2.9.8" } # Navigation 2
 nav3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "nav3" } # Navigation 3 runtime
 nav3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "nav3" }         # Navigation 3 UI
-nav3_viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version = "2.10.0" } # ViewModel integration
+nav3_viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version = "2.11.0" } # ViewModel integration
 
 # ─── Persistence ───
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" } # Room runtime
@@ -115,8 +115,8 @@ glance-material3 = { module = "androidx.glance:glance-material3", version.ref = 
 
 # ─── Paging ───
 # Paging runtime + Compose integration
-androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version = "3.4.2" }   # Paging runtime
-androidx-paging-compose = { module = "androidx.paging:paging-compose", version = "3.4.2" } # Paging in Compose
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version = "3.5.1" }   # Paging runtime
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version = "3.5.1" } # Paging in Compose
 
 [bundles]
 analytics = ["firebase-analytics", "firebase-crashlytics"] # Firebase analytics + crash reporting

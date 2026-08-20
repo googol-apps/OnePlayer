@@ -1,5 +1,6 @@
 // Import Gradle DSL helpers for Android and Kotlin configuration
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import com.android.build.api.dsl.ApplicationDefaultConfig as Config
 
 // -----------------------------
 // Plugins Section
@@ -10,6 +11,22 @@ plugins {
     alias(libs.plugins.kotlin.compose) // Kotlin Compose plugin → adds Jetpack Compose compiler integration
     alias(libs.plugins.google.services) // Google Services plugin → integrates Firebase/Google services (e.g., Analytics, Auth)
     alias(libs.plugins.crashanlytics)// Crashlytics plugin → enables Firebase Crashlytics for crash reporting
+}
+
+///
+//  -------------------------------------------------------------------------------------
+//  APPLICATION CONFIGURATION
+//  -------------------------------------------------------------------------------------
+//  Defines the core identity and compatibility parameters of the application.
+//  This lambda is applied to the [defaultConfig] block within the [android] section.
+private val config: Config.() -> Unit = {
+    versionCode = 40                                    // Internal version code
+    versionName = "1.7.0"                               // User-facing version name
+    applicationId = "com.googol.android.apps.oneplayer" // Unique app ID
+    minSdk = 28                                         // Minimum supported Android version
+    targetSdk = 37                                      // Target SDK
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    vectorDrawables { useSupportLibrary = true }
 }
 
 // -----------------------------
@@ -53,14 +70,15 @@ composeCompiler {
 // Android Configuration
 // -----------------------------
 android {
-    buildFeatures { compose = true} // Enable Compose and BuildConfig generation
+    buildFeatures { compose = true } // Enable Compose and BuildConfig generation
     namespace = "com.zs.audiofy" // Unique namespace for the app
     compileSdk = 37 // Compile against Android SDK level 36 → latest APIs available
     dynamicFeatures += setOf(":feature:codex")
-    packaging {
+    defaultConfig(config)
+    packaging { // Exclude redundant license files from packaging
         jniLibs.keepDebugSymbols.add("**/*.so")
         resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" }
-    }  // Exclude redundant license files from packaging
+    }
 
     // -----------------------------
     // Java Compatibility Options
@@ -70,18 +88,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    // -----------------------------
-    // Default Config
-    // -----------------------------
-    defaultConfig {
-        applicationId = "com.googol.android.apps.oneplayer" // Unique app ID
-        minSdk = 28                                         // Minimum supported Android version
-        targetSdk = 37                                      // Target SDK
-        versionCode = 39                                  // Internal version code
-        versionName = "1.6.11"                               // User-facing version name
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables { useSupportLibrary = true }
-    }
 
     // -------------------------------------------------------------------------
     // PRODUCT FLAVORS
