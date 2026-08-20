@@ -75,7 +75,7 @@ import com.zs.compose.foundation.Background
 import com.zs.compose.foundation.ImageBrush
 import com.zs.compose.foundation.background
 import com.zs.compose.foundation.lerp
-import com.zs.compose.foundation.plus
+import androidx.compose.foundation.layout.plus
 import com.zs.compose.foundation.textResource
 import com.zs.compose.foundation.thenIf
 import com.zs.compose.foundation.visualEffect

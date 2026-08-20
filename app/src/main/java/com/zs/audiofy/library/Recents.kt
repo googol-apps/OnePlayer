@@ -47,7 +47,7 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.zs.audiofy.common.compose.ContentPadding
 import com.zs.audiofy.common.compose.emit
-import com.zs.compose.foundation.decorator
+import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.text.Text
 import com.zs.core.db.playlists.Playlist.Track

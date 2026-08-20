@@ -83,7 +83,7 @@ import com.zs.compose.foundation.MetroGreen
 import com.zs.compose.foundation.composableIf
 import com.zs.compose.foundation.foreground
 import com.zs.compose.foundation.fullLineSpan
-import com.zs.compose.foundation.plus
+import androidx.compose.foundation.layout.plus
 import com.zs.compose.foundation.textResource
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.BaseListItem

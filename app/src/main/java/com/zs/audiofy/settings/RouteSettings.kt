@@ -53,7 +53,7 @@ import com.zs.audiofy.common.compose.fadingEdge2
 import com.zs.audiofy.common.compose.rememberAcrylicSurface
 import com.zs.audiofy.common.compose.source
 import com.zs.audiofy.common.vectorResource
-import com.zs.compose.foundation.plus
+import androidx.compose.foundation.layout.plus
 import com.zs.compose.foundation.textResource
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.FloatingActionButton

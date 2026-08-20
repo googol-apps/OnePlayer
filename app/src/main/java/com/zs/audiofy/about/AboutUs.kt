@@ -32,6 +32,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.plus
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
@@ -69,7 +70,6 @@ import com.zs.audiofy.common.compose.source
 import com.zs.audiofy.common.vectorResource
 import com.zs.audiofy.settings.DancingScriptFontFamily
 import com.zs.audiofy.settings.Settings
-import com.zs.compose.foundation.plus
 import com.zs.compose.foundation.shapes.SquircleShape
 import com.zs.compose.foundation.textArrayResource
 import com.zs.compose.foundation.textResource

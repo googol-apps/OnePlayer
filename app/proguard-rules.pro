@@ -47,3 +47,12 @@
 -keep class com.zs.feature.telemetry.AnalyticsImpl { *; }
 # Suppress warnings about Firebase encoder internals
 -dontwarn com.google.firebase.encoders.json.NumberedEnum
+
+# Media3 ShuffleOrder; Dont rename
+-keepnames class androidx.media3.exoplayer.ExoPlayerImpl {
+    private androidx.media3.exoplayer.source.ShuffleOrder shuffleOrder;
+}
+
+-keepnames class androidx.media3.exoplayer.source.ShuffleOrder$DefaultShuffleOrder {
+    private int[] shuffled;
+}

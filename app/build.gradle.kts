@@ -37,6 +37,19 @@ kotlin {
 }
 
 // -----------------------------
+// Compose Compiler Configuration
+// -----------------------------
+composeCompiler {
+    // Stability configuration for Compose compiler
+    // TODO - I guess disable these in release builds.reportsDestination =
+    //     layout.buildDirectory.dir("compose_compiler")
+    // metricsDestination = layout.buildDirectory.dir("compose_compiler")
+    stabilityConfigurationFiles = listOf(
+        rootProject.layout.projectDirectory.file("stability_config.conf")
+    )
+}
+
+// -----------------------------
 // Android Configuration
 // -----------------------------
 android {
@@ -44,19 +57,7 @@ android {
     packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }  // Exclude redundant license files from packaging
     namespace = "com.zs.audiofy" // Unique namespace for the app
     compileSdk = 37 // Compile against Android SDK level 36 → latest APIs available
-
-    // -----------------------------
-    // Compose Compiler Configuration
-    // -----------------------------
-    composeCompiler {
-        // Stability configuration for Compose compiler
-        // TODO - I guess disable these in release builds.reportsDestination =
-        //     layout.buildDirectory.dir("compose_compiler")
-        // metricsDestination = layout.buildDirectory.dir("compose_compiler")
-        stabilityConfigurationFiles = listOf(
-            rootProject.layout.projectDirectory.file("stability_config.conf")
-        )
-    }
+    dynamicFeatures += setOf(":feature:codex")
 
     // -----------------------------
     // Java Compatibility Options
@@ -73,8 +74,8 @@ android {
         applicationId = "com.googol.android.apps.oneplayer" // Unique app ID
         minSdk = 28                                         // Minimum supported Android version
         targetSdk = 37                                      // Target SDK
-        versionCode = 38                                  // Internal version code
-        versionName = "1.6.10"                               // User-facing version name
+        versionCode = 39                                  // Internal version code
+        versionName = "1.6.11"                               // User-facing version name
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
     }
@@ -97,6 +98,7 @@ android {
             dimension = "edition"; versionNameSuffix = "-gold"; applicationIdSuffix = ".full"
         }
     }
+
     // -----------------------------
     // Build Types
     // -----------------------------
@@ -119,7 +121,6 @@ android {
             versionNameSuffix = "-debug"     // Append suffix to version name
         }
     }
-    dynamicFeatures += setOf(":feature:codex")
 }
 
 // -----------------------------
