@@ -49,7 +49,15 @@
     <string name="changelog_1_6_11" translatable="false">
     <b>What’s New <font color='green'>(v1.6.11)\n</font></b>
     <font color='grey'>
-        \n✓
+        \n✓ <b>UI &amp; Layout:</b>
+        \n    • Improved queue accessibility by ensuring the list occupies all available screen space.
+        \n    • Refactored artwork styling in the Recents section using a unified decorator for consistent borders and elevation.
+        \n✓ <b>Build &amp; Infrastructure:</b>
+        \n    • Optimized CI/CD release workflow with flavor-specific build tasks (Standard, Community, Plus, Gold).
+        \n    • Refined build packaging to preserve JNI debug symbols for native library troubleshooting.
+        \n    • Cleaned up artifact distribution and consolidated build tool detection.
+        \n✓ <b>Internal:</b>
+        \n    • Updated Toolkit to v3.8.2-dev.
     </font>
     </string>
 

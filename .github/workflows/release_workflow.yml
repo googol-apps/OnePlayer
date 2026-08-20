@@ -1,25 +1,39 @@
+# 🚀 CI/CD Pipeline for Android App
+# Automates build, signing, release notes, and Play Store deployment.
 name: CI/CD Pipeline
+
+# -------------------------------------------------------------------------------------------------
+# Trigger Configuration
+# -------------------------------------------------------------------------------------------------
 on:
   push:
-    branches: # Change this to master once everything is setup.
-      - 'beta'
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    branches:
+      - 'beta' # 🔧 Temporary branch; switch to 'master' once stable
+  workflow_dispatch: # ▶️ Manual trigger from Actions tab
     inputs:
       max_commits:
         description: "Release notes up to:"
         required: false
         default: "1"
+
+# -------------------------------------------------------------------------------------------
+# 📂 Job
+# -------------------------------------------------------------------------------------------
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # -------------------------------------------------------------------------------------------
+      # 📂 Step 1: Checkout source code
+      # -------------------------------------------------------------------------------------------
       - name: Checkout Codebase
         uses: actions/checkout@v3
         with:
           fetch-depth: 0 # full git history
 
-      # Generate release notes from commit messages, restricted by 3
+      # -------------------------------------------------------------------------------------------
+      # 📝 Step 2: Generate release notes (restricted by 3)
+      # -------------------------------------------------------------------------------------------
       - name: Generate Release Notes
         id: notes
         run: |
@@ -48,7 +62,10 @@ jobs:
           echo "notes<<EOF" >> $GITHUB_OUTPUT
           echo "$notes" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-      # Cache Gradle
+
+      # -------------------------------------------------------------------------------------------
+      #  📦 Step 3: Cache Gradle dependencies for faster builds
+      # -------------------------------------------------------------------------------------------
       - name: Cache Gradle Dependencies
         uses: actions/cache@v3
         with:
@@ -59,6 +76,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      # -------------------------------------------------------------------------------------------
+      # ⚙️ Step 4: Configure environment variables (date, secrets, version tag)
+      # -------------------------------------------------------------------------------------------
       - name: Configure Environment Variables
         run: |
           echo "DATE_TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
@@ -66,12 +86,18 @@ jobs:
           echo "ADS_APP_ID=$(echo ${{ secrets.ADS_APP_ID }})" >> $GITHUB_ENV
           echo "GIT_TAG=$(grep -E "versionName\s*=?\s*['\"]" "app/build.gradle.kts" | awk -F"['\"]" '{print $2}')" >> $GITHUB_ENV
 
+      # -------------------------------------------------------------------------------------------
+      # 🔍 Step 5: Verify secrets and variables are correctly set
+      # -------------------------------------------------------------------------------------------
       - name: Verify Environment Variables
         run: |
           echo $ADS_APP_ID | sed 's/./&‌/g'
           echo $PLAY_CONSOLE_APP_RSA_KEY | sed 's/./&‌/g'
           echo $GIT_TAG | sed 's/./&‌/g'
 
+      # -------------------------------------------------------------------------------------------
+      # ☕ Step 6: Install Java 21 (Zulu) with Gradle cache
+      # -------------------------------------------------------------------------------------------
       - name: Set Up Java and Gradle
         uses: actions/setup-java@v3
         with:
@@ -79,15 +105,26 @@ jobs:
           java-version: "21"
           cache: gradle
 
+      # -------------------------------------------------------------------------------------------
+      # 🏗️ Step 7: Build APK + AAB (all flavors)
+      # -------------------------------------------------------------------------------------------
       - name: Build App
         run: |
           chmod +x ./gradlew
-          ./gradlew assembleRelease bundleRelease \
+          ./gradlew \
+            assembleStandardRelease \
+            bundleStandardRelease \
+            assembleCommunityRelease \
+            bundlePlusRelease \
+            bundleGoldRelease \
             --parallel \
             --configure-on-demand \
             --no-daemon \
             -Dorg.gradle.jvmargs="-Xmx4g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError"
 
+      # -------------------------------------------------------------------------------------------
+      # 🛠️ Step 8: Detect latest Android build tools version
+      # -------------------------------------------------------------------------------------------
       - name: Determine Build Tools Version
         shell: bash
         run: |
@@ -95,6 +132,9 @@ jobs:
           echo "BUILD_TOOL_VERSION=$BUILD_TOOL_VERSION" >> $GITHUB_ENV
           echo Last build tool version is: $BUILD_TOOL_VERSION
 
+      # -------------------------------------------------------------------------------------------
+      # 🔐 Step 9: Sign APKs/AABs for each flavor
+      # -------------------------------------------------------------------------------------------
       - name: Signing STANDARD APK
         uses: r0adkll/sign-android-release@v1
         id: signed_standard_apk
@@ -119,47 +159,11 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
 
-      - name: Signing PLUS APK
-        uses: r0adkll/sign-android-release@v1
-        id: signed_plus_apk
-        with:
-          releaseDirectory: app/build/outputs/apk/plus/release/
-          signingKeyBase64: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
-          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
-
-      - name: Signing GOLD APK
-        uses: r0adkll/sign-android-release@v1
-        id: signed_gold_apk
-        with:
-          releaseDirectory: app/build/outputs/apk/gold/release/
-          signingKeyBase64: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
-          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
-
       - name: Sign STANDARD AAB
         uses: r0adkll/sign-android-release@v1
         id: signed_standard_aab
         with:
           releaseDirectory: app/build/outputs/bundle/standardRelease/
-          signingKeyBase64: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
-          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
-
-      - name: Sign COMMUNITY AAB
-        uses: r0adkll/sign-android-release@v1
-        id: signed_community_aab
-        with:
-          releaseDirectory: app/build/outputs/bundle/communityRelease/
           signingKeyBase64: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
           alias: ${{ secrets.SIGNING_KEY_ALIAS }}
           keyStorePassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
@@ -191,6 +195,9 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
 
+      # -------------------------------------------------------------------------------------------
+      # 📦 Step 10: Create GitHub Release with signed artifacts
+      # -------------------------------------------------------------------------------------------
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
@@ -202,13 +209,10 @@ jobs:
             ${{steps.signed_standard_apk.outputs.signedReleaseFile}}
             ${{steps.signed_standard_aab.outputs.signedReleaseFile}}
             ${{steps.signed_community_apk.outputs.signedReleaseFile}}
-            ${{steps.signed_community_aab.outputs.signedReleaseFile}}
-#            ${{steps.signed_plus_aab.outputs.signedReleaseFile}}
-#            ${{steps.signed_plus_apk.outputs.signedReleaseFile}}
-#            ${{steps.signed_gold_aab.outputs.signedReleaseFile}}
-#            ${{steps.signed_gold_apk.outputs.signedReleaseFile}}
 
-      # Uploading Signed AAB to internal track of PlayConsole
+      # -------------------------------------------------------------------------------------------
+      # 📲 Step 11: Deploy signed AABs to Play Console (internal track)
+      # -------------------------------------------------------------------------------------------
       - name: Deploy STANDARD Play Store (Internal)
         uses: r0adkll/upload-google-play@v1
         with:

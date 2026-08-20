@@ -1,7 +1,4 @@
 * Re-enabled smooth resizing animations in the playback queue.
-* Improved queue list layout to utilize all available screen space.
-* Refined artwork styling in Recents with a new decorator system.
-* Upgraded Media3, Compose BOM, and internal Toolkit.
-* Updated Google Fonts, Constraint Layout, and Crashlytics.
-* Reverted Haze and Play App Review for improved stability.
-* Incremented build version to 38.
+* Improved queue accessibility by ensuring the list utilizes all available screen space.
+* Refactored artwork styling in Recents using a unified decorator for consistent borders and elevation.
+* Upgraded Media3, Compose BOM, and internal Toolkit to v3.8.2-dev.
