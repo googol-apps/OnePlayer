@@ -65,7 +65,6 @@ android {
     defaultConfig {
         minSdk = 28 // Minimum supported Android version (28 → Android 9 Pie)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro") // Consumer ProGuard rules → applied when this library is consumed by other apps/modules
         // --------------------------------------------------------------------
         // BUILD CONFIG: SECRETS
         // --------------------------------------------------------------------
