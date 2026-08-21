@@ -102,8 +102,10 @@ private val OutfitFontFamily = FontFamily("Outfit")
 val FontFamily.Companion.OutfitFontFamily get() = com.zs.audiofy.settings.OutfitFontFamily
 private val RobotoFontFamily = FontFamily("Roboto")
 val FontFamily.Companion.RobotoFontFamily get() = com.zs.audiofy.settings.RobotoFontFamily
-val DancingScriptFontFamily = FontFamily("Dancing Script")
+private val DancingScriptFontFamily = FontFamily("Dancing Script")
 val FontFamily.Companion.DancingScriptFontFamily get() = com.zs.audiofy.settings.DancingScriptFontFamily
+private val GeomFontFamily = FontFamily("Geom")
+val FontFamily.Companion.GeomFontFamily get() = com.zs.audiofy.settings.GeomFontFamily
 
 /**
  * ##### Settings

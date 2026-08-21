@@ -39,6 +39,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -49,6 +50,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.core.view.WindowCompat
@@ -121,6 +123,7 @@ import com.zs.audiofy.playlists.members.Members
 import com.zs.audiofy.playlists.members.RouteMembers
 import com.zs.audiofy.properties.Properties
 import com.zs.audiofy.properties.RouteProperties
+import com.zs.audiofy.settings.GeomFontFamily
 import com.zs.audiofy.settings.RouteSettings
 import com.zs.audiofy.settings.Settings
 import com.zs.audiofy.videos.RouteVideos
@@ -628,7 +631,7 @@ fun Home(
     val strategy by activity.observeAsState(Settings.COLORIZATION_STRATEGY)
     AppTheme(
         isLight = !isDark,
-        fontFamily = Settings.DefaultFontFamily,
+        fontFamily = FontFamily.GeomFontFamily,
         accent = when {
             strategy == AccentColorPolicy.WALLPAPER && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
                 dynamicAccentColor(activity, isDark)
@@ -653,7 +656,7 @@ fun Home(
 
     // Observe the state of the IMMERSE_VIEW setting
     val transparentSystemBars by activity.observeAsState(Settings.TRANSPARENT_SYSTEM_BARS)
-    LaunchedEffect( style, isDark, transparentSystemBars) {
+    SideEffect ( style, isDark, transparentSystemBars) {
         // Get the WindowInsetsController for managing system bars
         val window = activity.window
         val controller = WindowCompat.getInsetsController(window, window.decorView)
@@ -680,7 +683,7 @@ fun Home(
         }
         // Configure the system bars background color based on the current style settings
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM)
-            return@LaunchedEffect // No supported from here.
+            return@SideEffect // No supported from here.
         window.apply {
             val color = when (style.flagSystemBarBackground) {
                 WindowStyle.FLAG_SYSTEM_BARS_BG_TRANSLUCENT -> Color(0x20000000).toArgb()  // Translucent background

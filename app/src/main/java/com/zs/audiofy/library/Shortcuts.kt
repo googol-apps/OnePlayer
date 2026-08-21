@@ -70,10 +70,10 @@ private fun Shortcut(
     border = BorderStroke(1.dp, AppTheme.colors.onBackground.copy(0.4f)),
     onClick = onAction,
     contentColor = AppTheme.colors.onBackground,
-    modifier = modifier.size(95.dp, 73.dp),
+    modifier = modifier,
     content = {
         Column(
-            modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp, vertical = 8.dp),
+            modifier = Modifier.size(95.dp, 73.dp).padding(horizontal = 12.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.SpaceBetween,
             content = {
                 Icon(// Icon at the top

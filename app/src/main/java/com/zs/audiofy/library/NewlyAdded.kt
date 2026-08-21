@@ -21,17 +21,24 @@ package com.zs.audiofy.library
 import android.net.Uri
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.AnimationConstants
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -51,21 +58,25 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil3.compose.AsyncImage
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.allowHardware
 import coil3.request.crossfade
 import coil3.toBitmap
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
 import com.zs.audiofy.common.compose.emit
+import com.zs.audiofy.common.shapes.CompactDisk
 import com.zs.audiofy.common.vectorResource
 import com.zs.compose.foundation.ImageBrush
 import com.zs.compose.foundation.SignalWhite
+import com.zs.compose.foundation.decorator.EdgeInsets
+import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.foundation.foreground
 import com.zs.compose.foundation.visualEffect
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.Icon
+import com.zs.compose.theme.Surface
 import com.zs.compose.theme.text.Label
 import com.zs.core.common.WallpaperAccentColor
 import com.zs.core.store.MediaProvider
@@ -73,6 +84,7 @@ import com.zs.core.store.models.Audio
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.saveable.rememberSaveable as savable
+import com.zs.audiofy.common.compose.ContentPadding as CP
 
 private val ColorSaver = object : Saver<Color, Int> {
     override fun restore(value: Int): Color? {
@@ -100,85 +112,38 @@ private fun NewlyAddedItem(
     modifier: Modifier = Modifier,
     imageUri: Uri? = null,
 ) {
-    Box(
+    val colors = AppTheme.colors
+    Surface(
+        color = colors.background(4.dp),
+        shape = AppTheme.shapes.xLarge,
+        onClick = onClick,
         modifier = modifier
-            .shadow(8.dp, AppTheme.shapes.large) // Light shadow
-            .clickable(onClick = onClick) // Enable clicking
-            .size(224.dp, 132.dp), // Set minimum size
-        contentAlignment = Alignment.Center, // Center content within the box
-        content = {
-            val primary = AppTheme.colors.accent
-            var savable by savable(
-                imageUri?.toString(),
-                stateSaver = ColorSaver,
-                init = { mutableStateOf(Color.Unspecified) })
-            val accent by animateColorAsState(
-                savable.takeOrElse { primary },
-                label = "accent-color"
-            )
-            val context = LocalContext.current
-            val scope = rememberCoroutineScope()
-            // Load image using Coil
-            Image(
+    ) {
+        Column(modifier = Modifier.size(width = 138.dp, 210.dp)) {
+            AsyncImage(
+                imageUri,
                 contentDescription = null,
                 modifier = Modifier
-                    .visualEffect(ImageBrush.NoiseBrush, 0.3f, true)
-                    .foreground(
-                        Brush.horizontalGradient(
-                            0.0f to accent.copy(0.8f),
-                            0.3f to accent.copy(0.4f),
-                            1.0f to Color.Transparent,
-                        )
-                    ) // Apply transparent-to-primary gradient
-                    .foreground(Color.Black.copy(0.4f))
-                    .background(AppTheme.colors.background(1.dp))
-                    .matchParentSize(), // Fill available space,
-                contentScale = ContentScale.Crop,
-                alignment = Alignment.Center,
-                painter = rememberAsyncImagePainter(
-                    model = ImageRequest
-                        .Builder(context).apply {
-                            data(imageUri)
-                            allowHardware(false)
-                            crossfade(AnimationConstants.DefaultDurationMillis)
-                        }
-                        .build(),
-                    onSuccess = {
-                        if (savable != Color.Unspecified) return@rememberAsyncImagePainter
-                        scope.launch(Dispatchers.IO) {
-                            val image = it.result.image.toBitmap()
-                            val value = WallpaperAccentColor(image, false, primary)
-                            savable = Color(value)
-                        }
-                    }
-                ),
-            )
-
-            // Play icon aligned to the right with padding and size
-            Icon(
-                imageVector = vectorResource(Res.drawable.ic_play_arrow_filled),
-                contentDescription = null, // Provide content description for accessibility
-                modifier = Modifier
-                    .align(Alignment.CenterStart) // Align to the right
-                    .padding(horizontal = ContentPadding.large) // Add horizontal padding
-                    .size(64.dp), // Set icon size
-                tint = Color.SignalWhite.copy(0.6f) // Use contrasting color
+                    .decorator(
+                        colors.background(3.dp),
+                        shape = CompactDisk,
+                        edgeInsets = EdgeInsets(CP.medium),
+                        border = BorderStroke(1.dp, AppTheme.colors.onBackground)
+                    )
+                    .aspectRatio(1.0f),
             )
 
             // Label aligned to the left with padding and styling
             Label(
                 text = label,
                 modifier = Modifier
-                    .padding(horizontal = ContentPadding.small) // Add horizontal padding
-                    .fillMaxWidth(0.5f) // Take up half the available width
-                    .align(Alignment.CenterEnd), // Align to the left
-                style = AppTheme.typography.title2,
+                    .padding(CP.medium), // Add horizontal padding
+                style = AppTheme.typography.title3,
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 2, // Allow at most 2 lines for label
-                color = Color.SignalWhite, // Use contrasting text color
             )
         }
-    )
+    }
 }
 
 /**
@@ -198,7 +163,7 @@ fun NewlyAdded(
     val audios by state.newlyAdded.collectAsState()
     // Display the list with loading, empty, and content states
     LazyRow(
-        horizontalArrangement = ContentPadding.LargeArrangement,
+        horizontalArrangement = Arrangement.spacedBy(CP.normal),
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier,
         content = {
