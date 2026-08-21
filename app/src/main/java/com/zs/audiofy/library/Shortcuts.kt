@@ -19,19 +19,18 @@
 package com.zs.audiofy.library
 
 
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import com.zs.audiofy.audios.directory.RouteAlbums
 import com.zs.audiofy.audios.directory.RouteArtists
@@ -46,7 +45,7 @@ import com.zs.audiofy.playlists.members.RouteMembers
 import com.zs.compose.foundation.textResource
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.Icon
-import com.zs.compose.theme.ripple
+import com.zs.compose.theme.Surface
 import com.zs.compose.theme.text.Header
 import com.zs.compose.theme.text.Label
 import com.zs.core.playback.Remote
@@ -65,43 +64,32 @@ private fun Shortcut(
     label: CharSequence,
     onAction: () -> Unit,
     modifier: Modifier = Modifier,
-) {
-    // Base container for the shortcut with styling and click handling
-    val colors = AppTheme.colors
-    val accent = colors.onBackground
-    Box(
-        modifier = modifier
-            .clip(FolderShape) // Shape the shortcut like a folder
-            // .background(colors.primary.copy(0.035f), FolderShape)
-            .border(1.dp, accent.copy(0.40f), FolderShape) // Light border
-            //  .background(colors.backgroundColorAtElevation(0.4.dp), FolderShape)
-            .clickable(
-                null,
-                ripple(true, color = AppTheme.colors.accent), // Ripple effect on click
-                role = Role.Button, // Semantically indicate a button
-                onClick = onAction // Trigger the action on click
-            )
-            .padding(horizontal = 8.dp, vertical = 8.dp) // Add internal padding
-            .size(68.dp, 56.dp) // Set size (adjust factor if needed)
-        // then modifier // Apply additional modifiers
-    ) {
-        // Icon at the top
-        Icon(
-            imageVector = icon,
-            contentDescription = null, // Ensure a content description is provided elsewhere
-            tint = accent,
-            modifier = Modifier.align(Alignment.TopStart)
-        )
+) = Surface(
+    shape = FolderShape(),
+    color = Color.Transparent,
+    border = BorderStroke(1.dp, AppTheme.colors.onBackground.copy(0.4f)),
+    onClick = onAction,
+    contentColor = AppTheme.colors.onBackground,
+    modifier = modifier.size(95.dp, 73.dp),
+    content = {
+        Column(
+            modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
+            content = {
+                Icon(// Icon at the top
+                    imageVector = icon,
+                    // Ensure a content description is provided elsewhere
+                    contentDescription = null,
+                )
 
-        // Label at the bottom
-        Label(
-            text = label,
-            style = AppTheme.typography.body3,
-            color = accent,
-            modifier = Modifier.align(Alignment.BottomStart)
+                Label(// Label at the bottom
+                    text = label,
+                    style = AppTheme.typography.body3,
+                )
+            }
         )
     }
-}
+)
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
