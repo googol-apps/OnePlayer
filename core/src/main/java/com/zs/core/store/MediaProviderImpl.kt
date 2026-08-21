@@ -327,7 +327,7 @@ internal class MediaProviderImpl(context: Context) : MediaProvider {
             offset = offset,
             limit = limit,
             transform = { c ->
-              val list =   MutableList(c.count) {
+                val list = MutableList(c.count) {
                     c.moveToPosition(it)
                     Audio(c)
                 }
@@ -444,8 +444,6 @@ internal class MediaProviderImpl(context: Context) : MediaProvider {
             },
         )
     }
-
-
 
 
     override suspend fun fetchAudioFolders(
@@ -643,11 +641,52 @@ internal class MediaProviderImpl(context: Context) : MediaProvider {
         }
     }
 
+    override suspend fun fetchNewlyAddedAlbums(offset: Int, limit: Int): List<Album> {
+        // First query: fetch audio tracks ordered by DATE_ADDED DESC
+        // Collect unique album IDs in insertion order (LinkedHashSet preserves order)
+        val ids = resolver.query2(
+            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+            projection = arrayOf(MediaStore.Audio.Media.ALBUM_ID),
+            order = MediaStore.Audio.Media.DATE_ADDED,
+            ascending = false,
+            transform = { c ->
+                buildSet {
+                    while (c.moveToNext()) {
+                        add(c.getLong(0))
+                    }
+                }
+            }
+        )
+
+        // Guard clause: if no IDs found, return empty list
+        if (ids.isEmpty()) return emptyList()
+
+        // Second query: fetch album metadata for all collected IDs
+        // Use IN (...) clause to get only those albums
+        val albums = resolver.query2(
+            MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
+            projection = ALBUM_PROJECTION,
+            selection = "${MediaStore.Audio.Albums._ID} IN (${ids.joinToString(", ")})",
+            limit = limit,
+            transform = { c ->
+                List(c.count){ pos ->
+                    c.moveToPosition(pos)
+                    Album(c)
+                }
+            }
+        )
+
+        // Final step: sort albums back into the recency order
+        // Because SQL IN (...) does not guarantee order, we reapply the order
+        // preserved in the LinkedHashSet from the first query
+        return albums.sortedBy { ids.indexOf(it.id) }
+    }
+
     override suspend fun getAlbum(id: Long): Album {
         return resolver.query2(
             MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
             projection = ALBUM_PROJECTION,
-            selection ="${MediaStore.Audio.Albums.ALBUM_ID} == $id",
+            selection = "${MediaStore.Audio.Albums.ALBUM_ID} == $id",
             limit = 1,
         ) { c ->
             c.moveToNext()
@@ -683,7 +722,7 @@ internal class MediaProviderImpl(context: Context) : MediaProvider {
         return resolver.query2(
             MediaStore.Audio.Genres.EXTERNAL_CONTENT_URI,
             projection = GENRE_PROJECTION,
-            selection ="${MediaStore.Audio.Genres._ID} == $id",
+            selection = "${MediaStore.Audio.Genres._ID} == $id",
             limit = 1,
         ) { c ->
             c.moveToNext()

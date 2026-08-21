@@ -22,6 +22,7 @@ import androidx.compose.runtime.Stable
 import com.zs.audiofy.common.Route
 import com.zs.core.db.playlists.Playlist.Track
 import com.zs.core.store.models.Audio
+import com.zs.core.store.models.Audio.Album
 import kotlinx.coroutines.flow.StateFlow
 
 object RouteLibrary: Route
@@ -36,7 +37,7 @@ interface LibraryViewState {
      */
     val recent: StateFlow<List<Track>?>
     val carousel: StateFlow<Long>
-    val newlyAdded: StateFlow<List<Audio>?>
+    val newlyAdded: StateFlow<List<Album>?>
 
     /**
      * Callback method invoked upon clicking a history item.

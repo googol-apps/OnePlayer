@@ -64,7 +64,10 @@ import coil3.request.ImageRequest
 import coil3.request.allowHardware
 import coil3.request.crossfade
 import coil3.toBitmap
+import com.zs.audiofy.audios.RouteAudios
+import com.zs.audiofy.audios.directory.RouteAlbums
 import com.zs.audiofy.common.Res
+import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.emit
 import com.zs.audiofy.common.shapes.CompactDisk
 import com.zs.audiofy.common.vectorResource
@@ -81,6 +84,7 @@ import com.zs.compose.theme.text.Label
 import com.zs.core.common.WallpaperAccentColor
 import com.zs.core.store.MediaProvider
 import com.zs.core.store.models.Audio
+import com.zs.core.store.models.Audio.Album
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.saveable.rememberSaveable as savable
@@ -107,27 +111,25 @@ private val ColorSaver = object : Saver<Color, Int> {
  */
 @Composable
 private fun NewlyAddedItem(
-    label: CharSequence,
+    value: Album,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    imageUri: Uri? = null,
 ) {
     val colors = AppTheme.colors
     Surface(
         color = colors.background(4.dp),
-        shape = AppTheme.shapes.xLarge,
+        shape = AppTheme.shapes.large,
         onClick = onClick,
         modifier = modifier
     ) {
-        Column(modifier = Modifier.size(width = 138.dp, 210.dp)) {
+        Column(modifier = Modifier.padding(horizontal = CP.normal, vertical = CP.medium).size(width = 110.dp, 190.dp)) {
             AsyncImage(
-                imageUri,
+                MediaProvider.buildAlbumArtUri(value.id),
                 contentDescription = null,
                 modifier = Modifier
                     .decorator(
                         colors.background(3.dp),
                         shape = CompactDisk,
-                        edgeInsets = EdgeInsets(CP.medium),
                         border = BorderStroke(1.dp, AppTheme.colors.onBackground)
                     )
                     .aspectRatio(1.0f),
@@ -135,12 +137,19 @@ private fun NewlyAddedItem(
 
             // Label aligned to the left with padding and styling
             Label(
-                text = label,
+                text = value.title,
                 modifier = Modifier
-                    .padding(CP.medium), // Add horizontal padding
-                style = AppTheme.typography.title3,
+                    .padding(top = CP.medium), // Add horizontal padding
+                style = AppTheme.typography.label1,
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 2, // Allow at most 2 lines for label
+            )
+
+            // Label aligned to the left with padding and styling
+            Label(
+                text = value.artist,
+                style = AppTheme.typography.label3,
+                fontWeight = FontWeight.Light
             )
         }
     }
@@ -161,6 +170,7 @@ fun NewlyAdded(
 ) {
     // Collect newly added items from the Library state
     val audios by state.newlyAdded.collectAsState()
+    val navController = LocalNavController.current
     // Display the list with loading, empty, and content states
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(CP.normal),
@@ -173,12 +183,11 @@ fun NewlyAdded(
             }
 
             val data = emit(false, audios) ?: return@LazyRow
-            items(data, key = Audio::id) { item ->
+            items(data, key = Album::id) { item ->
                 // Create newly added item with parallax-adjusted image alignment
                 NewlyAddedItem(
-                    label = item.name,
-                    onClick = { state.onClickRecentAddedFile(item.id) },
-                    imageUri = MediaProvider.buildAlbumArtUri(item.albumId),
+                    value = item,
+                    onClick = { navController.navigate(RouteAudios(RouteAudios.SOURCE_ALBUM, "${item.id}")) },
                     modifier = Modifier.animateItem(),
                 )
             }

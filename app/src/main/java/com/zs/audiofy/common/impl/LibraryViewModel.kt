@@ -21,6 +21,7 @@
 package com.zs.audiofy.common.impl
 
 import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import androidx.compose.ui.graphics.Color
 import androidx.core.net.toUri
@@ -102,12 +103,10 @@ class LibraryViewModel(
         .observer(MediaProvider.EXTERNAL_AUDIO_URI)
         .debounceAfterFirst(500L)
         .map {
-            provider.fetchAudioFiles(
-                order = MediaProvider.COLUMN_DATE_MODIFIED,
-                ascending = false,
+            provider.fetchNewlyAddedAlbums(
                 offset = 0,
                 limit = SHOW_CASE_MAX_ITEMS
-            ).filter { it.duration  > AppConfig.minTrackLengthSecs * 1000 }
+            )
         }
         .catch {
             Log.d("TAG", "ssd: $it")
@@ -162,24 +161,24 @@ class LibraryViewModel(
     override fun onClickRecentAddedFile(id: Long) {
         // This function handles the click event for a newly added file.
         // When a newly added file is clicked, this function ensures that only this specific file is played.
-        runCatching {
-            // Retrieve the list of newly added files.
-            val newlyAddedItems = newlyAdded.firstOrNull()
-            // Find the specific item by its ID.
-            val item = newlyAddedItems?.find { it.id == id }
-            if (item == null) {
-                // This case should ideally not happen if the UI is displaying valid newly added items.
-                showSnackbar(
-                    "Oops! Unknown error",
-                    icon = vectorResource(Res.drawable.ic_error),
-                    accent = Color.Rose
-                )
-                return@runCatching
-            }
-            // Create a new playlist with this item and start playback.
-            remote.setMediaFiles(listOf(item.toMediaFile()))
-            remote.play(true)
-        }
+//        runCatching {
+//            // Retrieve the list of newly added files.
+//            val newlyAddedItems = newlyAdded.firstOrNull()
+//            // Find the specific item by its ID.
+//            val item = newlyAddedItems?.find { it.id == id }
+//            if (item == null) {
+//                // This case should ideally not happen if the UI is displaying valid newly added items.
+//                showSnackbar(
+//                    "Oops! Unknown error",
+//                    icon = vectorResource(Res.drawable.ic_error),
+//                    accent = Color.Rose
+//                )
+//                return@runCatching
+//            }
+//            // Create a new playlist with this item and start playback.
+//            remote.setMediaFiles(listOf(item.toMediaFile()))
+//            remote.play(true)
+//        }
     }
 
     override fun onNewLink(link: String) {

@@ -272,6 +272,11 @@ interface MediaProvider {
         limit: Int = Int.MAX_VALUE
     ): List<Album>
 
+    suspend fun fetchNewlyAddedAlbums(
+        offset: Int = 0,
+        limit: Int = Int.MAX_VALUE
+    ): List<Album>
+
     suspend fun getAlbum(id: Long): Album
 
     /**
