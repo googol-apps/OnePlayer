@@ -19,17 +19,13 @@
 package com.zs.audiofy.audios.directory
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -42,12 +38,10 @@ import com.zs.audiofy.common.compose.directory.Directory
 import com.zs.audiofy.common.compose.directory.DirectoryViewState
 import com.zs.audiofy.common.shapes.PixelCircleShape
 import com.zs.audiofy.common.vectorResource
-import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.ContentAlpha
 import com.zs.compose.theme.Icon
 import com.zs.compose.theme.Surface
-import com.zs.compose.theme.text.Label
 import com.zs.compose.theme.text.Text
 import com.zs.core.store.models.Audio.Artist
 import com.zs.audiofy.common.compose.ContentPadding as CP
@@ -123,28 +117,9 @@ private fun Artist(
                     )
 
                     // MoreInfo
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(2.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.decorator(
-                                backgroundColor = colors.accent,
-                                shape = CircleShape,
-                                scale = 0.85f,
-                            )
-                            .padding(vertical = 2.dp, horizontal = CP.small),
-                        content = {
-                            Icon(
-                                vectorResource(Res.drawable.ic_music_note),
-                                contentDescription = null,
-                                tint = colors.onAccent,
-                                modifier = Modifier.size(16.dp)
-                            )
-                            Label(
-                                "${value.tracks}",
-                                color = colors.onAccent,
-                                style = AppTheme.typography.label2
-                            )
-                        }
+                    InfoChip(
+                        icon =  vectorResource(Res.drawable.ic_music_note),
+                        label = "${value.tracks}"
                     )
                 }
             )

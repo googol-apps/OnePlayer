@@ -27,6 +27,7 @@ import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.graphics.RectangleShape
+import com.zs.audiofy.common.shapes.CompactDisk
 import com.zs.audiofy.common.shapes.SunnyShape
 
 /**
@@ -59,6 +60,7 @@ object Res {
         val circle = CircleShape
         val rectangle = RectangleShape
         val sunny = SunnyShape(0.4f)
+        val compact_disk get() = CompactDisk
     }
 
     /**
