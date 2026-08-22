@@ -210,7 +210,7 @@ fun Videos(viewState: VideosViewState) {
             }
         },
         key = Video::id,
-        itemContent = { video ->
+        itemContent = { video, _ ->
             Video(
                 value = video,
                 modifier = Modifier

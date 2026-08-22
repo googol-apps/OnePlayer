@@ -131,7 +131,7 @@ fun Members(viewState: MembersViewState) {
             }
         },
         key = Track::id,
-        itemContent = { audio ->
+        itemContent = { audio, _ ->
             Track(
                 value = audio,
                 modifier = Modifier

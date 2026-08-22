@@ -51,6 +51,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
@@ -547,8 +548,8 @@ object RouteConsole : Route {
                 icon = vectorResource(Res.drawable.ic_info),
                 contentDescription = null,
                 onClick = {},
-                enabled = enabled,
-                modifier = Modifier.layoutId(ID_BTN_MEDIA_INFO)
+                enabled = /*enabled*/ false,
+                modifier = Modifier.layoutId(ID_BTN_MEDIA_INFO).alpha(0f)
             )
 
             // More
@@ -716,7 +717,7 @@ object RouteConsole : Route {
                             animateChangesSpec = DefaultAnimSpecs,
                             content = content,
                             modifier = Modifier
-                                .animateContentSize()
+                                //.animateContentSize()
                                 .fillMaxSize()
                                 .then(
                                     when (strategy) {

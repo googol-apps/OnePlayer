@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -37,6 +38,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -59,6 +61,8 @@ import com.zs.audiofy.common.compose.directory.Files
 import com.zs.audiofy.editor.RouteEditor
 import com.zs.audiofy.playlists.Playlists
 import com.zs.audiofy.properties.RouteProperties
+import com.zs.compose.foundation.decorator.EdgeInsets
+import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.BaseListItem
 import com.zs.compose.theme.LocalContentColor
@@ -79,6 +83,7 @@ private val AudioItemPadding = PaddingValues(horizontal = ContentPadding.large)
 @Composable
 private fun Audio(
     value: Audio,
+    shape: Shape,
     actions: @Composable (() -> Unit),
     modifier: Modifier = Modifier
 ) {
@@ -108,8 +113,13 @@ private fun Audio(
         },
         trailing = actions,
         centerAlign = true,
-        padding = AudioItemPadding,
-        modifier = modifier
+        modifier = Modifier
+            .padding(horizontal =  ContentPadding.large)
+            .decorator(
+                backgroundColor = AppTheme.colors.background(1.dp),
+                shape = shape,
+               // edgeInsets = EdgeInsets(start = ContentPadding.large, end = ContentPadding.large)
+            ).then(modifier)
     )
 }
 
@@ -149,7 +159,7 @@ fun Audios(viewState: AudiosViewState) {
             }
         },
         key = Audio::id,
-        itemContent = { audio ->
+        itemContent = { audio, pos ->
             Audio(
                 value = audio,
                 modifier = Modifier
@@ -162,6 +172,12 @@ fun Audios(viewState: AudiosViewState) {
                         },
                         onLongClick = { viewState.select(audio.id) }
                     ),
+                shape = when (pos) {
+                    0 -> Res.shape.section
+                    1 -> Res.shape.section_first_item
+                    2 -> Res.shape.section_middle_item
+                    else -> Res.shape.section_last_item
+                },
                 // actions
                 actions = {
                     // show checkbox
@@ -203,8 +219,12 @@ fun Audios(viewState: AudiosViewState) {
 
                                 Action.INFO -> navController.navigate(RouteProperties(audio.path))
                                 Action.EDIT -> {
-                                    val isMp3 = audio.mimeType.equals("audio/mpeg", ignoreCase = true) ||
-                                            audio.mimeType.equals("audio/mp3", ignoreCase = true)
+                                    val isMp3 =
+                                        audio.mimeType.equals("audio/mpeg", ignoreCase = true) ||
+                                                audio.mimeType.equals(
+                                                    "audio/mp3",
+                                                    ignoreCase = true
+                                                )
                                     if (!isMp3)
                                         facade.showToast("Oops! That’s not an MP3 file.")
                                     else

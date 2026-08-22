@@ -75,11 +75,6 @@ import androidx.compose.foundation.layout.WindowInsetsSides as WIS
 import com.zs.audiofy.common.compose.ContentPadding as CP
 
 object RouteSettings : Route {
-    // Used to style individual items within a preference section.
-    val TopTileShape = RoundedCornerShape(24.dp, 24.dp, 0.dp, 0.dp)
-    val CentreTileShape = RectangleShape
-    val BottomTileShape = RoundedCornerShape(0.dp, 0.dp, 24.dp, 24.dp)
-    val SingleTileShape = RoundedCornerShape(24.dp)
 
     const val CONTENT_TYPE_HEADER = "header"
     val HeaderPadding = Padding(vertical = CP.normal, horizontal = CP.small)

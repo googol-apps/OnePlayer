@@ -91,6 +91,7 @@ import com.zs.compose.foundation.Background
 import com.zs.compose.foundation.background
 import com.zs.compose.foundation.fullLineSpan
 import androidx.compose.foundation.layout.plus
+import androidx.compose.foundation.lazy.itemsIndexed
 import com.zs.compose.foundation.stickyHeader
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.Button
@@ -407,7 +408,7 @@ fun <T> Files(
     onTapAction: (value: Action) -> Unit,
     key: ((item: T) -> Any)? = null,
     surface: HazeState = rememberAcrylicSurface(),
-    itemContent: @Composable LazyItemScope.(item: T) -> Unit
+    itemContent: @Composable LazyItemScope.(item: T, position: Int) -> Unit
 ) {
     val state = rememberLazyListState()
     var isSearchVisible by remember { mutableStateOf(false) }
@@ -491,6 +492,7 @@ fun <T> Files(
             LazyColumn(
                 state = state,
                 contentPadding = insets.asPaddingValues(),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
                 modifier = Modifier
                     .fillMaxSize()
                     .source(surface)
@@ -591,11 +593,14 @@ fun <T> Files(
                         }
 
                         //
-                        items(
+                        itemsIndexed(
                             values,
-                            key = key,
-                            contentType = { "item" },
-                            itemContent = itemContent
+                            key = if (key == null) null else {_ , item -> key(item) },
+                            contentType = {_, _ -> "item" },
+                            itemContent = {index, item ->
+                                val pos = if (values.size == 1) 0 else if (index == 0) 1 else if (index == values.lastIndex) 3 else 2
+                                itemContent(item, pos)
+                            }
                         )
 
                         // Spacer

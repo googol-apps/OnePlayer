@@ -61,7 +61,7 @@ fun Sponsor(modifier: Modifier = Modifier) {
     BaseListItem(
         modifier = modifier
             .offset(y = -CP.normal)
-            .background(AppTheme.colors.background(1.dp), RouteSettings.SingleTileShape),
+            .background(AppTheme.colors.background(1.dp), Res.shape.section),
         centerAlign = true,
         contentColor = AppTheme.colors.onBackground,
         // App name.

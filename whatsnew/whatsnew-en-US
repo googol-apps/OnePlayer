@@ -1,4 +1,5 @@
-* Re-enabled smooth resizing animations in the playback queue.
-* Improved queue accessibility by ensuring the list utilizes all available screen space.
-* Refactored artwork styling in Recents using a unified decorator for consistent borders and elevation.
-* Upgraded Media3, Compose BOM, and internal Toolkit to v3.8.2-dev.
+* Refreshed visual identity with the Geom font and Material 3-aligned designs for Albums, Artists, and Recents.
+* Introduced stylized "Compact Disk" artwork shapes and InfoChips for intuitive metadata display.
+* Improved UI with dynamic list corners, refined shortcuts, and standardized genre layouts.
+* Optimized "Newly Added" fetching performance and system bar color transitions.
+* Updated core libraries (Jetpack Compose, Navigation) and dependencies for improved stability.

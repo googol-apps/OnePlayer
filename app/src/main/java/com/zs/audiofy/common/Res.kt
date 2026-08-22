@@ -26,7 +26,9 @@ package com.zs.audiofy.common
 import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.unit.dp
 import com.zs.audiofy.common.shapes.CompactDisk
 import com.zs.audiofy.common.shapes.SunnyShape
 
@@ -57,6 +59,14 @@ object Res {
      * Common access to Compose shapes.
      */
     object shape {
+
+        // Used to style individual items within a preference section.
+        val section_first_item = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)
+        val section_middle_item = RectangleShape
+        val section_last_item = RoundedCornerShape(0.dp, 0.dp, 20.dp, 20.dp)
+        val section = RoundedCornerShape(20.dp)
+
+
         val circle = CircleShape
         val rectangle = RectangleShape
         val sunny = SunnyShape(0.4f)

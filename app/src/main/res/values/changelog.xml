@@ -50,7 +50,22 @@
     <string name="changelog_1_7_0" translatable="false">
     <b>What’s New <font color='green'>(v1.7.0)\n</font></b>
     <font color='grey'>
-        \n✓
+        \n✓ <b>Visual Design:</b>
+        \n    • Switched the app font to <b>Geom</b> for a modern and clean look.
+        \n    • Redesigned <b>Albums</b>, <b>Artists</b>, and <b>Newly Added</b> sections with a consistent, Material 3-aligned design.
+        \n    • Introduced stylized "Compact Disk" shapes for album artwork and updated surface effects.
+        \n    • Added <b>InfoChips</b> to neatly display track counts and years with intuitive icons.
+        \n✓ <b>User Interface:</b>
+        \n    • Improved list layouts with dynamic rounded corners based on item position (top, middle, bottom).
+        \n    • Refined <b>Shortcuts</b> with a larger, more accessible layout.
+        \n    • Standardized <b>Genre</b> items for better interaction and visual consistency.
+        \n    • Optimized system bar color management for smoother transitions.
+        \n✓ <b>Performance &amp; Infrastructure:</b>
+        \n    • Optimized media fetching for the "Newly Added" section to make it faster.
+        \n    • Updated core components to utilize the latest <b>Jetpack Compose</b> and <b>Navigation</b> libraries.
+        \n    • Added a new music note icon and refined various shape containers across the app.
+        \n✓ <b>Maintenance:</b>
+        \n    • Updated Firebase and advertising dependencies for better stability.
     </font>
     </string>
 
