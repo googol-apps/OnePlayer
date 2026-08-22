@@ -60,6 +60,7 @@ import com.zs.audiofy.common.compose.Acrylic
 import com.zs.audiofy.common.compose.lottie
 import com.zs.audiofy.common.compose.lottieAnimationPainter
 import com.zs.compose.foundation.ImageBrush
+import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.foundation.thenIf
 import com.zs.compose.foundation.visualEffect
 import com.zs.compose.theme.AppTheme
@@ -148,11 +149,13 @@ fun Artwork(
         model = uri,
         contentDescription = null,
         contentScale = ContentScale.Crop,
-        modifier = modifier
-            .shadow(shadow, shape, clip = shape != RectangleShape)
-            .thenIf(border > 0.dp) { border(border, Color.White, shape) }
-            .visualEffect(ImageBrush.NoiseBrush, 0.5f, true)
-            .background(AppTheme.colors.background(1.dp)),
+        modifier = modifier.decorator(
+            AppTheme.colors.background(2.dp),
+            shape = shape,
+            border = if (border > 0.dp) BorderStroke(border, Color.White) else null,
+            elevation = shadow,
+            roughness = 0.4f
+        )
     )
 }
 

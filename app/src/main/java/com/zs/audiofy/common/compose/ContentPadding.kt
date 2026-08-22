@@ -48,4 +48,5 @@ object ContentPadding {
     val LargeArrangement = Arrangement.spacedBy(large)
     val SmallArrangement = Arrangement.spacedBy(small)
     val xSmallArrangement = Arrangement.spacedBy(xSmall)
+    val mediumArrangement = Arrangement.spacedBy(medium)
 }

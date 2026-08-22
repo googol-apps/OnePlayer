@@ -321,8 +321,8 @@ fun <T> Directory(
             LazyVerticalGrid(
                 state = state,
                 columns = GridCells.Adaptive(minSize * multiplier),
-                verticalArrangement = CP.xSmallArrangement,
-                horizontalArrangement = CP.xSmallArrangement,
+                verticalArrangement = CP.mediumArrangement,
+                horizontalArrangement = CP.mediumArrangement,
                 contentPadding = padding,
                 modifier = Modifier
                     .fillMaxSize()

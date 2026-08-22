@@ -18,92 +18,41 @@
 
 package com.zs.audiofy.audios.directory
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.zs.audiofy.R
 import com.zs.audiofy.audios.RouteAudios
+import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.Route
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.directory.Directory
 import com.zs.audiofy.common.compose.directory.DirectoryViewState
-import androidx.compose.ui.draw.scale
-import com.zs.audiofy.common.Res
-import com.zs.compose.foundation.shadow
+import com.zs.audiofy.common.shapes.PixelCircleShape
+import com.zs.audiofy.common.vectorResource
+import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
+import com.zs.compose.theme.ContentAlpha
 import com.zs.compose.theme.Icon
 import com.zs.compose.theme.Surface
 import com.zs.compose.theme.text.Label
+import com.zs.compose.theme.text.Text
 import com.zs.core.store.models.Audio.Artist
 import com.zs.audiofy.common.compose.ContentPadding as CP
 
 object RouteArtists : Route
-
-
-private val IconModifier = Modifier
-    .wrapContentSize(Alignment.Center)
-    .scale(1.45f)
-private val shape = RoundedCornerShape(50, 50, 50, 15)
-
-@Composable
-private fun Artist(
-    value: Artist,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = Modifier
-            .clip(AppTheme.shapes.small)
-            .then(modifier)
-            .padding(vertical = 6.dp, horizontal = 10.dp),
-        verticalArrangement = Arrangement.spacedBy(CP.small),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        content = {
-            //
-            Surface(
-                modifier = Modifier
-                    .aspectRatio(1.0f)
-                    .shadow(
-                        elevation = 4.dp,
-                        lightShadowColor = AppTheme.colors.lightShadowColor,
-                        darkShadowColor = AppTheme.colors.darkShadowColor,
-                        shape = shape,
-                    )
-                    .background(AppTheme.colors.background),
-                color = AppTheme.colors.background(1.dp),
-                contentColor = AppTheme.colors.onBackground,
-                content = {
-                    Icon(
-                        painter = painterResource(id = Res.drawable.ic_artist),
-                        contentDescription = null,
-                        modifier = IconModifier,
-                    )
-                }
-            )
-
-            // title
-            Label(
-                text = value.name,
-                maxLines = 2,
-                style = AppTheme.typography.label3,
-                textAlign = TextAlign.Center
-            )
-        }
-    )
-}
 
 @Composable
 @NonRestartableComposable
@@ -111,17 +60,95 @@ fun Artists(viewState: DirectoryViewState<Artist>) {
     val navController = LocalNavController.current
     Directory(
         viewState,
-        minSize = 80.dp,
+        minSize = 100.dp,
         key = Artist::id,
         itemContent = {
             Artist(
                 it,
-                modifier = Modifier
-                    .animateItem()
-                    .clickable {
-                        navController.navigate(RouteAudios(RouteAudios.SOURCE_ARTIST, "${it.id}"))
-                    },
+                onClick = {
+                    navController.navigate(
+                        RouteAudios(
+                            RouteAudios.SOURCE_ARTIST,
+                            "${it.id}"
+                        )
+                    )
+                },
+                modifier = Modifier.animateItem()
             )
         }
     )
 }
+
+@Composable
+private fun Artist(
+    value: Artist,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val colors = AppTheme.colors
+    Surface(
+        color = colors.background(1.dp),
+        modifier = modifier,
+        onClick = onClick,
+        shape = AppTheme.shapes.medium,
+        content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = CP.normal, vertical = CP.medium),
+                content = {
+                    // Top Icon in PixselShape
+                    Surface(
+                        modifier = Modifier.aspectRatio(1.0f),
+                        shape = PixelCircleShape(12),
+                        color = colors.background(20.dp),
+                        border = BorderStroke(1.dp, colors.onBackground.copy(ContentAlpha.indication))
+                    ) {
+                        Icon(
+                            vectorResource(Res.drawable.ic_artist),
+                            contentDescription = null,
+                            modifier = Modifier.size(48.dp)
+                        )
+                    }
+
+                    // Label aligned to the left with padding and styling
+                    Text(
+                        text = value.name,
+                        modifier = Modifier.padding(top = CP.medium, bottom = CP.small), // Add horizontal padding
+                        style = AppTheme.typography.label2,
+                        fontWeight = FontWeight.SemiBold,
+                        maxLines = 2, // Allow at most 2 lines for label
+                        minLines = 2,
+                        overflow = TextOverflow.MiddleEllipsis
+                    )
+
+                    // MoreInfo
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(2.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.decorator(
+                                backgroundColor = colors.accent,
+                                shape = CircleShape,
+                                scale = 0.85f,
+                            )
+                            .padding(vertical = 2.dp, horizontal = CP.small),
+                        content = {
+                            Icon(
+                                vectorResource(Res.drawable.ic_music_note),
+                                contentDescription = null,
+                                tint = colors.onAccent,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Label(
+                                "${value.tracks}",
+                                color = colors.onAccent,
+                                style = AppTheme.typography.label2
+                            )
+                        }
+                    )
+                }
+            )
+        }
+    )
+}
+

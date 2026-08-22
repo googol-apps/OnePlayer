@@ -647,12 +647,14 @@ internal class MediaProviderImpl(context: Context) : MediaProvider {
         val ids = resolver.query2(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
             projection = arrayOf(MediaStore.Audio.Media.ALBUM_ID),
-            order = MediaStore.Audio.Media.DATE_ADDED,
+            order = MediaStore.Audio.Media.DATE_MODIFIED,
             ascending = false,
             transform = { c ->
                 buildSet {
                     while (c.moveToNext()) {
                         add(c.getLong(0))
+                        if (size >= limit)
+                            break
                     }
                 }
             }

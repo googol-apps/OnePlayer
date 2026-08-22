@@ -117,7 +117,7 @@ private fun NewlyAddedItem(
 ) {
     val colors = AppTheme.colors
     Surface(
-        color = colors.background(4.dp),
+        color = colors.background(2.dp),
         shape = AppTheme.shapes.large,
         onClick = onClick,
         modifier = modifier
