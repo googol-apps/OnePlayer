@@ -27,6 +27,7 @@ import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.graphics.RectangleShape
+import com.zs.audiofy.common.shapes.SunnyShape
 
 /**
  * Common access point for app-level constants and resources.
@@ -57,6 +58,7 @@ object Res {
     object shape {
         val circle = CircleShape
         val rectangle = RectangleShape
+        val sunny = SunnyShape(0.4f)
     }
 
     /**

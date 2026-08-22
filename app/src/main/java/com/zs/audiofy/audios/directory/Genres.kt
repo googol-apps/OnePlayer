@@ -19,70 +19,34 @@
 package com.zs.audiofy.audios.directory
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.NonRestartableComposable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.zs.audiofy.audios.RouteAudios
+import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.Route
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.directory.Directory
 import com.zs.audiofy.common.compose.directory.DirectoryViewState
+import com.zs.audiofy.common.shapes.GhostishShape
+import com.zs.audiofy.common.shapes.RoundedStarShape
+import com.zs.audiofy.common.shapes.SunnyShape
+import com.zs.audiofy.common.vectorResource
 import com.zs.compose.theme.AppTheme
+import com.zs.compose.theme.ContentAlpha
+import com.zs.compose.theme.Icon
 import com.zs.compose.theme.Surface
-import com.zs.compose.theme.text.Label
+import com.zs.compose.theme.text.Text
 import com.zs.core.store.models.Audio.Genre
 import com.zs.audiofy.common.compose.ContentPadding as CP
-
-@Composable
-private fun Genre(
-    value: Genre,
-    modifier: Modifier = Modifier
-) {
-    Column(
-        modifier = Modifier
-            .clip(AppTheme.shapes.small)
-            .then(modifier)
-            .padding(vertical = 6.dp, horizontal = 10.dp),
-        verticalArrangement = Arrangement.spacedBy(CP.small),
-        content = {
-            //
-            Surface (
-                color = Color.Transparent,
-                contentColor = AppTheme.colors.onBackground,
-                border = BorderStroke(3.dp, AppTheme.colors.onBackground),
-                shape = CircleShape,
-                modifier = Modifier.aspectRatio(1.0f),
-                content = {
-                    Label(
-                        text = "${value.name[0].uppercaseChar()}",
-                        fontWeight = FontWeight.Bold,
-                        style = AppTheme.typography.display3,
-                        modifier = Modifier.wrapContentSize(Alignment.Center)
-                    )
-                }
-            )
-
-            // title
-            Label(
-                text = value.name,
-                maxLines = 2,
-                style = AppTheme.typography.body3,
-            )
-        }
-    )
-}
 
 object RouteGenres : Route
 
@@ -93,14 +57,59 @@ fun Genres(viewState: DirectoryViewState<Genre>) {
     Directory(
         viewState,
         key = Genre::id,
+        minSize = 100.dp,
         itemContent = {
             Genre(
                 it,
+                onClick = { navController.navigate(RouteAudios(RouteAudios.SOURCE_GENRE, "${it.id}")) },
+                modifier = Modifier.animateItem(),
+            )
+        }
+    )
+}
+
+@Composable
+private fun Genre(
+    value: Genre,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val colors = AppTheme.colors
+    Surface(
+        color = colors.background(1.dp),
+        modifier = modifier,
+        onClick = onClick,
+        shape = AppTheme.shapes.medium,
+        content = {
+            Column(
                 modifier = Modifier
-                    .animateItem()
-                    .clickable {
-                        navController.navigate(RouteAudios(RouteAudios.SOURCE_GENRE, "${it.id}"))
-                    },
+                    .fillMaxWidth()
+                    .padding(CP.medium),
+                verticalArrangement = CP.mediumArrangement,
+                content = {
+                    // Top Icon in PixselShape
+                    Surface(
+                        modifier = Modifier.aspectRatio(1.0f),
+                        shape = SunnyShape(1.0f),
+                        color = colors.background(20.dp),
+                        border = BorderStroke(1.dp, colors.onBackground.copy(ContentAlpha.indication))
+                    ) {
+                        Icon(
+                            vectorResource(Res.drawable.ic_headphones),
+                            contentDescription = null,
+                            modifier = Modifier.size(48.dp)
+                        )
+                    }
+
+                    // Label aligned to the left with padding and styling
+                    Text(
+                        text = value.name,
+                        style = AppTheme.typography.label2,
+                        fontWeight = FontWeight.SemiBold,
+                        maxLines = 2, // Allow at most 2 lines for label
+                        overflow = TextOverflow.MiddleEllipsis
+                    )
+                }
             )
         }
     )
