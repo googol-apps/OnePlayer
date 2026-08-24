@@ -19,13 +19,10 @@
 package com.zs.audiofy.playlists.members
 
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -33,13 +30,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Action
 import com.zs.audiofy.common.PLAYLIST_ADD
 import com.zs.audiofy.common.Res
@@ -49,7 +44,10 @@ import com.zs.audiofy.common.compose.LottieAnimatedButton
 import com.zs.audiofy.common.compose.LottieAnimatedIcon
 import com.zs.audiofy.common.compose.OverflowMenu
 import com.zs.audiofy.common.compose.directory.Files
+import com.zs.audiofy.common.shapes.PixelCircleShape
 import com.zs.audiofy.playlists.Playlists
+import com.zs.compose.foundation.decorator.EdgeInsets
+import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.BaseListItem
 import com.zs.compose.theme.minimumInteractiveComponentSize
@@ -57,22 +55,17 @@ import com.zs.compose.theme.text.Label
 import com.zs.core.db.playlists.Playlist.Track
 import androidx.compose.foundation.combinedClickable as clickable
 
-private val MEMBER_ICON_SHAPE = RoundedCornerShape(30)
-private val TrackItemPadding = PaddingValues(horizontal = ContentPadding.large, vertical = ContentPadding.small)
-
-private val CommonTrackStyle = Modifier
-    .border(2.dp, Color.White, shape = MEMBER_ICON_SHAPE)
-    .shadow(elevation = 8.dp, shape = MEMBER_ICON_SHAPE)
-    .size(56.dp)
 
 @Composable
 private fun Track(
     value: Track,
+    shape: androidx.compose.ui.graphics.Shape,
     actions: @Composable (() -> Unit),
     modifier: Modifier = Modifier
 ) {
-    // TODO - use list item; once alignment is added to it.
     BaseListItem(
+        trailing = actions,
+        centerAlign = false,
         overline = { Label(text = value.subtitle) },
         heading = {
             Label(
@@ -82,21 +75,29 @@ private fun Track(
                 fontWeight = FontWeight.Bold
             )
         },
+        modifier = Modifier.decorator(
+            backgroundColor = AppTheme.colors.background(1.dp),
+            shape = shape,
+            edgeInsets = EdgeInsets(horizontal = ContentPadding.large)
+        )
+            .then(modifier),
         leading = {
             AsyncImage(
                 model = value.artwork,
                 contentScale = ContentScale.Crop,
                 contentDescription = null,
-                modifier = CommonTrackStyle then Modifier.background(AppTheme.colors.background(1.dp)),
+                modifier = Modifier
+                    .decorator(
+                        elevation = 4.dp,
+                        shape = PixelCircleShape(8),
+                        border = BorderStroke(2.dp, Color.White),
+                        backgroundColor = AppTheme.colors.background(3.dp)
+                    )
+                    .size(58.dp),
             )
         },
-        trailing = actions,
-        centerAlign = true,
-        padding = TrackItemPadding,
-        modifier = modifier
     )
 }
-
 
 /**
  * Represents the state of the members screen.
@@ -131,9 +132,15 @@ fun Members(viewState: MembersViewState) {
             }
         },
         key = Track::id,
-        itemContent = { audio, _ ->
+        itemContent = { audio, pos ->
             Track(
                 value = audio,
+                shape = when (pos) {
+                    0 -> Res.shape.section
+                    1 -> Res.shape.section_first_item
+                    2 -> Res.shape.section_middle_item
+                    else -> Res.shape.section_last_item
+                },
                 modifier = Modifier
                     .animateItem()
                     .clickable(

@@ -60,6 +60,7 @@ import com.zs.compose.theme.Icon
 import com.zs.compose.theme.IconButton
 import com.zs.compose.theme.IconToggleButton
 import com.zs.compose.theme.LocalContentColor
+import com.zs.compose.theme.Surface
 import com.zs.compose.theme.menu.DropDownMenu
 import com.zs.compose.theme.menu.DropDownMenuItem
 
@@ -201,7 +202,13 @@ inline fun RowScope.OverflowMenu(
 
     // "More" button to toggle dropdown visibility
     IconToggleButton(checked = show, onCheckedChange = { onDismissRequest(it) }) {
-        Icon(vectorResource(Res.drawable.ic_more_vert), contentDescription = "More actions")
+        Surface(color = AppTheme.colors.accent, shape = AppTheme.shapes.small) {
+            Icon(
+                vectorResource(Res.drawable.ic_more_vert),
+                contentDescription = "More actions",
+                modifier = Modifier.padding(vertical = 4.dp)
+            )
+        }
 
         // DropdownMenu: shows remaining items beyond the collapsed count
         DropDownMenu(
