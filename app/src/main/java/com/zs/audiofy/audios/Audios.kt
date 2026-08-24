@@ -23,14 +23,10 @@ package com.zs.audiofy.audios
 import android.app.Activity
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -39,12 +35,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Action
 import com.zs.audiofy.common.EDIT
 import com.zs.audiofy.common.GO_TO_ALBUM
@@ -58,6 +52,7 @@ import com.zs.audiofy.common.compose.LottieAnimatedButton
 import com.zs.audiofy.common.compose.LottieAnimatedIcon
 import com.zs.audiofy.common.compose.OverflowMenu
 import com.zs.audiofy.common.compose.directory.Files
+import com.zs.audiofy.common.shapes.SunnyShape
 import com.zs.audiofy.editor.RouteEditor
 import com.zs.audiofy.playlists.Playlists
 import com.zs.audiofy.properties.RouteProperties
@@ -73,13 +68,6 @@ import com.zs.core.store.models.Audio
 import dev.chrisbanes.haze.rememberHazeState
 import androidx.compose.foundation.combinedClickable as clickable
 
-private val ArtworkGraphicsModifier = Modifier.graphicsLayer() {
-    scaleX = 0.85f; scaleY = 0.85f; this.shadowElevation = 4.dp.toPx();
-    shape = CircleShape
-    clip = true
-}
-private val AudioItemPadding = PaddingValues(horizontal = ContentPadding.large)
-
 @Composable
 private fun Audio(
     value: Audio,
@@ -87,8 +75,9 @@ private fun Audio(
     actions: @Composable (() -> Unit),
     modifier: Modifier = Modifier
 ) {
-    // TODO - use list item; once alignment is added to it.
     BaseListItem(
+        trailing = actions,
+        centerAlign = false,
         subheading = { Label(text = value.artist) },
         overline = { Label(text = value.album) },
         heading = {
@@ -99,27 +88,28 @@ private fun Audio(
                 fontWeight = FontWeight.Bold
             )
         },
+        modifier = Modifier.decorator(
+                backgroundColor = AppTheme.colors.background(1.dp),
+                shape = shape,
+                edgeInsets = EdgeInsets(start = ContentPadding.large, end = ContentPadding.large)
+            )
+            .then(modifier),
         leading = {
             AsyncImage(
                 model = MediaProvider.buildAlbumArtUri(value.albumId),
                 contentScale = ContentScale.Crop,
                 contentDescription = null,
                 modifier = Modifier
-                    .border(2.dp, LocalContentColor.current, shape = CircleShape)
-                    .then(ArtworkGraphicsModifier)
-                    .background(AppTheme.colors.background(1.dp))
-                    .size(50.dp),
+                    .decorator(
+                        elevation = 4.dp,
+                        shape = SunnyShape(0.9f),
+                        outline = BorderStroke(2.dp, LocalContentColor.current),
+                        outlineGap = 4.dp,
+                        backgroundColor = AppTheme.colors.background(3.dp)
+                    )
+                    .size(64.dp),
             )
         },
-        trailing = actions,
-        centerAlign = true,
-        modifier = Modifier
-            .padding(horizontal =  ContentPadding.large)
-            .decorator(
-                backgroundColor = AppTheme.colors.background(1.dp),
-                shape = shape,
-               // edgeInsets = EdgeInsets(start = ContentPadding.large, end = ContentPadding.large)
-            ).then(modifier)
     )
 }
 
