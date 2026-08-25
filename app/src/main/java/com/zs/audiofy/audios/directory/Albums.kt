@@ -30,6 +30,7 @@ import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.zs.audiofy.audios.RouteAudios
@@ -81,7 +82,7 @@ private fun Album(
                             .decorator(
                                 colors.background(3.dp),
                                 shape = Res.shape.compact_disk,
-                                border = BorderStroke(1.dp, AppTheme.colors.onBackground),
+                                border = BorderStroke(Dp.Hairline, AppTheme.colors.onBackground),
                                 edgeInsets = EdgeInsets(horizontal = CP.xSmall)
                             )
                             .aspectRatio(1.0f),
@@ -111,7 +112,7 @@ private fun Album(
                         content = {
                             // Count
                             InfoChip(
-                                icon = vectorResource(Res.drawable.ic_music_note),
+                                icon = vectorResource(Res.drawable.ic_format_list_numbered),
                                 label = "${value.cardinality}"
                             )
                             // year

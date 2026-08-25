@@ -119,7 +119,7 @@ private fun Artist(
 
                     // MoreInfo
                     InfoChip(
-                        icon = vectorResource(Res.drawable.ic_music_note),
+                        icon = vectorResource(Res.drawable.ic_format_list_numbered),
                         label = "${value.tracks}"
                     )
                 }

@@ -18,156 +18,120 @@
 
 package com.zs.audiofy.folders
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.audios.RouteAudios
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+import com.zs.audiofy.common.compose.InfoChip
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.directory.Directory
 import com.zs.audiofy.common.fileSizeFormatted
 import com.zs.audiofy.common.vectorResource
 import com.zs.audiofy.videos.RouteVideos
-import com.zs.compose.foundation.foreground
+import com.zs.compose.foundation.decorator.EdgeInsets
+import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.ContentAlpha
-import com.zs.compose.theme.Icon
-import com.zs.compose.theme.text.Label
-import com.zs.core.common.PathUtils
+import com.zs.compose.theme.LocalContentColor
+import com.zs.compose.theme.Surface
+import com.zs.compose.theme.text.Text
 import com.zs.core.store.models.Folder
-import kotlin.math.abs
-
-private const val TAG = "Folders"
-private val FOLDER_SHAPE =
-    RoundedCornerShape(13)
-
-private fun colorFrom(name: String): Color {
-    val hash = abs(name.hashCode())
-
-    // Restrict hue to warm tones: orange → red → brownish
-    val warmHue = 10f + (hash % 40)      // 10° to 50°
-
-    // Low-to-mid saturation for muted tones
-    val saturation = 0.3f + (hash % 20) / 100f  // 0.3 to 0.5
-
-    // Lowered lightness (for a more grounded, warm background)
-    val lightness = 0.38f + (hash % 10) / 100f   // 0.68 to 0.78
-
-    return Color.hsl(warmHue, saturation, lightness)
-}
-
-val IndicatorModifier = Modifier.graphicsLayer {
-    clip = true
-    scaleX = 0.93f
-    shape = FOLDER_SHAPE
-}
-val ImageModifier = Modifier
-    .graphicsLayer {
-        shape = FOLDER_SHAPE
-        clip = true
-        translationY = 6.dp.toPx()
-    }
-    .aspectRatio(1.7f / 1f)
-    .foreground(Color.Black.copy(0.3f))
+import com.zs.audiofy.common.compose.ContentPadding as CP
 
 
 @Composable
 private fun Folder(
     value: Folder,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
-) = Column(
-    modifier = Modifier
-        .clip(AppTheme.shapes.medium)  // clip the ripple
-        .then(modifier),
-    horizontalAlignment = Alignment.Start,
-    content = {
+) {
+    val colors = AppTheme.colors
+    Surface(
+        color = colors.background(1.dp),
+        modifier = modifier,
+        onClick = onClick,
+        shape = AppTheme.shapes.medium,
+        content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(CP.small),
+                content = {
+                    // Album Art
+                    AsyncImage(
+                        value.artworkUri,
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .decorator(
+                                colors.background(3.dp),
+                                shape = Res.shape.folder,
+                                border = BorderStroke(Dp.Hairline, AppTheme.colors.onBackground),
+                                edgeInsets = EdgeInsets(
+                                    start = CP.xSmall,
+                                    end = CP.xSmall,
+                                    bottom = CP.medium
+                                )
+                            )
+                            .aspectRatio(1.30f),
+                    )
 
-        // Top Image
-        Box(
-            content = {
-                // IndicatorLine
-                Spacer(
-                    Modifier
-                        .then(IndicatorModifier)
-                        .matchParentSize()
-                        .drawBehind() {
-                            drawRect(colorFrom(value.name), size = size.copy(height = 5.dp.toPx()))
+                    // Title
+                    Text(
+                        text = value.name,
+                        style = AppTheme.typography.label1,
+                        fontWeight = FontWeight.SemiBold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    // Path
+                    Text(
+                        text = value.path,
+                        style = AppTheme.typography.label3,
+                        color = LocalContentColor.current.copy(ContentAlpha.medium),
+                        maxLines = 1,
+                        overflow = TextOverflow.StartEllipsis
+                    )
+
+                    // MoreInfo
+                    Row(
+                        modifier = Modifier.padding(top = CP.xSmall),
+                        horizontalArrangement = Arrangement.spacedBy(2.dp),
+                        content = {
+                            val ctx = LocalContext.current
+                            // Count
+                            InfoChip(
+                                icon = vectorResource(Res.drawable.ic_format_list_numbered),
+                                label = "${value.count}"
+                            )
+                            // year
+                            InfoChip(
+                                icon = vectorResource(Res.drawable.ic_save),
+                                label = ctx.fileSizeFormatted(value.size.toLong())
+                            )
                         }
-                )
-
-                // Image
-                val elevation = if (kotlin.random.Random.nextBoolean()) 0.5.dp else 1.dp
-                AsyncImage(
-                    model = value.artworkUri,
-                    contentDescription = value.name,
-                    modifier = Modifier
-                        .then(ImageModifier)
-                        .background(AppTheme.colors.background(elevation = elevation)),
-                    contentScale = ContentScale.Crop
-                )
-
-                //
-                val isRemovable = PathUtils.isRemovableStorage(value.path)
-                if (!isRemovable) return@Box
-                Icon(
-                    imageVector = vectorResource(Res.drawable.ic_save),
-                    contentDescription = "removable card",
-                    modifier = Modifier
-                        .scale(0.8f)
-                        .align(Alignment.TopStart)
-                        .padding(8.dp),
-                    tint = Color.White
-                )
-            }
-        )
-
-
-        val ctx = LocalContext.current
-        // TextLabel
-        Label(
-            modifier = Modifier.padding(
-                top = ContentPadding.normal,
-                start = ContentPadding.small
-            ),
-            style = AppTheme.typography.body2,
-            fontWeight = FontWeight.Normal,
-            text = value.name
-        )
-
-        // More Info
-        Label(
-            text = pluralStringResource(
-                Res.plurals.files_d,
-                value.count,
-                value.count
-            ) + " - " + ctx.fileSizeFormatted(value.size.toLong()),
-            style = AppTheme.typography.body3,
-            color = AppTheme.colors.onBackground.copy(ContentAlpha.medium),
-            modifier = Modifier.padding(start = ContentPadding.small),
-        )
-    }
-)
+                    )
+                }
+            )
+        }
+    )
+}
 
 @Composable
 fun Folders(viewState: FoldersViewState) {
@@ -175,24 +139,23 @@ fun Folders(viewState: FoldersViewState) {
     Directory(
         viewState,
         key = Folder::path,
-        minSize = 100.dp,
+        minSize = 110.dp,
         itemContent = {
             Folder(
                 it,
-                modifier = Modifier
-                    .animateItem()
-                    .clickable {
-                        navController.navigate(
-                            when {
-                                viewState.ofAudios -> RouteAudios(
-                                    RouteAudios.SOURCE_FOLDER,
-                                    it.path
-                                )
+                modifier = Modifier.animateItem(),
+                onClick = {
+                    navController.navigate(
+                        when {
+                            viewState.ofAudios -> RouteAudios(
+                                RouteAudios.SOURCE_FOLDER,
+                                it.path
+                            )
 
-                                else -> RouteVideos(it.path)
-                            }
-                        )
-                    },
+                            else -> RouteVideos(it.path)
+                        }
+                    )
+                }
             )
         }
     )
