@@ -1,51 +1,93 @@
 package com.zs.audiofy.common.shapes
 
-import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.LayoutDirection
 
-val GhostishShape = getGhostishShape(50f)
+object GhostShape : Shape {
+    override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
+        val (w, h) = size
+        val path  =Path().apply {
+            // Start at the top-center
+            moveTo(
+                x = w * 0.50f,
+                y = 0f
+            )
 
+            // Left half of the dome
+            cubicTo(
+                w * 0.23f, h * 0.00f,
+                w * 0.00f, h * 0.20f,
+                w * 0.00f, h * 0.46f
+            )
 
-/**
- * @param radius Defines the size of the bottom corner curves and the wave's height.
- */
-fun getGhostishShape(radius: Float) = GenericShape { size, _ ->
-    val w = size.width
-    val h = size.height
+            // Left vertical side
+            lineTo(
+                w * 0.00f,
+                h * 0.78f
+            )
 
-    // Where the straight vertical sides stop to make room for the bottom corners
-    val cornerStartY = h - radius
+            // Bottom-left rounded corner.
+            // This is the START of the continuous bottom wave.
+            cubicTo(
+                w * 0.00f, h * 0.91f,
+                w * 0.08f, h * 1.00f,
+                w * 0.21f, h * 1.00f
+            )
 
-    // Where the center indent rests (slightly lower than the corner start for a wavy look)
-    val centerDipY = h - (radius * 0.5f)
+            // -------------------------------------------------
+            // CONTINUOUS BOTTOM WAVE
+            // -------------------------------------------------
 
-    // 1. Start at the middle-left edge (just below the dome)
-    moveTo(0f, h * 0.4f)
+            // Left low section -> center dip/peak
+            cubicTo(
+                w * 0.32f, h * 1.00f,
+                w * 0.36f, h * 0.84f,
+                w * 0.50f, h * 0.84f
+            )
 
-    // 2. Draw the rounded top dome
-    cubicTo(
-        x1 = 0f, y1 = -h * 0.1f,
-        x2 = w, y2 = -h * 0.1f,
-        x3 = w, y3 = h * 0.4f
-    )
+            // Center -> right low section
+            cubicTo(
+                w * 0.64f, h * 0.84f,
+                w * 0.68f, h * 1.00f,
+                w * 0.79f, h * 1.00f
+            )
 
-    // 3. Right side straight down, STOPPING early to leave room for the corner
-    lineTo(w, cornerStartY)
+            // -------------------------------------------------
+            // Bottom-right rounded corner.
+            // This is the END of the continuous wave.
+            // -------------------------------------------------
+            cubicTo(
+                w * 0.92f, h * 1.00f,
+                w * 1.00f, h * 0.91f,
+                w * 1.00f, h * 0.78f
+            )
 
-    // 4. Bottom Right Corner & Foot
-    cubicTo(
-        x1 = w, y1 = h,                   // Tangent is vertical: rounds the bottom-right corner perfectly
-        x2 = w * 0.65f, y2 = centerDipY,  // Tangent is horizontal: approaches the center dip smoothly
-        x3 = w * 0.5f, y3 = centerDipY    // The center dip anchor point
-    )
+            // Right vertical side
+            lineTo(
+                w,
+                h * 0.46f
+            )
 
-    // 5. Bottom Left Corner & Foot
-    cubicTo(
-        x1 = w * 0.35f, y1 = centerDipY,  // Tangent is horizontal: leaves the center dip smoothly
-        x2 = 0f, y2 = h,                  // Tangent is vertical: rounds the bottom-left corner
-        x3 = 0f, y3 = cornerStartY        // Ends exactly where the left straight side will begin
-    )
+            // Right half of the dome
+            cubicTo(
+                w,
+                h * 0.20f,
+                w * 0.77f,
+                0f,
+                w * 0.50f,
+                0f
+            )
 
-    // 6. Close the path (This automatically draws the left vertical line back up to the start)
-    close()
+            close()
+        }
+        return Outline.Generic(path)
+    }
 }
+
+
+
+

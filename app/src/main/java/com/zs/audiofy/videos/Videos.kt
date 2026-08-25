@@ -141,7 +141,7 @@ private fun Video(
                 modifier = Modifier
                     .decorator(
                         elevation = 4.dp,
-                        shape = SuperellipseShape(0.6f),
+                        shape = Res.shape.crt_screen,
                         border = BorderStroke(1.dp, Color.White),
                         backgroundColor = AppTheme.colors.background(3.dp)
                     ),

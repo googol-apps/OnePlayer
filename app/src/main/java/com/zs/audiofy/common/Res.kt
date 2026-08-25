@@ -30,7 +30,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import com.zs.audiofy.common.shapes.CompactDisk
+import com.zs.audiofy.common.shapes.CrtScreenShape
 import com.zs.audiofy.common.shapes.FolderShape
+import com.zs.audiofy.common.shapes.GhostShape
 import com.zs.audiofy.common.shapes.SunnyShape
 import com.zs.audiofy.common.shapes.SuperellipseShape
 
@@ -69,11 +71,13 @@ object Res {
         val section = RoundedCornerShape(20.dp)
         val squircle = SuperellipseShape(0.5f)
         val folder =  FolderShape(0.18f)
+        val ghost get() =  GhostShape
 
-        val circle = CircleShape
-        val rectangle = RectangleShape
+        val circle get() =  CircleShape
+        val rectangle get() =  RectangleShape
         val sunny = SunnyShape(0.4f)
         val compact_disk get() = CompactDisk
+        val crt_screen get() = CrtScreenShape
     }
 
     /**

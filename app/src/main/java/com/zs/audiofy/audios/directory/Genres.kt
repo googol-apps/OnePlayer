@@ -36,8 +36,6 @@ import com.zs.audiofy.common.Route
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.directory.Directory
 import com.zs.audiofy.common.compose.directory.DirectoryViewState
-import com.zs.audiofy.common.shapes.GhostishShape
-import com.zs.audiofy.common.shapes.RoundedStarShape
 import com.zs.audiofy.common.shapes.SunnyShape
 import com.zs.audiofy.common.vectorResource
 import com.zs.compose.theme.AppTheme

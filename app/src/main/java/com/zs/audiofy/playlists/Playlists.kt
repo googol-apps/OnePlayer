@@ -27,7 +27,7 @@ import com.zs.audiofy.common.compose.scale
 import com.zs.audiofy.playlists.members.RouteMembers
 import androidx.compose.foundation.combinedClickable as clickable
 
-private val MIN_CELL_WIDTH = 120.dp
+private val MIN_CELL_WIDTH = 100.dp
 
 @Composable
 fun Playlists(viewState: PlaylistsViewState) {

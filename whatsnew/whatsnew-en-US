@@ -1,5 +1,6 @@
-* Refreshed visual identity with the Geom font and Material 3-aligned designs for Albums, Artists, and Recents.
-* Introduced stylized "Compact Disk" artwork shapes and InfoChips for intuitive metadata display.
-* Improved UI with dynamic list corners, refined shortcuts, and standardized genre layouts.
-* Optimized "Newly Added" fetching performance and system bar color transitions.
-* Updated core libraries (Jetpack Compose, Navigation) and dependencies for improved stability.
+* Introduced new retro CrtScreen, Superellipse, and Sunny artwork shapes for a modernized UI.
+* Redesigned Folder and Playlist items with improved layouts and metadata chips.
+* Implemented dynamic list item corners and enhanced FloatingMenu visibility.
+* Centralized InfoChip components for consistent display of resolution, size, and counts.
+* Optimized track list iconography and updated internal Toolkit dependencies.
+* Cleaned up legacy styles and improved overall UI consistency across the app.

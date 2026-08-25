@@ -51,6 +51,20 @@
     <string name="changelog_1_7_1" translatable="false">
     <b>What’s New <font color='green'>(v1.7.1)\n</font></b>
     <font color='grey'>
+        \n✓ <b>Visual Design &amp; Shapes:</b>
+        \n    • Introduced <b>CrtScreenShape</b> for a retro bulging screen effect on video thumbnails.
+        \n    • Added <b>SuperellipseShape</b> (squircle) for modern, smoother UI containers.
+        \n    • Modernized <b>Playlist</b> items with a square aspect ratio and <b>GhostShape</b> artwork decorators.
+        \n    • Updated <b>Audio</b> items with <b>SunnyShape</b> artwork and increased thumbnail size to 64dp.
+        \n✓ <b>UI Refinements:</b>
+        \n    • Completely redesigned <b>Folder</b> items with a consistent surface-based look and file metadata chips.
+        \n    • Implemented positional shape logic for list items (dynamic rounded corners for top/middle/bottom items).
+        \n    • Improved <b>FloatingMenu</b> visibility with accent-colored surfaces.
+        \n    • Updated track count icons to a numbered list format across Albums and Artists.
+        \n✓ <b>Infrastructure:</b>
+        \n    • Centralized <b>InfoChip</b> component for consistent metadata display (size, resolution, counts).
+        \n    • Bumped <b>Toolkit</b> dependency to v3.9.0-dev.
+        \n    • Cleaned up unused legacy styling constants and imports.
         \n✓
     </font>
     </string>
