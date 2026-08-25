@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.zs.audiofy.audios.RouteAudios
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.Route
+import com.zs.audiofy.common.compose.InfoChip
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.directory.Directory
 import com.zs.audiofy.common.compose.directory.DirectoryViewState
@@ -118,7 +119,7 @@ private fun Artist(
 
                     // MoreInfo
                     InfoChip(
-                        icon =  vectorResource(Res.drawable.ic_music_note),
+                        icon = vectorResource(Res.drawable.ic_music_note),
                         label = "${value.tracks}"
                     )
                 }

@@ -91,7 +91,7 @@ private fun Audio(
         modifier = Modifier.decorator(
                 backgroundColor = AppTheme.colors.background(1.dp),
                 shape = shape,
-                edgeInsets = EdgeInsets(start = ContentPadding.large, end = ContentPadding.large)
+                edgeInsets = EdgeInsets(horizontal = ContentPadding.large)
             )
             .then(modifier),
         leading = {

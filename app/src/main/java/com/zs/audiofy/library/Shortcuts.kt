@@ -65,7 +65,7 @@ private fun Shortcut(
     onAction: () -> Unit,
     modifier: Modifier = Modifier,
 ) = Surface(
-    shape = FolderShape(),
+    shape = Res.shape.folder,
     color = Color.Transparent,
     border = BorderStroke(1.dp, AppTheme.colors.onBackground.copy(0.4f)),
     onClick = onAction,

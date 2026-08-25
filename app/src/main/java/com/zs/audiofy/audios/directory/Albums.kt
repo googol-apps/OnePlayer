@@ -35,10 +35,12 @@ import coil3.compose.AsyncImage
 import com.zs.audiofy.audios.RouteAudios
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.Route
+import com.zs.audiofy.common.compose.InfoChip
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.directory.Directory
 import com.zs.audiofy.common.compose.directory.DirectoryViewState
 import com.zs.audiofy.common.vectorResource
+import com.zs.compose.foundation.decorator.EdgeInsets
 import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.ContentAlpha
@@ -79,7 +81,8 @@ private fun Album(
                             .decorator(
                                 colors.background(3.dp),
                                 shape = Res.shape.compact_disk,
-                                border = BorderStroke(1.dp, AppTheme.colors.onBackground)
+                                border = BorderStroke(1.dp, AppTheme.colors.onBackground),
+                                edgeInsets = EdgeInsets(horizontal = CP.xSmall)
                             )
                             .aspectRatio(1.0f),
                     )

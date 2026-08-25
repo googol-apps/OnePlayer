@@ -30,7 +30,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
 import com.zs.audiofy.common.shapes.CompactDisk
+import com.zs.audiofy.common.shapes.FolderShape
 import com.zs.audiofy.common.shapes.SunnyShape
+import com.zs.audiofy.common.shapes.SuperellipseShape
 
 /**
  * Common access point for app-level constants and resources.
@@ -65,7 +67,8 @@ object Res {
         val section_middle_item = RectangleShape
         val section_last_item = RoundedCornerShape(0.dp, 0.dp, 20.dp, 20.dp)
         val section = RoundedCornerShape(20.dp)
-
+        val squircle = SuperellipseShape(0.5f)
+        val folder =  FolderShape(0.18f)
 
         val circle = CircleShape
         val rectangle = RectangleShape

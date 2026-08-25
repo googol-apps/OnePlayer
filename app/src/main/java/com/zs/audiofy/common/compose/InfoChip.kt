@@ -1,4 +1,4 @@
-package com.zs.audiofy.audios.directory
+package com.zs.audiofy.common.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
 import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.ContentAlpha

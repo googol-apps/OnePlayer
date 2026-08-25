@@ -18,14 +18,13 @@
 
 package com.zs.audiofy.videos
 
-
 import android.app.Activity
 import android.text.format.DateUtils
 import android.text.format.Formatter
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -39,36 +38,36 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import coil3.compose.rememberAsyncImagePainter
-import com.zs.audiofy.R
+import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 import com.zs.audiofy.common.Action
 import com.zs.audiofy.common.INFO
 import com.zs.audiofy.common.PLAYLIST_ADD
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.compose.ContentPadding
+import com.zs.audiofy.common.compose.InfoChip
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.LocalSystemFacade
 import com.zs.audiofy.common.compose.LottieAnimatedButton
 import com.zs.audiofy.common.compose.LottieAnimatedIcon
 import com.zs.audiofy.common.compose.OverflowMenu
-import com.zs.audiofy.common.compose.background
 import com.zs.audiofy.common.compose.directory.Files
-import com.zs.audiofy.common.compose.shine
+import com.zs.audiofy.common.shapes.SuperellipseShape
+import com.zs.audiofy.common.vectorResource
 import com.zs.audiofy.console.RouteConsole
 import com.zs.audiofy.playlists.Playlists
 import com.zs.audiofy.properties.RouteProperties
 import com.zs.compose.foundation.SignalWhite
+import com.zs.compose.foundation.decorator.EdgeInsets
+import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.BaseListItem
 import com.zs.compose.theme.ContentAlpha
@@ -82,10 +81,7 @@ import dev.chrisbanes.haze.rememberHazeState
 import androidx.compose.foundation.combinedClickable as clickable
 import com.zs.audiofy.common.compose.ContentPadding as CP
 
-private const val TAG = "Video"
-
-private val VideoItemPadding = PaddingValues(start = ContentPadding.normal, end = CP.medium)
-private val VideoThumbnailModifier = Modifier.size(90.dp, 56.dp)
+private const val TAG = "Videos"
 
 /**
  * Represents the [Video] list item.
@@ -93,15 +89,16 @@ private val VideoThumbnailModifier = Modifier.size(90.dp, 56.dp)
 @Composable
 private fun Video(
     value: Video,
+    shape: Shape,
     actions: @Composable () -> Unit,
     modifier: Modifier = Modifier
 ) {
     BaseListItem(
-        modifier = modifier,
         trailing = actions,
-        padding = VideoItemPadding,
+        spacing = CP.small,
         centerAlign = false,
-        // Title
+        padding = PaddingValues(start = CP.medium, end = 0.dp, top = CP.medium, bottom = CP.medium),
+                // Title
         overline = {
             Label(
                 value.name,
@@ -125,38 +122,35 @@ private fun Video(
         // Properties
         subheading = {
             val ctx = LocalContext.current
-            val color = AppTheme.colors.onBackground
-            val style =
-                SpanStyle(color.copy(ContentAlpha.medium), background = color.copy(0.12f))
-            Label(
-                buildAnnotatedString {
-                    withStyle(style) {
-                        append(" ${Formatter.formatShortFileSize(ctx, value.size)} ")
-                    }
-                    append("  ")
-                    withStyle(style) {
-                        append(" ")
-                        append(stringResource(Res.string.pixels_d, value.height))
-                        append(" ")
-                    }
-                },
-                fontWeight = FontWeight.SemiBold,
-                style = AppTheme.typography.label3
-            )
+            Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+                InfoChip(
+                    label = "${Formatter.formatShortFileSize(ctx, value.size)} ",
+                    icon = vectorResource(Res.drawable.ic_save),
+                    shape = AppTheme.shapes.xSmall
+                )
+                InfoChip(
+                    label = stringResource(Res.string.pixels_d, value.height),
+                    icon = vectorResource(Res.drawable.ic_fit_screen),
+                    shape = AppTheme.shapes.xSmall
+                )
+            }
         },
         // Thumbnail
         leading = {
             Box(
                 modifier = Modifier
-                    .clip(AppTheme.shapes.small)
-                    .background(AppTheme.colors.background(1.dp)) then VideoThumbnailModifier,
+                    .decorator(
+                        elevation = 4.dp,
+                        shape = SuperellipseShape(0.6f),
+                        border = BorderStroke(1.dp, Color.White),
+                        backgroundColor = AppTheme.colors.background(3.dp)
+                    ),
                 content = {
-                    // Thumbnail
-                    Image(
-                        rememberAsyncImagePainter(value.contentUri),
-                        contentDescription = value.name,
+                    AsyncImage(
+                        model = value.contentUri,
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier.matchParentSize()
+                        contentDescription = null,
+                        modifier = Modifier.size(90.dp, 58.dp)
                     )
 
                     // Duration
@@ -165,15 +159,21 @@ private fun Video(
                         modifier = Modifier
                             .padding(end = CP.xSmall, bottom = CP.xSmall)
                             .background(Color.Black.copy(0.36f), AppTheme.shapes.small)
-                            .padding(1.dp)
                             .align(Alignment.BottomEnd),
                         color = Color.SignalWhite,
                         style = AppTheme.typography.label3,
+                        fontSize = 10.sp,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
             )
-        }
+        },
+        modifier = Modifier.decorator(
+            backgroundColor = AppTheme.colors.background(1.dp),
+            shape = shape,
+            edgeInsets = EdgeInsets(horizontal = ContentPadding.normal)
+        )
+            .then(modifier),
     )
 }
 
@@ -210,9 +210,15 @@ fun Videos(viewState: VideosViewState) {
             }
         },
         key = Video::id,
-        itemContent = { video, _ ->
+        itemContent = { video, pos ->
             Video(
                 value = video,
+                shape = when (pos) {
+                    0 -> Res.shape.section
+                    1 -> Res.shape.section_first_item
+                    2 -> Res.shape.section_middle_item
+                    else -> Res.shape.section_last_item
+                },
                 modifier = Modifier
                     .animateItem()
                     .clickable(
