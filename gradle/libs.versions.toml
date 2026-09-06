@@ -1,13 +1,13 @@
 [versions]
-agp = "9.3.1"                # Android Gradle Plugin
+agp = "9.4.0"                # Android Gradle Plugin
 kotlin = "2.4.10"             # Kotlin language + Compose plugin
 media3 = "1.11.0"             # Media3 playback libraries
-toolkit = "3.9.0-dev"       # Prime Toolkit modules
+toolkit = "3.10.0-dev"       # Prime Toolkit modules
 material_icons = "1.7.8"     # Material Icons for Compose
-coil = "3.5.0"               # Coil image loader
+coil = "3.6.2"               # Coil image loader
 room = "2.8.4"               # Room persistence library
-glance = "1.1.1"             # Glance widgets
-nav3 = "1.1.6"       # Navigation 3 experimental
+glance = "1.2.0"             # Glance widgets
+nav3 = "1.1.7"       # Navigation 3 experimental
 
 [plugins]
 # ─── Android Build Plugins ───
@@ -93,7 +93,7 @@ coil-core = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }          
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }  # Compose integration
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" } # Networking via Ktor
 coil-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil" }          # SVG rendering
-coil-video = { module = "io.coil-kt.coil3:coil-video", version = "3.5.0" }         # Video frame thumbnails
+coil-video = { module = "io.coil-kt.coil3:coil-video", version = "3.6.2" }         # Video frame thumbnails
 coil-avif-coder = { module = "com.github.awxkee:avif-coder-coil", version = "2.1.4" } # AVIF format support
 
 # ─── Toolkit ───

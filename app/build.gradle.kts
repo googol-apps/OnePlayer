@@ -20,8 +20,8 @@ plugins {
 //  Defines the core identity and compatibility parameters of the application.
 //  This lambda is applied to the [defaultConfig] block within the [android] section.
 private val config: Config.() -> Unit = {
-    versionCode = 41                                    // Internal version code
-    versionName = "1.7.1"                               // User-facing version name
+    versionCode = 42                                    // Internal version code
+    versionName = "1.7.2"                               // User-facing version name
     applicationId = "com.googol.android.apps.oneplayer" // Unique app ID
     minSdk = 28                                         // Minimum supported Android version
     targetSdk = 37                                      // Target SDK
