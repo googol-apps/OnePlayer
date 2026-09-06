@@ -162,7 +162,7 @@ class ConsoleViewModel(
             // Determine the deletion action based on Android version and trash can settings.
             val code = when {
                 // If running on Android R or newer and trash can is enabled, move to trash.
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && AppConfig.isTrashCanEnabled ->
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && Res.config.isTrashCanEnabled ->
                     dataProvider.trash(resolver, key)
                 // If running on Android R or newer and trash can is disabled, delete permanently.
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> dataProvider.delete(resolver, key)

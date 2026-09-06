@@ -130,13 +130,13 @@ class FoldersViewModel(
                     )
                 val result = when (order) {
                     ORDER_BY_NONE -> folders.groupBy { "" }
-                    ORDER_BY_TITLE -> folders.sortedBy { if (AppConfig.isFileGroupingEnabled) it.firstTitleChar else ""}
-                        .let { if (ascending) it else it.reversed() }.groupBy { if (AppConfig.isFileGroupingEnabled) it.firstTitleChar else "" }
+                    ORDER_BY_TITLE -> folders.sortedBy { if (Res.config.isFileGroupingEnabled) it.firstTitleChar else ""}
+                        .let { if (ascending) it else it.reversed() }.groupBy { if (Res.config.isFileGroupingEnabled) it.firstTitleChar else "" }
 
                     ORDER_BY_DATE_MODIFIED -> folders.sortedBy { it.lastModified }
                         .let { if (ascending) it else it.reversed() }
                         .groupBy {
-                            if (!AppConfig.isFileGroupingEnabled)
+                            if (!Res.config.isFileGroupingEnabled)
                                 return@groupBy ""
                             DateUtils.getRelativeTimeSpanString(it.lastModified).toString()
                         }

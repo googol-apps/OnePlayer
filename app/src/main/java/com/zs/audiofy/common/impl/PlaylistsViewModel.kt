@@ -127,13 +127,13 @@ class PlaylistsViewModel(val playlists: Playlists) : KoinViewModel(), PlaylistsV
             playlists.observe(query).map { playlists ->
                 val result = when (order) {
                     ORDER_NONE -> playlists.groupBy { "" }
-                    ORDER_NAME -> playlists.sortedBy { if (AppConfig.isFileGroupingEnabled) it.firstTitleChar else "" }
-                        .let { if (ascending) it else it.reversed() }.groupBy { if (AppConfig.isFileGroupingEnabled) it.firstTitleChar else "" }
+                    ORDER_NAME -> playlists.sortedBy { if (Res.config.isFileGroupingEnabled) it.firstTitleChar else "" }
+                        .let { if (ascending) it else it.reversed() }.groupBy { if (Res.config.isFileGroupingEnabled) it.firstTitleChar else "" }
 
                     ORDER_BY_MODIFIED -> playlists.sortedBy { it.dateModified }
                         .let { if (ascending) it else it.reversed() }
                         .groupBy {
-                            if (!AppConfig.isFileGroupingEnabled)
+                            if (!Res.config.isFileGroupingEnabled)
                                 return@groupBy ""
                             DateUtils.getRelativeTimeSpanString(it.dateModified).toString() }
 

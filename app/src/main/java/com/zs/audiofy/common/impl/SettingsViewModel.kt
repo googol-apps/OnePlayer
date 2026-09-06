@@ -35,19 +35,19 @@ import com.zs.preferences.Key
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(val remote: Remote) : KoinViewModel(), SettingsViewState {
-    override var trashCanEnabled: Boolean by mutableStateOf(AppConfig.isTrashCanEnabled)
-    override var preferCachedThumbnails: Boolean by mutableStateOf(AppConfig.isLoadThumbnailFromCache)
-    override var enabledBackgroundBlur: Boolean by mutableStateOf(AppConfig.isBackgroundBlurEnabled)
-    override var fontScale: Float by mutableFloatStateOf(AppConfig.fontScale)
-    override var minTrackLengthSecs: Int by mutableIntStateOf(AppConfig.minTrackLengthSecs)
-    override var inAppAudioEffectsEnabled: Boolean by mutableStateOf(AppConfig.inAppAudioEffectsEnabled)
-    override var gridItemSizeMultiplier: Float by mutableFloatStateOf(AppConfig.gridItemSizeMultiplier)
-    override var fabLongPressLaunchConsole: Boolean by mutableStateOf(AppConfig.fabLongPressLaunchConsole)
-    override var isSurfaceViewVideoRenderingPreferred: Boolean by mutableStateOf(AppConfig.isSurfaceViewVideoRenderingPreferred)
-    override var isFileGroupingEnabled: Boolean by mutableStateOf(AppConfig.isFileGroupingEnabled)
-    override var isSplashAnimWaitEnabled: Boolean by mutableStateOf(AppConfig.isSplashAnimWaitEnabled)
-    override var isWidgetToConsoleTransitionEnabled: Boolean by mutableStateOf(AppConfig.isWidgetToConsoleTransitionEnabled)
-    override var isLabsModeOn: Boolean by mutableStateOf(AppConfig.isLabsModeOn)
+    override var trashCanEnabled: Boolean by mutableStateOf(Res.config.isTrashCanEnabled)
+    override var preferCachedThumbnails: Boolean by mutableStateOf(Res.config.isLoadThumbnailFromCache)
+    override var enabledBackgroundBlur: Boolean by mutableStateOf(Res.config.isBackgroundBlurEnabled)
+    override var fontScale: Float by mutableFloatStateOf(Res.config.fontScale)
+    override var minTrackLengthSecs: Int by mutableIntStateOf(Res.config.minTrackLengthSecs)
+    override var inAppAudioEffectsEnabled: Boolean by mutableStateOf(Res.config.inAppAudioEffectsEnabled)
+    override var gridItemSizeMultiplier: Float by mutableFloatStateOf(Res.config.gridItemSizeMultiplier)
+    override var fabLongPressLaunchConsole: Boolean by mutableStateOf(Res.config.fabLongPressLaunchConsole)
+    override var isSurfaceViewVideoRenderingPreferred: Boolean by mutableStateOf(Res.config.isSurfaceViewVideoRenderingPreferred)
+    override var isFileGroupingEnabled: Boolean by mutableStateOf(Res.config.isFileGroupingEnabled)
+    override var isSplashAnimWaitEnabled: Boolean by mutableStateOf(Res.config.isSplashAnimWaitEnabled)
+    override var isWidgetToConsoleTransitionEnabled: Boolean by mutableStateOf(Res.config.isWidgetToConsoleTransitionEnabled)
+    override var isLabsModeOn: Boolean by mutableStateOf(Res.config.isLabsModeOn)
     @set:JvmName("setBgPlaybackPolicy2")
     override var bgPlaybackPolicy: Int by mutableIntStateOf(Remote.BG_PLAYBACK_AUDIO_ONLY)
 
@@ -58,19 +58,19 @@ class SettingsViewModel(val remote: Remote) : KoinViewModel(), SettingsViewState
     }
 
     override val save: Boolean by derivedStateOf {
-        trashCanEnabled != AppConfig.isTrashCanEnabled ||
-                preferCachedThumbnails != AppConfig.isLoadThumbnailFromCache ||
-                enabledBackgroundBlur != AppConfig.isBackgroundBlurEnabled ||
-                fontScale != AppConfig.fontScale ||
-                minTrackLengthSecs != AppConfig.minTrackLengthSecs ||
-                inAppAudioEffectsEnabled != AppConfig.inAppAudioEffectsEnabled ||
-                gridItemSizeMultiplier != AppConfig.gridItemSizeMultiplier ||
-                fabLongPressLaunchConsole != AppConfig.fabLongPressLaunchConsole ||
-                isSurfaceViewVideoRenderingPreferred != AppConfig.isSurfaceViewVideoRenderingPreferred ||
-                isFileGroupingEnabled != AppConfig.isFileGroupingEnabled ||
-                isSplashAnimWaitEnabled != AppConfig.isSplashAnimWaitEnabled ||
-                isWidgetToConsoleTransitionEnabled != AppConfig.isWidgetToConsoleTransitionEnabled ||
-                isLabsModeOn != AppConfig.isLabsModeOn
+        trashCanEnabled != Res.config.isTrashCanEnabled ||
+                preferCachedThumbnails != Res.config.isLoadThumbnailFromCache ||
+                enabledBackgroundBlur != Res.config.isBackgroundBlurEnabled ||
+                fontScale != Res.config.fontScale ||
+                minTrackLengthSecs != Res.config.minTrackLengthSecs ||
+                inAppAudioEffectsEnabled != Res.config.inAppAudioEffectsEnabled ||
+                gridItemSizeMultiplier != Res.config.gridItemSizeMultiplier ||
+                fabLongPressLaunchConsole != Res.config.fabLongPressLaunchConsole ||
+                isSurfaceViewVideoRenderingPreferred != Res.config.isSurfaceViewVideoRenderingPreferred ||
+                isFileGroupingEnabled != Res.config.isFileGroupingEnabled ||
+                isSplashAnimWaitEnabled != Res.config.isSplashAnimWaitEnabled ||
+                isWidgetToConsoleTransitionEnabled != Res.config.isWidgetToConsoleTransitionEnabled ||
+                isLabsModeOn != Res.config.isLabsModeOn
     }
 
     override fun commit(facade: SystemFacade) {
@@ -78,8 +78,8 @@ class SettingsViewModel(val remote: Remote) : KoinViewModel(), SettingsViewState
             // [CORE_SETTING_CHANGE] Update AppConfig with new settings values
             // This directly modifies the global AppConfig object, which is used throughout the application
             // to determine runtime behavior based on user preferences.
-            val global = AppConfig.isLoadThumbnailFromCache != preferCachedThumbnails ||
-                    AppConfig.isWidgetToConsoleTransitionEnabled != isWidgetToConsoleTransitionEnabled
+            val global = Res.config.isLoadThumbnailFromCache != preferCachedThumbnails ||
+                    Res.config.isWidgetToConsoleTransitionEnabled != isWidgetToConsoleTransitionEnabled
 
             AppConfig.isLoadThumbnailFromCache = preferCachedThumbnails
             AppConfig.isBackgroundBlurEnabled = enabledBackgroundBlur
@@ -98,7 +98,7 @@ class SettingsViewModel(val remote: Remote) : KoinViewModel(), SettingsViewState
             // [PERSISTENCE] Serialize and save the updated AppConfig to preferences
             // The `stringify()` method likely converts the AppConfig object into a JSON or similar string format
             // for storage. `preferences` is an abstraction over SharedPreferences or DataStore.
-            preferences[Res.key.app_config] = AppConfig.stringify()
+            preferences[Res.key.app_config] = Res.config.stringify()
             // trigger save
             val enabled = trashCanEnabled
             trashCanEnabled = !enabled
@@ -128,18 +128,18 @@ class SettingsViewModel(val remote: Remote) : KoinViewModel(), SettingsViewState
         viewModelScope.launch {
             val res = showSnackbar("Discard unsaved changes?", "Discard")
             if (res == SnackbarResult.ActionPerformed) {
-                fontScale = AppConfig.fontScale
-                minTrackLengthSecs = AppConfig.minTrackLengthSecs
-                inAppAudioEffectsEnabled = AppConfig.inAppAudioEffectsEnabled
-                gridItemSizeMultiplier = AppConfig.gridItemSizeMultiplier
-                preferCachedThumbnails = AppConfig.isLoadThumbnailFromCache
-                enabledBackgroundBlur = AppConfig.isBackgroundBlurEnabled
-                trashCanEnabled = AppConfig.isTrashCanEnabled
-                fabLongPressLaunchConsole = AppConfig.fabLongPressLaunchConsole
-                isSurfaceViewVideoRenderingPreferred = AppConfig.isSurfaceViewVideoRenderingPreferred
-                isFileGroupingEnabled = AppConfig.isFileGroupingEnabled
-                isSplashAnimWaitEnabled = AppConfig.isSplashAnimWaitEnabled
-                isLabsModeOn = AppConfig.isLabsModeOn
+                fontScale = Res.config.fontScale
+                minTrackLengthSecs = Res.config.minTrackLengthSecs
+                inAppAudioEffectsEnabled = Res.config.inAppAudioEffectsEnabled
+                gridItemSizeMultiplier = Res.config.gridItemSizeMultiplier
+                preferCachedThumbnails = Res.config.isLoadThumbnailFromCache
+                enabledBackgroundBlur = Res.config.isBackgroundBlurEnabled
+                trashCanEnabled = Res.config.isTrashCanEnabled
+                fabLongPressLaunchConsole = Res.config.fabLongPressLaunchConsole
+                isSurfaceViewVideoRenderingPreferred = Res.config.isSurfaceViewVideoRenderingPreferred
+                isFileGroupingEnabled = Res.config.isFileGroupingEnabled
+                isSplashAnimWaitEnabled = Res.config.isSplashAnimWaitEnabled
+                isLabsModeOn = Res.config.isLabsModeOn
             }
         }
     }

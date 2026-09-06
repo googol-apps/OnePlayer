@@ -205,7 +205,7 @@ private fun Sponsor(modifier: Modifier = Modifier) {
         // Build version info.
         heading = {
             Text(
-                text = textResource(Res.string.version_info_s, AppConfig.VERSION_NAME),
+                text = textResource(Res.string.version_info_s, Res.config.VERSION_NAME),
                 style = AppTheme.typography.label3,
                 fontWeight = FontWeight.Normal
             )

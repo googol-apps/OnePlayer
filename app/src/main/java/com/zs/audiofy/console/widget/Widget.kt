@@ -191,12 +191,12 @@ object Widget {
                         onRequest(REQUEST_PLAY_TOGGLE)
                     // If currently viewing a video, toggle playback (play/pause).
 
-                    isFab && AppConfig.fabLongPressLaunchConsole ->
+                    isFab && Res.config.fabLongPressLaunchConsole ->
                         expanded = true
                     // If in FAB mode and the "long-press FAB opens console" setting is enabled,
                     // expand the player to show the console.
 
-                    isFab && !AppConfig.fabLongPressLaunchConsole ->
+                    isFab && !Res.config.fabLongPressLaunchConsole ->
                         navController.navigate(RouteConsole())
                     // If in FAB mode but the "long-press FAB opens console" setting is disabled,
                     // navigate directly to the console screen without expanding.
@@ -210,12 +210,12 @@ object Widget {
                 // If not expanded, it's considered a FAB player.
 
                 when {
-                    isFab && AppConfig.fabLongPressLaunchConsole ->
+                    isFab && Res.config.fabLongPressLaunchConsole ->
                         // If in FAB mode AND the user preference "long-press FAB opens console" is enabled,
                         // navigate to the console screen.
                         navController.navigate(RouteConsole())
 
-                    isFab && !AppConfig.fabLongPressLaunchConsole ->
+                    isFab && !Res.config.fabLongPressLaunchConsole ->
                         // If in FAB mode but the preference is disabled,
                         // expand the player to show the full-screen view instead.
                         expanded = true

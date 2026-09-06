@@ -264,7 +264,7 @@ class MainActivity : ComponentActivity(), SystemFacade, NavDestListener {
 
     override fun attachBaseContext(newBase: Context?) {
         // Retrieve the desired font scale from application configuration.
-        val scale = AppConfig.fontScale
+        val scale = Res.config.fontScale
         // If the scale is invalid (-1f) or the newBase context is null,
         // fallback to the default behavior without applying any font scaling.
         if (scale == -1f || newBase == null) {
@@ -554,7 +554,7 @@ class MainActivity : ComponentActivity(), SystemFacade, NavDestListener {
         // Initialize
         if (isColdStart) {
             // Wait for Splash Anim
-            if (AppConfig.isSplashAnimWaitEnabled) {
+            if (Res.config.isSplashAnimWaitEnabled) {
                 val uptimeMillis = SystemClock.uptimeMillis()
                 val content = findViewById<View>(android.R.id.content)
                 val onPreDrawListener = object : OnPreDrawListener {
@@ -590,7 +590,7 @@ class MainActivity : ComponentActivity(), SystemFacade, NavDestListener {
             // TODO - properly handle promotional content.
             lifecycleScope.launch {
                 // Show "What's New" message if the app version has changed
-                val versionCode = AppConfig.VERSION_CODE
+                val versionCode = Res.config.VERSION_CODE
                 val savedVersionCode = preferences[KEY_APP_VERSION_CODE]
                 // Update review-time to current time if this is a new install.
                 if (savedVersionCode == -1)

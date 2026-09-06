@@ -80,7 +80,7 @@ interface SystemFacade {
      *
      * @param pkg the package name of the app to open on the App Store.
      */
-    fun launchAppStore(pkg: String = AppConfig.APPLICATION_ID) {
+    fun launchAppStore(pkg: String = Res.config.APPLICATION_ID) {
         val url = "$Res.app.market_url_prefix$pkg"
         // Create an Intent to open the Play Store app.
         val intent = Intent(Intent.ACTION_VIEW, url.toUri()).apply {

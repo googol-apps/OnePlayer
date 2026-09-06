@@ -239,7 +239,7 @@ fun SystemFacade.launchEqualizer(id: Int) {
         return showToast(Res.string.msg_unknown_error)
     val intent =
         android.content.Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL).apply {
-            putExtra(AudioEffect.EXTRA_PACKAGE_NAME, AppConfig.APPLICATION_ID)
+            putExtra(AudioEffect.EXTRA_PACKAGE_NAME, Res.config.APPLICATION_ID)
             putExtra(AudioEffect.EXTRA_AUDIO_SESSION, id)
             putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC)
         }

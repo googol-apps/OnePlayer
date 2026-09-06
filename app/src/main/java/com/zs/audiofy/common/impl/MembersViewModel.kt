@@ -123,9 +123,9 @@ class MembersViewModel(
         playlists.observer(playlistName, query).debounceAfterFirst(300L).map { tracks ->
             when (order) {
                 ORDER_NONE -> tracks.groupBy { "" }
-                ORDER_BY_TITLE -> tracks.sortedBy { if (AppConfig.isFileGroupingEnabled) it.firstTitleChar else "" }
+                ORDER_BY_TITLE -> tracks.sortedBy { if (Res.config.isFileGroupingEnabled) it.firstTitleChar else "" }
                     .let { if (ascending) it else it.reversed() }
-                    .groupBy { if (AppConfig.isFileGroupingEnabled) it.firstTitleChar else "" }
+                    .groupBy { if (Res.config.isFileGroupingEnabled) it.firstTitleChar else "" }
 
                 else -> error("Oops!! invalid order passed $order")
             }

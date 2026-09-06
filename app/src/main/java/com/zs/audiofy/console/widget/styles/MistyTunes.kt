@@ -211,7 +211,7 @@ fun MistyTunes(
                     val size = Widget.SmallIconBtn
 
                     when {
-                        BuildConfig.FLAVOR == BuildConfig.FLAVOR_COMMUNITY || AppConfig.inAppWidgetLongPressOpenConfig -> LottieAnimatedButton(
+                        BuildConfig.FLAVOR == BuildConfig.FLAVOR_COMMUNITY || Res.config.inAppWidgetLongPressOpenConfig -> LottieAnimatedButton(
                             Res.raw.lt_twitter_heart_filled_unfilled,
                             onClick = { onRequest(Widget.REQUEST_LIKED) },
                             animationSpec = tween(800),

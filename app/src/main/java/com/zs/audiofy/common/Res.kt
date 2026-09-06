@@ -171,6 +171,7 @@ object Res {
     typealias plurals = com.zs.audiofy.R.plurals
     typealias font = FontFamily.Companion
     typealias layout = Arrangement
+    typealias config = AppConfig
 
     /**
      * Global constants and intents.

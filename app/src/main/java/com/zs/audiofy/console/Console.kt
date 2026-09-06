@@ -166,7 +166,7 @@ object RouteConsole : Route {
     private val COLOR_BACKGROUND = Color(0xFF0E0E0F)
 
     /** A short-hand   */
-    private fun Modifier.key(value: String) = layoutId(value).thenIf(AppConfig.isWidgetToConsoleTransitionEnabled){
+    private fun Modifier.key(value: String) = layoutId(value).thenIf(Res.config.isWidgetToConsoleTransitionEnabled){
         sharedElement(value)
     }
     private val DefaultAnimSpecs = tween<Float>()
@@ -266,7 +266,7 @@ object RouteConsole : Route {
                             keepScreenOn = state.playWhenReady,
                             modifier = Modifier
                                 .resize(scale, state.videoSize),
-                            typeSurfaceView = AppConfig.isSurfaceViewVideoRenderingPreferred
+                            typeSurfaceView = Res.config.isSurfaceViewVideoRenderingPreferred
                         )
                     }
                 )
@@ -533,7 +533,7 @@ object RouteConsole : Route {
                 enabled = enabled,
                 modifier = Modifier.layoutId(ID_BTN_EQUALIZER),
                 onClick = {
-                    if (!AppConfig.inAppAudioEffectsEnabled)
+                    if (!Res.config.inAppAudioEffectsEnabled)
                         facade.launchEqualizer(0)
                     else
                         navController.navigate(RouteAudioFx())
@@ -628,7 +628,7 @@ object RouteConsole : Route {
 
         // Layout
         TwoPane(
-            modifier = Modifier.thenIf(AppConfig.isWidgetToConsoleTransitionEnabled){ sharedBounds(ID_BACKGROUND)},
+            modifier = Modifier.thenIf(Res.config.isWidgetToConsoleTransitionEnabled){ sharedBounds(ID_BACKGROUND)},
             strategy = strategy,
             containerColor = COLOR_BACKGROUND,
             spacing = Res.space.normal,

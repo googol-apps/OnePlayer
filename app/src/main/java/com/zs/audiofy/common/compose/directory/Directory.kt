@@ -315,7 +315,7 @@ fun <T> Directory(
             // Collect the data from the viewState, initially null representing loading state.
             // Get the grid item size multiplier from user preferences.
             val data by viewState.data.collectAsState()
-            val multiplier = AppConfig.gridItemSizeMultiplier
+            val multiplier = Res.config.gridItemSizeMultiplier
             val padding = ContentPadding +
                     inAppNavInsets.union(WindowInsets.content).union(WindowInsets.systemBars)
                         .asPaddingValues()

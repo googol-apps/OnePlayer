@@ -113,7 +113,7 @@ fun Colors.background(
     luminance: Float = if (containerColor.luminance() >= 0.5f) 0.07f else 0.03f,
     blendMode: BlendMode = BlendMode.SrcOver,
     progressive: Float = -1f,
-) = if (!AppConfig.isBackgroundBlurEnabled) Background(Modifier.acrylic(background, accent))
+) = if (!Res.config.isBackgroundBlurEnabled) Background(Modifier.acrylic(background, accent))
 else Background(Modifier.hazeEffect(state = surface) {
     this.blurEnabled = true
     this.blurRadius = blurRadius

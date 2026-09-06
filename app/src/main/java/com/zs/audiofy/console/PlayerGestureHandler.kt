@@ -62,6 +62,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import com.zs.audiofy.common.AppConfig
+import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.SystemFacade
 import com.zs.audiofy.common.compose.LocalSystemFacade
 import com.zs.compose.theme.ContentAlpha
@@ -406,7 +407,7 @@ private class PlayerGestureHandlerNode(
     var speed: Float = 1f
     fun onLongPress(released: Boolean) {
         // This feature is still in preview mode; hence this
-        if (!AppConfig.isLabsModeOn)
+        if (!Res.config.isLabsModeOn)
             return
         Log.d(TAG, "onLongPress: $released")
         // Hide the player controls if they are visible

@@ -87,7 +87,7 @@ class CoilInitializer : Initializer<Unit> {
             .crossfade(450)
             .components {
                 // Conditionally add video thumbnail support if enabled in AppConfig
-                if (AppConfig.isLoadThumbnailFromCache) {
+                if (Res.config.isLoadThumbnailFromCache) {
                     add(VideoThumbnailFetcher.Factory())
                     return@components
                 }

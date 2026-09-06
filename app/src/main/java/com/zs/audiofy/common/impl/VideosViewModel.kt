@@ -131,9 +131,9 @@ class VideosViewModel(
         // Group data.
         data = when (filter.second) {
             ORDER_BY_NONE -> files.groupBy { "" }
-            ORDER_BY_TITLE -> files.groupBy { if (AppConfig.isFileGroupingEnabled) it.firstTitleChar else "" }
+            ORDER_BY_TITLE -> files.groupBy { if (Res.config.isFileGroupingEnabled) it.firstTitleChar else "" }
             ORDER_BY_DATE_MODIFIED -> files.groupBy {
-                if (!AppConfig.isFileGroupingEnabled)
+                if (!Res.config.isFileGroupingEnabled)
                     return@groupBy ""
                 val mills = System.currentTimeMillis()
                 DateUtils.getRelativeTimeSpanString(

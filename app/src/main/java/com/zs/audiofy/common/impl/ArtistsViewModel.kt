@@ -81,7 +81,7 @@ class ArtistsViewModel(provider: MediaProvider) : LocalDirectoryViewModel<Artist
         val (ascending, order) = filter
         val result = provider.fetchArtists(query, order.toMediaStoreOrder, ascending)
         return when (order) {
-            ORDER_BY_TITLE -> result.groupBy { if (AppConfig.isFileGroupingEnabled)  it.firstTitleChar else "" }
+            ORDER_BY_TITLE -> result.groupBy { if (Res.config.isFileGroupingEnabled)  it.firstTitleChar else "" }
             else -> result.groupBy { "" }
         }
     }

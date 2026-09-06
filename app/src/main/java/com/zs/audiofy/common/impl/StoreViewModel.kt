@@ -124,7 +124,7 @@ abstract class StoreViewModel<T>(
     /** Deletes or Trashes file(s) represented by id(s).*/
     fun remove(resolver: Activity, vararg id: Long) {
         runCatching {
-            val isTrashEnabled = AppConfig.isTrashCanEnabled
+            val isTrashEnabled = Res.config.isTrashCanEnabled
             if (isTrashEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
                 trash(resolver = resolver, *id)
             else {

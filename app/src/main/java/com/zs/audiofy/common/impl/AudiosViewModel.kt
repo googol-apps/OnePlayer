@@ -206,7 +206,7 @@ class AudiosViewModel(
 
                 else -> TODO("$source not implemented yet!")
             }
-        }.filter { it.duration  > AppConfig.minTrackLengthSecs * 1000 }
+        }.filter { it.duration  > Res.config.minTrackLengthSecs * 1000 }
         // Emit only if query is null or empty
         if (query.isNullOrBlank()) {
             val latest = files.maxByOrNull { it.dateModified }
@@ -219,11 +219,11 @@ class AudiosViewModel(
         // Group data.
         data = when (filter.second) {
             ORDER_BY_NONE -> files.groupBy { "" }
-            ORDER_BY_TITLE -> files.groupBy {  if (AppConfig.isFileGroupingEnabled) it.firstTitleChar else "" }
-            ORDER_BY_ALBUM -> files.groupBy {  if (AppConfig.isFileGroupingEnabled) it.album else "" }
-            ORDER_BY_ARTIST -> files.groupBy { if (AppConfig.isFileGroupingEnabled) it.artist else "" }
+            ORDER_BY_TITLE -> files.groupBy {  if (Res.config.isFileGroupingEnabled) it.firstTitleChar else "" }
+            ORDER_BY_ALBUM -> files.groupBy {  if (Res.config.isFileGroupingEnabled) it.album else "" }
+            ORDER_BY_ARTIST -> files.groupBy { if (Res.config.isFileGroupingEnabled) it.artist else "" }
             ORDER_BY_DATE_MODIFIED -> files.groupBy {
-                if (!AppConfig.isFileGroupingEnabled)
+                if (!Res.config.isFileGroupingEnabled)
                     return@groupBy ""
                 val mills = System.currentTimeMillis()
                 DateUtils.getRelativeTimeSpanString(
@@ -234,7 +234,7 @@ class AudiosViewModel(
             }
 
             ORDER_BY_LENGTH -> files.groupBy { audio ->
-                if (!AppConfig.isFileGroupingEnabled)
+                if (!Res.config.isFileGroupingEnabled)
                     return@groupBy ""
                 when {
                     audio.duration < TimeUnit.MINUTES.toMillis(2) -> getText(Res.string.duration_under_2_min)
