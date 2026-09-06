@@ -1,6 +1,5 @@
-* Introduced new retro CrtScreen, Superellipse, and Sunny artwork shapes for a modernized UI.
-* Redesigned Folder and Playlist items with improved layouts and metadata chips.
-* Implemented dynamic list item corners and enhanced FloatingMenu visibility.
-* Centralized InfoChip components for consistent display of resolution, size, and counts.
-* Optimized track list iconography and updated internal Toolkit dependencies.
-* Cleaned up legacy styles and improved overall UI consistency across the app.
+* Centralized application configuration via the new Res utility for streamlined UI and resource management.
+* Standardized layout spacing, modern shape naming conventions, and modernized UI components.
+* Upgraded core infrastructure including Gradle 9.7.1, AGP 9.4.0, and Coil 3.6.2.
+* Refined SystemFacade and gesture handling for improved performance and configuration reliability.
+* Optimized codebase by removing legacy utilities and redundant internal logic.

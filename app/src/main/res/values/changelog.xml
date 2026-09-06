@@ -12,6 +12,7 @@
 <resources>
     <!--Changelog-->
     <string-array name="changelog" translatable="false">
+        <item>@string/changelog_1_7_1</item>
         <item>@string/changelog_1_7_0</item>
         <item>@string/changelog_1_6_11</item>
         <item>@string/changelog_1_6_10</item>
@@ -45,7 +46,29 @@
     </string-array>
 
     <!--Points to the changelog of current version.-->
-    <string name="release_notes" translatable="false">@string/changelog_1_7_1</string>
+    <string name="release_notes" translatable="false">@string/changelog_1_7_2</string>
+
+    <!--1.7.2-->
+    <string name="changelog_1_7_2" translatable="false">
+    <b>What’s New <font color='green'>(v1.7.2)\n</font></b>
+    <font color='grey'>
+        \n✓ <b>Architectural Refactoring:</b>
+        \n    • Centralized application configuration via the new <b>Res.config</b> alias, streamlining access across ViewModels and UI components.
+        \n    • Migrated all settings keys, intents, and font references to a unified <b>Res</b> utility object.
+        \n✓ <b>UI &amp; Resource Management:</b>
+        \n    • Standardized spacing and layout arrangements using <b>Res.space</b> and <b>Res.layout</b>.
+        \n    • Modernized shape naming conventions (e.g., <b>section_top</b>, <b>section_bottom</b>) for better clarity.
+        \n    • Cleaned up legacy <b>ContentPadding</b> utilities and redundant code across all screens.
+        \n✓ <b>System &amp; Infrastructure:</b>
+        \n    • Upgraded <b>Gradle</b> to v9.7.1 and <b>AGP</b> to v9.4.0.
+        \n    • Updated core dependencies: <b>Toolkit</b> (v3.10.0-dev), <b>Coil</b> (v3.6.2), <b>Glance</b> (v1.2.0), and <b>Nav3</b> (v1.1.7).
+        \n    • Refined <b>SystemFacade</b> and <b>PlayerGestureHandler</b> for improved configuration handling.
+        \n✓ <b>Maintenance:</b>
+        \n    • Bumped internal version code to 42.
+        \n    • Removed unused imports, redundant semicolons, and legacy self-references.
+        \n    • Simplified <b>MediaProvider</b> constant handling in data models.
+    </font>
+    </string>
 
     <!--1.7.1-->
     <string name="changelog_1_7_1" translatable="false">
