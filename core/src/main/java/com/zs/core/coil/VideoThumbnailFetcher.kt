@@ -167,7 +167,7 @@ class VideoThumbnailFetcher(
         checkNotNull(rawBitmap) { "Failed to decode thumbnail of size ${options.size}." }
 
         // Extract dimensions and normalize the bitmap
-        val srcWidth = rawBitmap.width;
+        val srcWidth = rawBitmap.width
         val srcHeight = rawBitmap.height
         val dstSize = options.size
         val bitmap = normalize(rawBitmap, dstSize)

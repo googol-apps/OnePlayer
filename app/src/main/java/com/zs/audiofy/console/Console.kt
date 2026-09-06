@@ -24,7 +24,6 @@ import android.app.Activity
 import android.text.format.DateUtils
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -61,11 +60,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Route
 import com.zs.audiofy.common.WindowStyle
 import com.zs.audiofy.common.compose.LocalNavController
@@ -106,7 +103,7 @@ import com.zs.compose.theme.text.Label
 import com.zs.core.playback.NowPlaying
 import com.zs.core.playback.Remote
 import kotlinx.coroutines.delay
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 import com.zs.audiofy.common.compose.rememberAnimatedVectorPainter as AnimVectorPainter
 import com.zs.compose.foundation.thenIf
 
@@ -328,7 +325,7 @@ object RouteConsole : Route {
                 isPlaying = state.playing,
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(end = CP.xSmall)
+                    .padding(end = Res.space.x_small)
                     .key(ID_PLAYING_INDICATOR),
                 tint = accent
             )
@@ -634,7 +631,7 @@ object RouteConsole : Route {
             modifier = Modifier.thenIf(AppConfig.isWidgetToConsoleTransitionEnabled){ sharedBounds(ID_BACKGROUND)},
             strategy = strategy,
             containerColor = COLOR_BACKGROUND,
-            spacing = CP.normal,
+            spacing = Res.space.normal,
             secondary = {
                 Box(
                     modifier = Modifier.let{

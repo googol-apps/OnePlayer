@@ -186,9 +186,7 @@ private class PlayerGestureHandlerElement(
 
         other as PlayerGestureHandlerElement
 
-        if (viewState != other.viewState) return false
-
-        return true
+        return viewState == other.viewState
     }
 
     override fun hashCode(): Int {

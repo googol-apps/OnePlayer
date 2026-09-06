@@ -62,7 +62,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.zs.audiofy.about.RouteAboutUs
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.LocalSystemFacade
 import com.zs.audiofy.common.compose.background
@@ -98,7 +98,7 @@ import com.zs.compose.theme.appbar.TopAppBarScrollBehavior
 import com.zs.compose.theme.text.Label
 import com.zs.compose.theme.text.Text
 import com.zs.core.store.MediaProvider
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 @Composable
 private fun LibraryTopAppBar(
@@ -185,7 +185,7 @@ private fun LibraryTopAppBar(
             if (fraction < 0.9f)
                 Spacer(
                     modifier = Modifier
-                        .graphicsLayer() {
+                        .graphicsLayer {
                             this.alpha = lerp(1f, 0f, fraction * 3f)
                         }
                         .thenIf(!immersive) { clip(AppBarDefaults.FloatingTopBarShape) }
@@ -220,8 +220,8 @@ private fun LibraryTopAppBar(
                             scaleX = scale
                             scaleY = scale
                             // Translate the button slightly to create a subtle movement effect.
-                            translationX = -CP.normal.toPx()
-                            translationY = CP.xLarge.toPx()
+                            translationX = -Res.space.normal.toPx()
+                            translationY = Res.space.x_large.toPx()
                         }
                     )
                 }
@@ -253,7 +253,7 @@ private fun LibraryHeader(
 private val Colors.border
     @Composable inline get() = BorderStroke(0.2.dp, accent.copy(0.3f))
 
-private val HeaderMargin = Modifier.padding(top = CP.small)
+private val HeaderMargin = Modifier.padding(top = Res.space.small)
 
 @Composable
 fun Library(viewState: LibraryViewState) {
@@ -271,10 +271,10 @@ fun Library(viewState: LibraryViewState) {
     val inAppNavBarInsets = WindowInsets.content
     val surface = rememberAcrylicSurface()
     val topAppBarScrollBehavior = AppBarDefaults.exitUntilCollapsedScrollBehavior()
-    val colors = AppTheme.colors
+    val colors = colors
     // Layout
     TwoPane(
-        spacing = CP.normal,
+        spacing = Res.space.normal,
         strategy = strategy,
         // TODO - Observe if AppNavBar is Positioned in Side or Bottom.
         topBar = {
@@ -293,7 +293,7 @@ fun Library(viewState: LibraryViewState) {
             Surface(
                 modifier = Modifier
                     .windowInsetsPadding(insets)
-                    .padding(end = ContentPadding.small)
+                    .padding(end = Res.space.small)
                     //.sizeIn(maxWidth = 300.dp)
                 ,
                 // Use the outline color as the border stroke or null based on the lightness
@@ -313,12 +313,12 @@ fun Library(viewState: LibraryViewState) {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .background(AppTheme.colors.background(2.dp))
-                                .padding(horizontal = CP.small, vertical = CP.xSmall)
+                                .padding(horizontal = Res.space.small, vertical = Res.space.x_small)
                         )
 
                         Shortcuts(
                             Modifier
-                                .padding(ContentPadding.small)
+                                .padding(Res.space.small)
                                 .fillMaxWidth(),
                         )
                     }
@@ -333,8 +333,8 @@ fun Library(viewState: LibraryViewState) {
                     .nestedScroll(topAppBarScrollBehavior.nestedScrollConnection)
                     .fadingEdge2(length = 50.dp),
                 contentPadding = PaddingValues(
-                    if (strategy is SinglePaneStrategy) CP.normal else 0.dp,
-                    vertical = CP.small
+                    if (strategy is SinglePaneStrategy) Res.space.normal else 0.dp,
+                    vertical = Res.space.small
                 ) +
                         (WindowInsets.content
                             .union(inAppNavBarInsets)
@@ -354,7 +354,7 @@ fun Library(viewState: LibraryViewState) {
                         item {
                             Shortcuts(
                                 Modifier
-                                    .padding(horizontal = CP.small)
+                                    .padding(horizontal = Res.space.small)
                                     .fillMaxWidth(),
                             )
                         }
@@ -376,7 +376,7 @@ fun Library(viewState: LibraryViewState) {
                     item {
                         Promotions(
                             modifier = Modifier
-                                .padding(horizontal = CP.small, vertical = CP.small)
+                                .padding(horizontal = Res.space.small, vertical = Res.space.small)
                                 .fillMaxWidth(),
                         )
                     }

@@ -46,9 +46,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+import com.zs.audiofy.common.gap_small
+
 import com.zs.audiofy.common.compose.LottieAnimatedButton
 import com.zs.audiofy.common.compose.chronometer
 import com.zs.audiofy.common.compose.marque
@@ -85,7 +85,7 @@ fun SkewedDynamic(
     val contentColor = colors.onBackground
     BaseListItem(
         contentColor = contentColor,
-        spacing = ContentPadding.small,
+        spacing = Res.space.small,
         padding = Widget.Padding,
         modifier = modifier
             .sharedBounds(RouteConsole.ID_BACKGROUND)
@@ -190,7 +190,7 @@ fun SkewedDynamic(
         // progress
         footer = {
             Row(
-                horizontalArrangement = ContentPadding.SmallArrangement,
+                horizontalArrangement = Res.layout.gap_small,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth(),
                 content = {

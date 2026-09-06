@@ -49,6 +49,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.res.ResourcesCompat
 import com.zs.audiofy.common.Action
+
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.vectorResource
 import com.zs.compose.foundation.Background
@@ -64,7 +65,7 @@ import com.zs.compose.theme.Surface
 import com.zs.compose.theme.menu.DropDownMenu
 import com.zs.compose.theme.menu.DropDownMenuItem
 
-private val DefaultItemSpace = Arrangement.spacedBy(ContentPadding.xSmall)
+private val DefaultItemSpace = Arrangement.spacedBy(Res.space.x_small)
 
 @Composable
 @NonRestartableComposable

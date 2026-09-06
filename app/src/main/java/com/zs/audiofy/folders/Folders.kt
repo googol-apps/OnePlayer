@@ -29,7 +29,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -51,7 +50,7 @@ import com.zs.compose.theme.LocalContentColor
 import com.zs.compose.theme.Surface
 import com.zs.compose.theme.text.Text
 import com.zs.core.store.models.Folder
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 
 @Composable
@@ -70,7 +69,7 @@ private fun Folder(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(CP.small),
+                    .padding(Res.space.small),
                 content = {
                     // Album Art
                     AsyncImage(
@@ -83,9 +82,9 @@ private fun Folder(
                                 shape = Res.shape.folder,
                                 border = BorderStroke(Dp.Hairline, AppTheme.colors.onBackground),
                                 edgeInsets = EdgeInsets(
-                                    start = CP.xSmall,
-                                    end = CP.xSmall,
-                                    bottom = CP.medium
+                                    start = Res.space.x_small,
+                                    end = Res.space.x_small,
+                                    bottom = Res.space.medium
                                 )
                             )
                             .aspectRatio(1.30f),
@@ -111,7 +110,7 @@ private fun Folder(
 
                     // MoreInfo
                     Row(
-                        modifier = Modifier.padding(top = CP.xSmall),
+                        modifier = Modifier.padding(top = Res.space.x_small),
                         horizontalArrangement = Arrangement.spacedBy(2.dp),
                         content = {
                             val ctx = LocalContext.current

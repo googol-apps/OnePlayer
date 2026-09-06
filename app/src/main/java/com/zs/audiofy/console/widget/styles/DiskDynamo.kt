@@ -28,9 +28,7 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -53,13 +51,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.LottieAnimatedButton
 import com.zs.audiofy.common.compose.marque
 import com.zs.audiofy.common.shapes.CompactDisk
 import com.zs.audiofy.common.vectorResource
+import com.zs.audiofy.common.gap_x_small
 import com.zs.audiofy.console.RouteConsole
 import com.zs.audiofy.console.widget.Widget
 import com.zs.compose.foundation.SignalWhite
@@ -92,7 +90,7 @@ fun DiskDynamo(
     BaseListItem(
         contentColor = contentColor,
         centerAlign = true,
-        spacing = ContentPadding.small,
+        spacing = Res.space.small,
         padding = Widget.Padding,
         modifier = modifier
             .sharedBounds(RouteConsole.ID_BACKGROUND)
@@ -117,7 +115,7 @@ fun DiskDynamo(
                 modifier = Modifier
                     .size(DefaultArtworkSize)
                     .sharedElement(RouteConsole.ID_ARTWORK)
-                    .graphicsLayer() {
+                    .graphicsLayer {
                         rotationZ = if (!state.playing) 0f else degrees
                         scaleX = 1.1f
                         scaleY = 1.1f
@@ -163,9 +161,9 @@ fun DiskDynamo(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .padding(top = ContentPadding.medium)
+                    .padding(top = Res.space.medium)
                     .fillMaxWidth(),
-                horizontalArrangement = ContentPadding.xSmallArrangement,
+                horizontalArrangement = Res.layout.gap_x_small,
                 content = {
                     val IconModifier = Modifier.background(colors.background(10.dp), CircleShape) then    Widget.SmallIconBtn
                     // SeekBackward

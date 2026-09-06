@@ -97,7 +97,7 @@ var Window.systemBarsColor: Color
     }
     get() = error("Not supported!")
 
-private const val ELLIPSIS_NORMAL = "\u2026"; // HORIZONTAL ELLIPSIS (…)
+private const val ELLIPSIS_NORMAL = "\u2026" // HORIZONTAL ELLIPSIS (…)
 
 /**
  * Ellipsizes this CharSequence, adding a horizontal ellipsis (…) if it is longer than [after] characters.

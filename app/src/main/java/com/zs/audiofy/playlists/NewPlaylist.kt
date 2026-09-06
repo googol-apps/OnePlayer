@@ -35,9 +35,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.window.DialogProperties
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.vectorResource
 import com.zs.compose.foundation.textResource
 import com.zs.compose.theme.AlertDialog
@@ -98,7 +97,7 @@ fun NewPlaylist(
         },
         gravity = if (width > height) Gravity.CENTER else Gravity.BOTTOM,
         actions = {
-            val scale = Modifier.scale(0.80f).padding(end = ContentPadding.small)
+            val scale = Modifier.scale(0.80f).padding(end = Res.space.small)
             when {
                 isError -> {}
                 value != null -> TonalIconButton(
@@ -121,7 +120,7 @@ fun NewPlaylist(
         },
         content = {
             // Title
-            val padding = Modifier.padding(horizontal = ContentPadding.normal)
+            val padding = Modifier.padding(horizontal = Res.space.normal)
             OutlinedTextField(
                 title,
                 shape = AppTheme.shapes.small,

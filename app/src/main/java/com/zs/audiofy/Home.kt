@@ -37,7 +37,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
@@ -50,7 +49,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.core.view.WindowCompat
@@ -81,7 +79,6 @@ import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.Route
 import com.zs.audiofy.common.SystemFacade
 import com.zs.audiofy.common.WindowStyle
-import com.zs.audiofy.common.compose.ContentPadding
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.LocalSystemFacade
 import com.zs.audiofy.common.compose.background
@@ -123,9 +120,8 @@ import com.zs.audiofy.playlists.members.Members
 import com.zs.audiofy.playlists.members.RouteMembers
 import com.zs.audiofy.properties.Properties
 import com.zs.audiofy.properties.RouteProperties
-import com.zs.audiofy.settings.GeomFontFamily
+import com.zs.audiofy.common.geom
 import com.zs.audiofy.settings.RouteSettings
-import com.zs.audiofy.settings.Settings
 import com.zs.audiofy.videos.RouteVideos
 import com.zs.audiofy.videos.Videos
 import com.zs.compose.foundation.Background
@@ -523,7 +519,7 @@ private fun NavigationBar(
             border = colors.shine,
             windowInsets = AppBarDefaults.bottomAppBarWindowInsets.union(WindowInsets(bottom = 16.dp)),
             shape = Res.shape.circle,
-            modifier = modifier.padding(bottom = ContentPadding.xSmall),
+            modifier = modifier.padding(bottom = Res.space.x_small),
             // Display routes at the contre of available space
             content = { routes() }
         )
@@ -587,7 +583,7 @@ fun Home(
             },
             // Set up the navigation bar using the NavBar composable
             navBar = {
-                val useAccent by preference(Settings.USE_ACCENT_IN_NAV_BAR)
+                val useAccent by preference(Res.key.use_accent_in_nav_bar)
                 val colors = AppTheme.colors
                 NavigationBar(
                     portrait,
@@ -618,7 +614,7 @@ fun Home(
     }
     // Check if light theme is preferred
     val isDark = run {
-        val mode by activity.observeAsState(key = Settings.NIGHT_MODE)
+        val mode by activity.observeAsState(key = Res.key.night_mode)
         when (mode) {
             NightMode.ENABLED -> true
             NightMode.DISABLED -> false
@@ -628,16 +624,16 @@ fun Home(
 
     // Setup App Theme and provide necessary dependencies.
     // Provide the navController and window size class to child composable.
-    val strategy by activity.observeAsState(Settings.COLORIZATION_STRATEGY)
+    val strategy by activity.observeAsState(Res.key.colorization_strategy)
     AppTheme(
         isLight = !isDark,
-        fontFamily = FontFamily.GeomFontFamily,
+        fontFamily = Res.font.geom,
         accent = when {
             strategy == AccentColorPolicy.WALLPAPER && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
                 dynamicAccentColor(activity, isDark)
 
-            isDark -> Settings.DarkAccentColor
-            else -> Settings.LightAccentColor
+            isDark -> Res.app.color_accent_dark
+            else -> Res.app.color_accent_light
         },
         content = {
             // Provide the navController, newWindowClass through LocalComposition.
@@ -655,7 +651,7 @@ fun Home(
     )
 
     // Observe the state of the IMMERSE_VIEW setting
-    val transparentSystemBars by activity.observeAsState(Settings.TRANSPARENT_SYSTEM_BARS)
+    val transparentSystemBars by activity.observeAsState(Res.key.transparent_system_bars)
     SideEffect ( style, isDark, transparentSystemBars) {
         // Get the WindowInsetsController for managing system bars
         val window = activity.window

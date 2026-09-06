@@ -51,7 +51,7 @@ import com.zs.compose.theme.text.Label
 import com.zs.compose.theme.text.Text
 import com.zs.core.store.MediaProvider
 import com.zs.core.store.models.Audio.Album
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 object RouteAlbums : Route
 
@@ -71,19 +71,19 @@ private fun Album(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(CP.small),
+                    .padding(Res.space.small),
                 content = {
                     // Album Art
                     AsyncImage(
                         MediaProvider.buildAlbumArtUri(value.id),
                         contentDescription = null,
                         modifier = Modifier
-                            .padding(bottom = CP.medium)
+                            .padding(bottom = Res.space.medium)
                             .decorator(
                                 colors.background(3.dp),
                                 shape = Res.shape.compact_disk,
                                 border = BorderStroke(Dp.Hairline, AppTheme.colors.onBackground),
-                                edgeInsets = EdgeInsets(horizontal = CP.xSmall)
+                                edgeInsets = EdgeInsets(horizontal = Res.space.x_small)
                             )
                             .aspectRatio(1.0f),
                     )
@@ -107,7 +107,7 @@ private fun Album(
 
                     // MoreInfo
                     Row(
-                        modifier = Modifier.padding(top = CP.xSmall),
+                        modifier = Modifier.padding(top = Res.space.x_small),
                         horizontalArrangement = Arrangement.spacedBy(2.dp),
                         content = {
                             // Count

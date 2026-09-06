@@ -46,9 +46,8 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.lottie
 import com.zs.audiofy.common.compose.lottieAnimationPainter
 import com.zs.audiofy.common.compose.marque
@@ -67,7 +66,7 @@ import com.zs.compose.theme.sharedBounds
 import com.zs.compose.theme.sharedElement
 import com.zs.compose.theme.text.Label
 import com.zs.core.playback.NowPlaying
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 private val DefaultArtworkSize = DpSize(84.dp, 1.5 * 84.dp)
 private val DefaultArtworkShape = CircleShape
@@ -83,7 +82,7 @@ fun ElongatedBeat(
     val accent = AppTheme.colors.accent
     BaseListItem(
         contentColor = AppTheme.colors.onAccent,
-        spacing = ContentPadding.small,
+        spacing = Res.space.small,
         padding = Widget.Padding,
         modifier = modifier
             .sharedBounds(RouteConsole.ID_BACKGROUND)
@@ -145,7 +144,7 @@ fun ElongatedBeat(
         subheading = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(top = CP.medium).fillMaxWidth(),
+                modifier = Modifier.padding(top = Res.space.medium).fillMaxWidth(),
                 content = {
                     val bgModifier = Modifier.background(AppTheme.colors.onAccent.copy(0.3f), CircleShape) then Widget.SmallIconBtn
                     // SeekBackward

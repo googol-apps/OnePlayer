@@ -33,16 +33,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.zs.audiofy.MainActivity
-import com.zs.audiofy.R
 import com.zs.audiofy.common.IAP_CODEX
 import com.zs.audiofy.common.IAP_TAG_EDITOR_PRO
+import com.zs.audiofy.common.gap_large
+import com.zs.audiofy.common.outfit
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.compose.LocalSystemFacade
 import com.zs.audiofy.common.compose.purchase
@@ -64,7 +64,7 @@ import com.zs.core.billing.Paymaster
 import com.zs.core.billing.Product
 import com.zs.core.billing.purchased
 import kotlinx.coroutines.flow.map
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 private val ProductShape = NotchedCornerShape(10.dp)
 private val Colors.border
@@ -103,10 +103,10 @@ private fun Upgrade(
                     text = value.formattedPrice ?: stringResource(Res.string.abbr_not_available),
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
-                        .padding(top = CP.medium),
+                        .padding(top = Res.space.medium),
                     style = AppTheme.typography.headline2,
                     fontWeight = FontWeight.Medium,
-                    fontFamily = FontFamily.OutfitFontFamily,
+                    fontFamily = Res.font.outfit,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
@@ -160,7 +160,7 @@ context(_: RouteSettings)
 fun Upgrades(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
-        horizontalArrangement = CP.LargeArrangement,
+        horizontalArrangement = Res.layout.gap_large,
         verticalAlignment = Alignment.CenterVertically
     ) {
         val facade = LocalSystemFacade.current

@@ -65,7 +65,6 @@ import com.zs.audiofy.common.products
 import com.zs.audiofy.common.richDesc
 import com.zs.audiofy.console.RouteConsole
 import com.zs.audiofy.library.RouteLibrary
-import com.zs.audiofy.settings.Settings
 import com.zs.compose.foundation.getText2
 import com.zs.compose.foundation.runCatching
 import com.zs.compose.theme.snackbar.SnackbarDuration
@@ -419,7 +418,7 @@ class MainActivity : ComponentActivity(), SystemFacade, NavDestListener {
     override fun initiateReviewFlow() {
         lifecycleScope.launch {
             // Get the app launch count from preferences.
-            val count = preferences[Settings.KEY_LAUNCH_COUNTER]
+            val count = preferences[Res.key.launch_counter]
             // Check if the minimum launch count has been reached.
             if (count < MIN_LAUNCHES_BEFORE_REVIEW)
                 return@launch
@@ -463,7 +462,7 @@ class MainActivity : ComponentActivity(), SystemFacade, NavDestListener {
             val index = (category * 1000) + (counter / 2) % 1000 //
             Log.d(TAG, "showPromoToast: category: $category index: $index")
             // calculate variable index and attempts
-            var currentIndex = index;
+            var currentIndex = index
             var attempts = 0
             while (attempts++ < 30) {
                 when (currentIndex) {
@@ -630,7 +629,7 @@ class MainActivity : ComponentActivity(), SystemFacade, NavDestListener {
                 // Promotional messages start with index 1.
                 // The index is calculated using the formula: (counter % MAX_PROMO_MESSAGES).coerceAtLeast(1).
                 // Each message is skipped by PROMO_SKIP_LAUNCHES number of launches.
-                val counter = preferences[Settings.KEY_LAUNCH_COUNTER]
+                val counter = preferences[Res.key.launch_counter]
                 if (counter < MIN_LAUNCHES_BEFORE_REVIEW)
                     return@launch
                 val newCounter = counter - MIN_LAUNCHES_BEFORE_REVIEW

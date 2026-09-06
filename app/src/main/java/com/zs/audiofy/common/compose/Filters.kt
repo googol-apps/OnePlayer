@@ -34,6 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.res.ResourcesCompat
 import com.zs.audiofy.common.Action
+
 import com.zs.audiofy.common.Filter
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.vectorResource
@@ -49,7 +50,7 @@ import com.zs.compose.theme.text.Label
 import com.zs.preferences.StringSaver
 
 private val REC_SPACING =
-    Arrangement.spacedBy(ContentPadding.xSmall)
+    Arrangement.spacedBy(Res.space.x_small)
 
 object FilterDefaults {
 
@@ -143,7 +144,7 @@ fun Filters(
                 // if order_id is none- dont allow this.
                 enabled = order != FilterDefaults.ORDER_NONE,
                 modifier = Modifier
-                    .padding(end = ContentPadding.small),
+                    .padding(end = Res.space.small),
                 shape = AppTheme.shapes.small
             )
 

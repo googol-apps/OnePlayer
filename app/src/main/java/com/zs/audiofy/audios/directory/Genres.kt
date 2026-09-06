@@ -36,6 +36,7 @@ import com.zs.audiofy.common.Route
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.directory.Directory
 import com.zs.audiofy.common.compose.directory.DirectoryViewState
+import com.zs.audiofy.common.gap_medium
 import com.zs.audiofy.common.shapes.SunnyShape
 import com.zs.audiofy.common.vectorResource
 import com.zs.compose.theme.AppTheme
@@ -44,7 +45,7 @@ import com.zs.compose.theme.Icon
 import com.zs.compose.theme.Surface
 import com.zs.compose.theme.text.Text
 import com.zs.core.store.models.Audio.Genre
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 object RouteGenres : Route
 
@@ -82,8 +83,8 @@ private fun Genre(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(CP.medium),
-                verticalArrangement = CP.mediumArrangement,
+                    .padding(Res.space.medium),
+                verticalArrangement = Res.layout.gap_medium,
                 content = {
                     // Top Icon in PixselShape
                     Surface(

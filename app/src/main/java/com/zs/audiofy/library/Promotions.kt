@@ -58,7 +58,6 @@ import com.zs.audiofy.common.compose.preference
 import com.zs.audiofy.common.compose.purchase
 import com.zs.audiofy.common.richDesc
 import com.zs.audiofy.common.vectorResource
-import com.zs.audiofy.settings.Settings
 import com.zs.compose.foundation.Amber
 import com.zs.compose.foundation.AzureBlue
 import com.zs.compose.foundation.MetroGreen
@@ -76,13 +75,13 @@ import com.zs.core.billing.Product
 import com.zs.core.billing.purchased
 import androidx.compose.foundation.layout.PaddingValues as Padding
 import androidx.compose.ui.graphics.Brush.Companion.linearGradient as LinearGradient
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 import com.zs.compose.foundation.textResource as stringResource
 
 private const val TAG = "Promotions"
 
 private val PROMOTION_PADDING =
-    Padding(CP.xSmall, CP.small, CP.small, CP.small)
+    Padding(Res.space.x_small, Res.space.small, Res.space.small, Res.space.small)
 
 private val SHIMMER_ANIM_SPEC =
     repeatable<Float>(1, animation = tween(1_000, 1_000, LinearEasing))
@@ -113,7 +112,7 @@ private fun Promotion(
                 overflow = TextOverflow.Ellipsis,
             )
         },
-        spacing = CP.small,
+        spacing = Res.space.small,
         padding = PROMOTION_PADDING,
         contentColor = AppTheme.colors.onBackground,
         leading = composableIf(icon != null) {
@@ -121,7 +120,7 @@ private fun Promotion(
                 imageVector = icon ?: vectorResource(Res.drawable.ic_info_filled),
                 contentDescription = null,
                 tint = accent,
-                modifier = Modifier.padding(vertical = CP.xSmall)
+                modifier = Modifier.padding(vertical = Res.space.x_small)
             )
         },
         modifier = modifier
@@ -211,7 +210,7 @@ private fun JoinUs(
         action = {
             Button(
                 text = stringResource(id = Res.string.telegram),
-                onClick = { facade.launch(Settings.TelegramIntent) },
+                onClick = { facade.launch(Res.app.intent_telegram) },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.SkyBlue.copy(0.12f)
                 ),
@@ -276,7 +275,7 @@ private fun HelpTranslate(
         action = {
             Button(
                 text = stringResource(id = Res.string.translate),
-                onClick = { facade.launch(Settings.TranslateIntent) },
+                onClick = { facade.launch(Res.app.intent_translate) },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color.SkyBlue.copy(0.12f)
                 ),
@@ -354,7 +353,7 @@ fun Promotions(
 ) {
     // current: Index of the currently displayed promotion item.
     // Starts with ID_NONE to indicate no promotion is initially shown.
-    val count by preference(Settings.KEY_LAUNCH_COUNTER)
+    val count by preference(Res.key.launch_counter)
     // expanded: State variable to track if a promotion item is expanded (details shown).
     // onValueChange: Callback to update the expanded state.
     val (expanded, onValueChange) = remember { mutableStateOf(false) }

@@ -45,7 +45,7 @@ import com.zs.compose.theme.Icon
 import com.zs.compose.theme.Surface
 import com.zs.compose.theme.text.Text
 import com.zs.core.store.models.Audio.Artist
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 object RouteArtists : Route
 
@@ -90,7 +90,7 @@ private fun Artist(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = CP.normal, vertical = CP.medium),
+                    .padding(horizontal = Res.space.normal, vertical = Res.space.medium),
                 content = {
                     // Top Icon in PixselShape
                     Surface(
@@ -109,7 +109,7 @@ private fun Artist(
                     // Label aligned to the left with padding and styling
                     Text(
                         text = value.name,
-                        modifier = Modifier.padding(top = CP.medium, bottom = CP.small), // Add horizontal padding
+                        modifier = Modifier.padding(top = Res.space.medium, bottom = Res.space.small), // Add horizontal padding
                         style = AppTheme.typography.label2,
                         fontWeight = FontWeight.SemiBold,
                         maxLines = 2, // Allow at most 2 lines for label

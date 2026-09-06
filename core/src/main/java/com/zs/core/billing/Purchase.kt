@@ -32,8 +32,7 @@ class Purchase(
     val state: Int,
     val quantity: Int = -1,
     val time: Long = -1,
-) {
-}
+)
 
 /**
  * @return `true` if this [Purchase] object is `non-null`, has been `acknowledged`, and is in the

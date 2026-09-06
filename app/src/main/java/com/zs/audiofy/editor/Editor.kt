@@ -67,7 +67,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.res.ResourcesCompat
-import com.zs.audiofy.R
 import com.zs.audiofy.common.IAP_TAG_EDITOR_PRO
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.compose.FloatingLargeTopAppBar
@@ -84,6 +83,8 @@ import com.zs.compose.foundation.composableIf
 import com.zs.compose.foundation.foreground
 import com.zs.compose.foundation.fullLineSpan
 import androidx.compose.foundation.layout.plus
+import com.zs.audiofy.common.gap_large
+import com.zs.audiofy.common.gap_small
 import com.zs.compose.foundation.textResource
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.BaseListItem
@@ -110,7 +111,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult as Launcher
 import androidx.activity.result.PickVisualMediaRequest as Pick
 import androidx.compose.foundation.layout.PaddingValues as Padding
 import androidx.compose.foundation.layout.WindowInsetsSides as WIS
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 /**
  * A VisualTransformation that applies styling to timestamps in the [MM:SS:XX] format within text.
@@ -159,7 +160,7 @@ private fun ExtraInfo(
     viewState: EditorViewState,
     modifier: Modifier = Modifier
 ) {
-    Row(modifier, horizontalArrangement = CP.LargeArrangement) {
+    Row(modifier, horizontalArrangement = Res.layout.gap_large) {
         // Artwork
         val facade = LocalSystemFacade.current
         val launcher =
@@ -261,7 +262,7 @@ fun Editor(viewState: EditorViewState) {
                     .windowInsetsPadding(
                         WindowInsets.systemBars.only(WIS.Vertical + WIS.End)
                     )
-                    .padding(top = CP.large)
+                    .padding(top = Res.space.large)
             )
         },
         topBar = {
@@ -313,13 +314,13 @@ fun Editor(viewState: EditorViewState) {
         },
         primary = {
             LazyVerticalGrid(
-                horizontalArrangement = CP.LargeArrangement,
-                verticalArrangement = CP.SmallArrangement,
+                horizontalArrangement = Res.layout.gap_large,
+                verticalArrangement = Res.layout.gap_small,
                 // In immersive mode, add horizontal padding to prevent settings from touching the screen edges.
                 // Immersive layouts typically have a bottom app bar, so extra padding improves aesthetics.
                 // Non-immersive layouts only need vertical padding.
                 contentPadding =
-                    Padding(horizontal = CP.large) +
+                    Padding(horizontal = Res.space.large) +
                             (WindowInsets.content.union(WindowInsets.systemBars)
                                 .union(inAppNavBarInsets).only(WIS.Vertical))
                                 .asPaddingValues(),
@@ -521,7 +522,7 @@ fun Editor(viewState: EditorViewState) {
                             stringResource(Res.string.lyrics),
                             style = AppTheme.typography.title3,
                             color = AppTheme.colors.accent,
-                            modifier = Modifier.padding(top = CP.medium)
+                            modifier = Modifier.padding(top = Res.space.medium)
                         )
                     }
 

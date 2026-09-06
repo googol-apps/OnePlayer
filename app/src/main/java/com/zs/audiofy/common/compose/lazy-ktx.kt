@@ -29,12 +29,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.zs.audiofy.R
+
 import com.zs.audiofy.common.Mapped
 import com.zs.audiofy.common.Res
 import com.zs.compose.foundation.fullLineSpan
 import com.zs.compose.theme.Icon
-import com.zs.compose.theme.Placeholder
 import com.zs.compose.theme.text.Label
 
 inline fun <T> LazyListScope.emit(vertical: Boolean, data: List<T>?): List<T>? {
@@ -50,7 +49,7 @@ inline fun <T> LazyListScope.emit(vertical: Boolean, data: List<T>?): List<T>? {
         data == null -> item(contentType = "loading", key = "placeholder_loading_list") {
             Row(
                 modifier = Modifier.sizeIn(minWidth = 320.dp, maxWidth = 360.dp, maxHeight = 56.dp).animateItem(),
-                horizontalArrangement = Arrangement.spacedBy(ContentPadding.normal, alignment = Alignment.CenterHorizontally),
+                horizontalArrangement = Arrangement.spacedBy(Res.space.normal, alignment = Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
                 content = {
                     Icon(
@@ -74,7 +73,7 @@ inline fun <T> LazyListScope.emit(vertical: Boolean, data: List<T>?): List<T>? {
         data.isEmpty() -> item(contentType = "empty", key = "placeholder_empty_list") {
             Row(
                 modifier = Modifier.sizeIn(minWidth = 320.dp, maxWidth = 360.dp, maxHeight = 56.dp).animateItem(),
-                horizontalArrangement = Arrangement.spacedBy(ContentPadding.normal, alignment = Alignment.CenterHorizontally),
+                horizontalArrangement = Arrangement.spacedBy(Res.space.normal, alignment = Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
                 content = {
                     Icon(

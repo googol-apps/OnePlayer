@@ -18,9 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.lottie
 import com.zs.audiofy.common.compose.lottieAnimationPainter
 import com.zs.audiofy.common.compose.shine
@@ -68,7 +67,7 @@ fun FabPlayer(
                 ),
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(start = ContentPadding.small)
+                    .padding(start = Res.space.small)
                     .sharedElement(RouteConsole.ID_PLAYING_INDICATOR)
                     .lottie()
                     .align(Alignment.CenterStart),

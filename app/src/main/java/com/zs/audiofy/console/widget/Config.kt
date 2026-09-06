@@ -21,7 +21,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.zs.audiofy.MainActivity
-import com.zs.audiofy.R
 import com.zs.audiofy.common.IAP_COLOR_CROFT_GOLDEN_DUST
 import com.zs.audiofy.common.IAP_COLOR_CROFT_GRADIENT_GROVES
 import com.zs.audiofy.common.IAP_COLOR_CROFT_MISTY_DREAM
@@ -38,7 +37,7 @@ import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_TIRAMISU
 import com.zs.audiofy.common.IAP_WIDGETS_PLATFORM
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.WindowStyle
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.LocalSystemFacade
 import com.zs.audiofy.common.compose.background
 import com.zs.audiofy.common.compose.preference
@@ -58,7 +57,6 @@ import com.zs.audiofy.console.widget.styles.SkewedDynamic
 import com.zs.audiofy.console.widget.styles.SnowCone
 import com.zs.audiofy.console.widget.styles.Tiramisu
 import com.zs.audiofy.console.widget.styles.WavyGradientDots
-import com.zs.audiofy.settings.Settings
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.Button
 import com.zs.compose.theme.ButtonDefaults
@@ -143,7 +141,7 @@ fun Config(
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier.pointerInput(Unit, {})) {
         // viewpager
-        val selected by preference(Settings.GLANCE)
+        val selected by preference(Res.key.glance_widget)
         var index by remember {
             mutableIntStateOf(WIDGETS.indexOf(selected))
         }
@@ -194,7 +192,7 @@ fun Config(
         TopAppBar(
             shape = CircleShape,
             elevation = 8.dp,
-            modifier = Modifier.padding(top = ContentPadding.medium),
+            modifier = Modifier.padding(top = Res.space.medium),
             border = AppTheme.colors.shine,
             background = AppTheme.colors.background(surface),
             windowInsets = WindowInsets.None,
@@ -216,7 +214,7 @@ fun Config(
                                 if (!unlocked)
                                     activity.initiatePurchaseFlow(key)
                                 else {
-                                    activity.setPreference(Settings.GLANCE, WIDGETS[index])
+                                    activity.setPreference(Res.key.glance_widget, WIDGETS[index])
                                     activity.showToast("Widget have been successfully applied.")
                                     onRequest(Widget.REQUEST_SHOW_CONFIG)
                                 }

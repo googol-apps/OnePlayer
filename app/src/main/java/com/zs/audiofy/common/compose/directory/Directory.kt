@@ -47,7 +47,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.runtime.Composable
@@ -69,7 +68,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Action
 import com.zs.audiofy.common.SelectionTracker
 import com.zs.audiofy.common.compose.Filters
@@ -92,6 +90,8 @@ import com.zs.compose.foundation.background
 import com.zs.compose.foundation.fullLineSpan
 import androidx.compose.foundation.layout.plus
 import androidx.compose.foundation.lazy.itemsIndexed
+import com.zs.audiofy.common.gap_small
+import com.zs.audiofy.common.gap_medium
 import com.zs.compose.foundation.stickyHeader
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.Button
@@ -116,13 +116,13 @@ import com.zs.compose.theme.text.TonalHeader
 import dev.chrisbanes.haze.HazeState
 import androidx.compose.foundation.layout.PaddingValues as Padding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState as GridState
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 import com.zs.compose.foundation.textResource as stringResource
 
 private val DEFAULT_MIN_SIZE = 80.dp
 
 // The default padding to content
-private val ContentPadding = Padding(start = CP.normal, end = CP.normal, bottom = CP.normal)
+private val ContentPadding = Padding(start = Res.space.normal, end = Res.space.normal, bottom = Res.space.normal)
 
 //
 private const val SHOW_FAB = 0
@@ -322,8 +322,8 @@ fun <T> Directory(
             LazyVerticalGrid(
                 state = state,
                 columns = GridCells.Adaptive(minSize * multiplier),
-                verticalArrangement = CP.mediumArrangement,
-                horizontalArrangement = CP.mediumArrangement,
+                verticalArrangement = Res.layout.gap_medium,
+                horizontalArrangement = Res.layout.gap_medium,
                 contentPadding = padding,
                 modifier = Modifier
                     .fillMaxSize()
@@ -382,7 +382,7 @@ fun <T> Directory(
                             span = fullLineSpan,
                             key = "${header}_items_end"
                         ) {
-                            Spacer(Modifier.padding(vertical = CP.normal))
+                            Spacer(Modifier.padding(vertical = Res.space.normal))
                         }
                     }
 
@@ -399,8 +399,8 @@ private val SelectionTracker.Level.toIconRes
         SelectionTracker.Level.FULL -> Res.drawable.ic_verified
     }
 
-private val FilesHorizontalPadding = CP.large
-private val FilesHeaderPadding = Padding(horizontal = CP.large, vertical = 4.dp)
+private val FilesHorizontalPadding = Res.space.large
+private val FilesHeaderPadding = Padding(horizontal = Res.space.large, vertical = 4.dp)
 
 @Composable
 fun <T> Files(
@@ -512,7 +512,7 @@ fun <T> Files(
                                     .padding(horizontal = FilesHorizontalPadding)
                                     .widthIn(max = 500.dp),
                                 verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = CP.SmallArrangement,
+                                horizontalArrangement = Res.layout.gap_small,
                                 content = {
                                     val modifier = Modifier.weight(1f).height(42.dp)
                                     // Shuffle
@@ -553,7 +553,7 @@ fun <T> Files(
                                 viewState.orders,
                                 modifier = Modifier.padding(
                                     horizontal = FilesHorizontalPadding,
-                                    vertical = CP.normal
+                                    vertical = Res.space.normal
                                 ),
                                 onRequest = {
                                     when {
@@ -608,7 +608,7 @@ fun <T> Files(
                             contentType = "spacer",
                             key = "${header}_items_end",
                             content = {
-                                Spacer(Modifier.padding(bottom = CP.normal))
+                                Spacer(Modifier.padding(bottom = Res.space.normal))
                             }
                         )
                     }

@@ -37,7 +37,7 @@ data class Trashed(
 ) {
     internal constructor(cursor: Cursor) : this(
         id = cursor.getLong(0),
-        name = cursor.getString(1) ?: MediaProvider.Companion.UNKNOWN_STRING,
+        name = cursor.getString(1) ?: MediaProvider.UNKNOWN_STRING,
         mimeType = cursor.getString(2),
         path = cursor.getString(3),
         dateAdded = cursor.getLong(4) * 1000,

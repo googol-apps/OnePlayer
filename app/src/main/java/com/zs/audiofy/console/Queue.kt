@@ -52,7 +52,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.compose.LottieAnimatedButton
 import com.zs.audiofy.common.compose.collectAsState
@@ -73,14 +72,12 @@ import com.zs.compose.theme.BaseListItem
 import com.zs.compose.theme.ContentAlpha
 import com.zs.compose.theme.Icon
 import com.zs.compose.theme.IconButton
-import com.zs.compose.theme.ListItem
 import com.zs.compose.theme.LocalContentColor
 import com.zs.compose.theme.TonalIconButton
 import com.zs.compose.theme.adaptive.Scaffold
 import com.zs.compose.theme.adaptive.content
 import com.zs.compose.theme.appbar.TopAppBar
 import com.zs.compose.theme.drawHorizontalDivider
-import com.zs.compose.theme.minimumInteractiveComponentSize
 import com.zs.compose.theme.text.Header
 import com.zs.compose.theme.text.Label
 import com.zs.compose.theme.text.TonalHeader
@@ -88,7 +85,7 @@ import com.zs.core.playback.MediaFile
 import com.zs.core.playback.NowPlaying
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.layout.WindowInsetsSides as WIS
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 private val ThumbnailModifier = Modifier.size(110.dp, 64.dp)
 
@@ -208,7 +205,7 @@ fun Queue(viewState: QueueViewState, shape: Shape, insets: WindowInsets) {
                     )
 
                     // Clear all
-                    val scale = Modifier.scale(0.8f).padding(end = CP.small)
+                    val scale = Modifier.scale(0.8f).padding(end = Res.space.small)
                     TonalIconButton(
                         icon = vectorResource(Res.drawable.ic_clear_all),
                         contentDescription = null,
@@ -252,9 +249,9 @@ fun Queue(viewState: QueueViewState, shape: Shape, insets: WindowInsets) {
                                     modifier = Modifier
                                         .animateItem()
                                         .padding(
-                                            top = CP.small,
-                                            start = CP.large,
-                                            bottom = CP.small
+                                            top = Res.space.small,
+                                            start = Res.space.large,
+                                            bottom = Res.space.small
                                         ),
                                     style = AppTheme.typography.label2,
                                     color = AppTheme.colors.accent
@@ -271,7 +268,7 @@ fun Queue(viewState: QueueViewState, shape: Shape, insets: WindowInsets) {
                                     }
                                     .animateItem()
                                     .thenIf(playing) {
-                                        padding(bottom = CP.normal)
+                                        padding(bottom = Res.space.normal)
                                     },
                                 playing = playing,
                                 actions = {
@@ -293,7 +290,7 @@ fun Queue(viewState: QueueViewState, shape: Shape, insets: WindowInsets) {
                                     stringResource(Res.string.up_next),
                                     modifier = Modifier
                                         .animateItem()
-                                        .padding(start = CP.normal)
+                                        .padding(start = Res.space.normal)
                                 )
                             }
                     }

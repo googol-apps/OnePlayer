@@ -28,7 +28,6 @@ import androidx.lifecycle.viewModelScope
 import com.zs.audiofy.common.AppConfig
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.SystemFacade
-import com.zs.audiofy.settings.Settings
 import com.zs.audiofy.settings.SettingsViewState
 import com.zs.compose.theme.snackbar.SnackbarResult
 import com.zs.core.playback.Remote
@@ -99,7 +98,7 @@ class SettingsViewModel(val remote: Remote) : KoinViewModel(), SettingsViewState
             // [PERSISTENCE] Serialize and save the updated AppConfig to preferences
             // The `stringify()` method likely converts the AppConfig object into a JSON or similar string format
             // for storage. `preferences` is an abstraction over SharedPreferences or DataStore.
-            preferences[Settings.KEY_APP_CONFIG] = AppConfig.stringify()
+            preferences[Res.key.app_config] = AppConfig.stringify()
             // trigger save
             val enabled = trashCanEnabled
             trashCanEnabled = !enabled

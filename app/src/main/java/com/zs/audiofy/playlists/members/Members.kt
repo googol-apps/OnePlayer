@@ -38,7 +38,7 @@ import coil3.compose.AsyncImage
 import com.zs.audiofy.common.Action
 import com.zs.audiofy.common.PLAYLIST_ADD
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.LottieAnimatedButton
 import com.zs.audiofy.common.compose.LottieAnimatedIcon
@@ -78,7 +78,7 @@ private fun Track(
         modifier = Modifier.decorator(
             backgroundColor = AppTheme.colors.background(1.dp),
             shape = shape,
-            edgeInsets = EdgeInsets(horizontal = ContentPadding.large)
+            edgeInsets = EdgeInsets(horizontal = Res.space.large)
         )
             .then(modifier),
         leading = {
@@ -137,9 +137,9 @@ fun Members(viewState: MembersViewState) {
                 value = audio,
                 shape = when (pos) {
                     0 -> Res.shape.section
-                    1 -> Res.shape.section_first_item
-                    2 -> Res.shape.section_middle_item
-                    else -> Res.shape.section_last_item
+                    1 -> Res.shape.section_top
+                    2 -> Res.shape.section_middle
+                    else -> Res.shape.section_bottom
                 },
                 modifier = Modifier
                     .animateItem()
@@ -165,7 +165,7 @@ fun Members(viewState: MembersViewState) {
                             tint = AppTheme.colors.accent,
                             modifier = Modifier
                                 .minimumInteractiveComponentSize()
-                                .padding(end = ContentPadding.small)
+                                .padding(end = Res.space.small)
                         )
 
                     // show actions

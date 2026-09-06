@@ -65,7 +65,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             checked = viewState.trashCanEnabled,
             onCheckedChange = { viewState.trashCanEnabled = it },
             icon = vectorResource(Res.drawable.ic_recycling),
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_first_item),
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_top),
         )
     }
     // Legacy Artwork Method
@@ -75,7 +75,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             checked = viewState.preferCachedThumbnails,
             onCheckedChange = { viewState.preferCachedThumbnails = it },
             icon = vectorResource(Res.drawable.ic_art_track),
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item),
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle),
         )
     }
     // Exclude Track Duration
@@ -96,7 +96,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
                         .wrapContentSize(Alignment.Center)
                 )
             },
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item),
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle),
         )
     }
 
@@ -107,7 +107,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             checked = viewState.isLabsModeOn,
             onCheckedChange = { viewState.isLabsModeOn = it },
             icon = vectorResource(Res.drawable.ic_science),
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item),
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle),
         )
     }
 
@@ -118,7 +118,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             checked = viewState.isFileGroupingEnabled,
             onCheckedChange = { viewState.isFileGroupingEnabled = it },
             icon = vectorResource(Res.drawable.ic_sort),
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_last_item),
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_bottom),
         )
     }
 
@@ -135,16 +135,16 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
     // Night Mode Strategy
     // The strategy to use for night mode.
     item(contentType = CONTENT_TYPE_PREF) {
-        val strategy by preference(Settings.NIGHT_MODE)
+        val strategy by preference(Res.key.night_mode)
         val entries = textArrayResource(Res.array.pref_night_mode_entries)
         DropDownPreference(
             text = textResource(Res.string.pref_app_theme_s, entries[strategy.ordinal]),
             value = strategy,
             icon = vectorResource(Res.drawable.ic_light_mode),
             entries = entries,
-            onRequestChange = { viewState.set(Settings.NIGHT_MODE, it) },
+            onRequestChange = { viewState.set(Res.key.night_mode, it) },
             values = NightMode.values(),
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_first_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_top)
         )
     }
     // Splash Anim
@@ -156,7 +156,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
                 viewState.isSplashAnimWaitEnabled = should
             },
             icon = vectorResource(Res.drawable.ic_animation),
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle)
         )
     }
 
@@ -169,7 +169,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
                 viewState.isWidgetToConsoleTransitionEnabled = should
             },
             icon = vectorResource(Res.drawable.ic_auto_awesome_motion),
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle)
         )
     }
 
@@ -182,35 +182,35 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
                 viewState.enabledBackgroundBlur = should
             },
             icon = vectorResource(Res.drawable.ic_blur_on),
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle)
         )
     }
 
     item(contentType = CONTENT_TYPE_PREF) {
-        val use by preference(Settings.USE_ACCENT_IN_NAV_BAR)
+        val use by preference(Res.key.use_accent_in_nav_bar)
         SwitchPreference(
             checked = use,
             text = textResource(Res.string.pref_accent_nav),
             onCheckedChange = { should: Boolean ->
-                viewState.set(Settings.USE_ACCENT_IN_NAV_BAR, should)
+                viewState.set(Res.key.use_accent_in_nav_bar, should)
             },
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle)
         )
     }
 
     // Colorization Strategy
     item(contentType = CONTENT_TYPE_PREF) {
-        val colorizationStrategy by preference(Settings.COLORIZATION_STRATEGY)
+        val colorizationStrategy by preference(Res.key.colorization_strategy)
         SwitchPreference(
             checked = colorizationStrategy == AccentColorPolicy.WALLPAPER,
             text = textResource(Res.string.pref_colorization_strategy),
             onCheckedChange = { should: Boolean ->
                 val strategy =
                     if (should) AccentColorPolicy.WALLPAPER else AccentColorPolicy.DEFAULT
-                viewState.set(Settings.COLORIZATION_STRATEGY, strategy)
+                viewState.set(Res.key.colorization_strategy, strategy)
             },
             icon = vectorResource(Res.drawable.ic_imagesearch_roller),
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle)
         )
     }
     // App font scale
@@ -235,7 +235,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
                 val newValue = if (value <= 0.75f) -1f else value
                 viewState.fontScale = newValue
             },
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle)
         )
     }
 
@@ -257,20 +257,20 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             onRequestChange = { value: Float ->
                 viewState.gridItemSizeMultiplier = value
             },
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle)
         )
     }
     // Translucent System Bars
     // Whether System Bars are rendered as translucent or Transparent.
     item(contentType = CONTENT_TYPE_PREF) {
-        val translucentSystemBars by preference(Settings.TRANSPARENT_SYSTEM_BARS)
+        val translucentSystemBars by preference(Res.key.transparent_system_bars)
         SwitchPreference(
             checked = translucentSystemBars,
             text = textResource(Res.string.pref_translucent_system_bars),
             onCheckedChange = { should: Boolean ->
-                viewState.set(Settings.TRANSPARENT_SYSTEM_BARS, should)
+                viewState.set(Res.key.transparent_system_bars, should)
             },
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_last_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_bottom)
         )
     }
 
@@ -291,7 +291,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             checked = viewState.inAppAudioEffectsEnabled,
             onCheckedChange = { viewState.inAppAudioEffectsEnabled = it},
             icon = vectorResource(Res.drawable.ic_tune),
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_first_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_top)
         )
     }
     // Background Playback Policy
@@ -318,7 +318,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             entries = entries,
             onRequestChange = { viewState.setBgPlaybackPolicy(it) },
             values = values,
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle)
         )
     }
     // FAB player long press behaviour
@@ -328,7 +328,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             checked = !viewState.fabLongPressLaunchConsole,
             onCheckedChange = { viewState.fabLongPressLaunchConsole = !it},
             icon = vectorResource(Res.drawable.ic_touch_app),
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle)
         )
     }
     // Texture View/Surface view
@@ -337,7 +337,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             text = textResource(Res.string.pref_use_surface_view_video_rendering),
             checked = viewState.isSurfaceViewVideoRenderingPreferred,
             onCheckedChange = { viewState.isSurfaceViewVideoRenderingPreferred = it},
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_last_item)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_bottom)
         )
     }
 }

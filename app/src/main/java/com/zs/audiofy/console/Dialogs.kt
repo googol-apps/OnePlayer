@@ -41,8 +41,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogProperties
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
+import com.zs.audiofy.common.gap_small
 import com.zs.audiofy.common.compose.emit
 import com.zs.audiofy.common.ellipsize
 import com.zs.audiofy.common.vectorResource
@@ -67,7 +67,7 @@ import com.zs.compose.theme.text.Text
 import com.zs.core.playback.Remote
 import com.zs.core.playback.Remote.TrackInfo
 import kotlin.math.roundToInt
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 private val CustomWidthProperties = DialogProperties(usePlatformDefaultWidth = false)
 private val SPEED_RANGE = 0.25f..8.0f
@@ -171,12 +171,12 @@ fun PlaybackSpeed(
             val presetsScrollState = rememberScrollState()
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = CP.SmallArrangement,
+                horizontalArrangement = Res.layout.gap_small,
                 modifier = Modifier
                     .fadingEdge(presetsScrollState, true, 15.dp)
                     .horizontalScroll(presetsScrollState),
                 content = {
-                    val padding = Modifier.padding(horizontal = CP.small)
+                    val padding = Modifier.padding(horizontal = Res.space.small)
                     for (value in PLAYBACK_SPEED_PRESETS) {
                         Chip(
                             colors = chipColors,
@@ -190,7 +190,7 @@ fun PlaybackSpeed(
                                 )
                             },
                             onClick = {
-                                onRequestChange(value);
+                                onRequestChange(value)
                                 onValueChange(value)
                             },
                         )
@@ -234,7 +234,7 @@ fun SleepTimer(
             // Start Timer
             val color = LocalContentColor.current
             Chip(
-                modifier = Modifier.padding(end = CP.small),
+                modifier = Modifier.padding(end = Res.space.small),
                 colors = ChipDefaults.chipColors(
                     backgroundColor = color.copy(ContentAlpha.indication),
                     contentColor = color
@@ -257,7 +257,7 @@ fun SleepTimer(
             // Controls
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = CP.SmallArrangement
+                horizontalArrangement = Res.layout.gap_small
             ) {
                 val chipColors = ChipDefaults.chipColors(
                     backgroundColor = if (isLight) colors.background(6.dp) else colors.onBackground.copy(
@@ -341,7 +341,7 @@ fun MediaConfigDialog(
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
                 // Audio
-                val spacer = Modifier.offset(x = -CP.xSmall)
+                val spacer = Modifier.offset(x = -Res.space.x_small)
                 RadioButton(
                     selected = checked == Remote.TRACK_TYPE_AUDIO,
                     onValueChange = {
@@ -383,7 +383,7 @@ fun MediaConfigDialog(
             }
 
             LazyRow(
-                horizontalArrangement = CP.SmallArrangement,
+                horizontalArrangement = Res.layout.gap_small,
                 verticalAlignment = Alignment.CenterVertically,
                 content = {
                     val data = emit(false, tracks) ?: return@LazyRow

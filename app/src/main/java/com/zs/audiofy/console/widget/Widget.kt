@@ -57,7 +57,7 @@ import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_RED_VIOLET_CAKE
 import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_SKEWED_DYNAMIC
 import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_SNOW_CONE
 import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_TIRAMISU
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.LocalSystemFacade
 import com.zs.audiofy.common.compose.preference
@@ -78,7 +78,7 @@ import com.zs.audiofy.console.widget.styles.SnowCone
 import com.zs.audiofy.console.widget.styles.Tiramisu
 import com.zs.audiofy.console.widget.styles.WavyGradientDots
 import com.zs.audiofy.common.AppConfig
-import com.zs.audiofy.settings.Settings
+import com.zs.audiofy.common.Res
 import com.zs.compose.theme.LocalNavAnimatedVisibilityScope
 import com.zs.core.BuildConfig
 import com.zs.core.billing.Paymaster
@@ -94,11 +94,11 @@ object Widget {
     /** Represents the max-width of the inApp Player widget.*/
     private val LimitedBy =
         Modifier
-            .padding(start = 50.dp, end = ContentPadding.large)
+            .padding(start = 50.dp, end = Res.space.large)
             .widthIn(max = 400.dp)
     val FabSize = Modifier.requiredSize(112.dp, 56.dp)
     val FabVideoSize = Modifier.requiredSize(156.dp, 88.dp)
-    val Padding = PaddingValues(ContentPadding.small)
+    val Padding = PaddingValues(Res.space.small)
 
     val SmallIconBtn = Modifier.size(35.dp).scale(0.9f)
 
@@ -225,7 +225,7 @@ object Widget {
             }
         )
         // Layout
-        val widget by preference(Settings.GLANCE)
+        val widget by preference(Res.key.glance_widget)
         AnimatedContent(
             // choose target appropriately.
             targetState = when {

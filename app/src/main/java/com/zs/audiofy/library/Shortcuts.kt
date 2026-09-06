@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -36,10 +35,11 @@ import com.zs.audiofy.audios.directory.RouteAlbums
 import com.zs.audiofy.audios.directory.RouteArtists
 import com.zs.audiofy.audios.directory.RouteGenres
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+import com.zs.audiofy.common.gap_small
+
 import com.zs.audiofy.common.compose.LocalNavController
-import com.zs.audiofy.common.shapes.FolderShape
 import com.zs.audiofy.common.vectorResource
+import com.zs.audiofy.common.gap_x_small
 import com.zs.audiofy.folders.RouteFolders
 import com.zs.audiofy.playlists.members.RouteMembers
 import com.zs.compose.foundation.textResource
@@ -99,8 +99,8 @@ fun Shortcuts(
     // FlowRow to arrange shortcuts horizontally with spacing
     FlowRow(
         modifier = modifier/*.scaledLayout(1.3f)*/,
-        horizontalArrangement = ContentPadding.SmallArrangement,
-        verticalArrangement = ContentPadding.xSmallArrangement,
+        horizontalArrangement = Res.layout.gap_small,
+        verticalArrangement = Res.layout.gap_x_small,
         content = {
             val navigator = LocalNavController.current
 
@@ -137,7 +137,7 @@ fun Shortcuts(
                 textResource(Res.string.folders),
                 style = AppTheme.typography.label3,
                 color = AppTheme.colors.accent,
-                modifier = Modifier.padding(top = ContentPadding.small)
+                modifier = Modifier.padding(top = Res.space.small)
             )
             // Audio Folders
             Shortcut(

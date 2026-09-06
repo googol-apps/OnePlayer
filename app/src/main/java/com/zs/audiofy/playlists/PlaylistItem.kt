@@ -42,7 +42,7 @@ import com.zs.compose.theme.Surface
 import com.zs.compose.theme.text.Label
 import com.zs.compose.theme.text.Text
 import com.zs.core.db.playlists.Playlist
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 
 /**
@@ -62,7 +62,7 @@ fun PlaylistItem(
         border = if (focused) BorderStroke(2.dp, LocalContentColor.current) else null,
         content = {
             Column(
-                modifier = Modifier.padding(CP.small),
+                modifier = Modifier.padding(Res.space.small),
                 content = {
                     // Album Art
                     AsyncImage(
@@ -74,7 +74,7 @@ fun PlaylistItem(
                                 colors.background(20.dp),
                                 shape = Res.shape.ghost,
                                 //  border = BorderStroke(Dp.Hairline, AppTheme.colors.onBackground),
-                                edgeInsets = EdgeInsets(bottom = CP.medium),
+                                edgeInsets = EdgeInsets(bottom = Res.space.medium),
                                 elevation = 4.dp
                             )
                             .aspectRatio(1.0f),
@@ -105,7 +105,7 @@ fun PlaylistItem(
                     InfoChip(
                         icon = vectorResource(Res.drawable.ic_format_list_numbered),
                         label = "${value.count}",
-                        modifier = Modifier.padding(top = CP.small)
+                        modifier = Modifier.padding(top = Res.space.small)
                     )
                 }
             )

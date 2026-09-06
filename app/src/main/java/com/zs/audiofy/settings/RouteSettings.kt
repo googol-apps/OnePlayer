@@ -27,23 +27,19 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.union
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.Route
 import com.zs.audiofy.common.compose.FloatingLargeTopAppBar
@@ -60,7 +56,6 @@ import com.zs.compose.theme.FloatingActionButton
 import com.zs.compose.theme.Icon
 import com.zs.compose.theme.IconButton
 import com.zs.compose.theme.LocalWindowSize
-import com.zs.compose.theme.WindowSize.Category
 import com.zs.compose.theme.adaptive.HorizontalTwoPaneStrategy
 import com.zs.compose.theme.adaptive.SinglePaneStrategy
 import com.zs.compose.theme.adaptive.TwoPane
@@ -72,12 +67,12 @@ import com.zs.compose.theme.text.Text
 import com.zs.core.BuildConfig
 import androidx.compose.foundation.layout.PaddingValues as Padding
 import androidx.compose.foundation.layout.WindowInsetsSides as WIS
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 object RouteSettings : Route {
 
     const val CONTENT_TYPE_HEADER = "header"
-    val HeaderPadding = Padding(vertical = CP.normal, horizontal = CP.small)
+    val HeaderPadding = Padding(vertical = Res.space.normal, horizontal = Res.space.small)
 
     // The max width of the secondary pane
     private val sPaneMaxWidth = 320.dp
@@ -134,13 +129,13 @@ object RouteSettings : Route {
                         IconButton(
                             icon = vectorResource(Res.drawable.ic_sms_outline),
                             contentDescription = null,
-                            onClick = { facade.launch(Settings.TelegramIntent) },
+                            onClick = { facade.launch(Res.app.intent_telegram) },
                         )
                         // Report Bugs on Github.
                         IconButton(
                             icon = vectorResource(Res.drawable.ic_bug_report_outline),
                             contentDescription = null,
-                            onClick = { facade.launch(Settings.GitHubIssuesPage) },
+                            onClick = { facade.launch(Res.app.intent_github_issues) },
                         )
                     }
                 )
@@ -152,7 +147,7 @@ object RouteSettings : Route {
                 Column(
                     modifier = Modifier
                         .verticalScroll(rememberScrollState())
-                        .padding(top = CP.small)
+                        .padding(top = Res.space.small)
                         // .widthIn(max = sPaneMaxWidth)
                         .windowInsetsPadding(
                             WindowInsets.systemBars.union(inAppNavBarInsets).only(
@@ -190,7 +185,7 @@ object RouteSettings : Route {
                     // In immersive mode, add horizontal padding to prevent settings from touching the screen edges.
                     // Immersive layouts typically have a bottom app bar, so extra padding improves aesthetics.
                     // Non-immersive layouts only need vertical padding.
-                    contentPadding = Padding(horizontal = CP.large, CP.normal) +
+                    contentPadding = Padding(horizontal = Res.space.large, Res.space.normal) +
                             (WindowInsets.content.union(WindowInsets.systemBars)
                                 .union(inAppNavBarInsets).only(
                                     WIS.Vertical

@@ -115,20 +115,20 @@ class Audio(
 
     internal constructor(cursor: Cursor) : this(
         id = cursor.getLong(0),
-        name = cursor.getString(1) ?: MediaProvider.Companion.UNKNOWN_STRING,
+        name = cursor.getString(1) ?: MediaProvider.UNKNOWN_STRING,
         mimeType = cursor.getString(2),
         path = cursor.getString(3),
         dateAdded = cursor.getLong(4) * 1000,
         dateModified = cursor.getLong(5) * 1000,
         size = cursor.getLong(6),
         duration = cursor.getInt(7),
-        album = cursor.getString(8) ?: MediaProvider.Companion.UNKNOWN_STRING,
-        artist = cursor.getString(9) ?: MediaProvider.Companion.UNKNOWN_STRING,
+        album = cursor.getString(8) ?: MediaProvider.UNKNOWN_STRING,
+        artist = cursor.getString(9) ?: MediaProvider.UNKNOWN_STRING,
         albumId = cursor.getLong(10),
-        composer = cursor.getString(11) ?: MediaProvider.Companion.UNKNOWN_STRING,
+        composer = cursor.getString(11) ?: MediaProvider.UNKNOWN_STRING,
         year = cursor.getInt(12),
         tracks = cursor.getInt(13),
-        albumArtist = cursor.getString(14) ?: MediaProvider.Companion.UNKNOWN_STRING
+        albumArtist = cursor.getString(14) ?: MediaProvider.UNKNOWN_STRING
     )
 
     /**

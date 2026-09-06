@@ -27,7 +27,7 @@ import coil3.video.videoFramePercent
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class VideoFrameDecoderFactory() : Decoder.Factory {
+class VideoFrameDecoderFactory : Decoder.Factory {
 
     // Cache extras if needed (can be reused later for performance)
     var cachedDefaultExtras: Extras? = null

@@ -49,7 +49,6 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -60,6 +59,7 @@ import com.zs.audiofy.common.AppConfig
 import com.zs.audiofy.common.IAP_BUY_ME_COFFEE
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.Route
+import com.zs.audiofy.common.gap_small
 import com.zs.audiofy.common.compose.FloatingLargeTopAppBar
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.LocalSystemFacade
@@ -68,8 +68,7 @@ import com.zs.audiofy.common.compose.fadingEdge2
 import com.zs.audiofy.common.compose.rememberAcrylicSurface
 import com.zs.audiofy.common.compose.source
 import com.zs.audiofy.common.vectorResource
-import com.zs.audiofy.settings.DancingScriptFontFamily
-import com.zs.audiofy.settings.Settings
+import com.zs.audiofy.common.dancing_script
 import com.zs.compose.foundation.shapes.SquircleShape
 import com.zs.compose.foundation.textArrayResource
 import com.zs.compose.foundation.textResource
@@ -95,7 +94,7 @@ import com.zs.core.BuildConfig
 import com.zs.core.billing.Paymaster
 import androidx.compose.foundation.layout.PaddingValues as Padding
 import androidx.compose.foundation.layout.WindowInsetsSides as WIS
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 // Represents route to pref screen.
 object RouteAboutUs : Route
@@ -140,7 +139,7 @@ private fun App(
         modifier = modifier
             .clip(AppTheme.shapes.small)
             .clickable(onClick = onClick)
-            .padding(CP.medium),
+            .padding(Res.space.medium),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
@@ -174,13 +173,13 @@ fun Release(
         shape = TileShape,
         color = AppTheme.colors.background(1.dp),
         modifier = modifier
-            .padding(top = CP.normal)
+            .padding(top = Res.space.normal)
             .fillMaxWidth()
     ) {
         Text(
             info,
             style = AppTheme.typography.body2,
-            modifier = Modifier.padding(CP.medium)
+            modifier = Modifier.padding(Res.space.medium)
         )
     }
 }
@@ -189,7 +188,7 @@ fun Release(
 private fun Sponsor(modifier: Modifier = Modifier) {
     BaseListItem(
         modifier = modifier
-            .offset(y = -CP.normal)
+            .offset(y = -Res.space.normal)
             .background(AppTheme.colors.background(1.dp), TileShape),
         centerAlign = true,
         contentColor = AppTheme.colors.onBackground,
@@ -199,7 +198,7 @@ private fun Sponsor(modifier: Modifier = Modifier) {
                 text = textResource(Res.string.app_name),
                 style = AppTheme.typography.display3,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.DancingScriptFontFamily,
+                fontFamily = Res.font.dancing_script,
                 color = AppTheme.colors.onBackground
             )
         },
@@ -229,8 +228,8 @@ private fun Sponsor(modifier: Modifier = Modifier) {
         // RateUs + Buy me a Coffee Button.
         footer = {
             Row(
-                modifier = Modifier.padding(top = CP.normal),
-                horizontalArrangement = Arrangement.spacedBy(CP.normal),
+                modifier = Modifier.padding(top = Res.space.normal),
+                horizontalArrangement = Arrangement.spacedBy(Res.space.normal),
                 verticalAlignment = Alignment.CenterVertically,
                 content = {
                     val facade = LocalSystemFacade.current
@@ -241,7 +240,7 @@ private fun Sponsor(modifier: Modifier = Modifier) {
                         icon = vectorResource(Res.drawable.ic_rate_review_outline),
                         onClick = {
                             when (BuildConfig.FLAVOR){
-                                BuildConfig.FLAVOR_COMMUNITY -> facade.launch(Settings.GithubIntent)
+                                BuildConfig.FLAVOR_COMMUNITY -> facade.launch(Res.app.intent_github)
                                 else -> facade.launchAppStore()
                             }
                         },
@@ -319,19 +318,19 @@ fun AboutUs() {
                     IconButton(
                         icon = vectorResource(Res.drawable.ic_data_object_filled),
                         contentDescription = null,
-                        onClick = { facade.launch(Settings.GithubIntent) },
+                        onClick = { facade.launch(Res.app.intent_github) },
                     )
                     // Report Bugs on Github.
                     IconButton(
                         icon = vectorResource(Res.drawable.ic_bug_report_outline),
                         contentDescription = null,
-                        onClick = { facade.launch(Settings.GitHubIssuesPage) },
+                        onClick = { facade.launch(Res.app.intent_github_issues) },
                     )
                     // Join our telegram channel
                     IconButton(
                         icon = vectorResource(Res.drawable.ic_sms_outline),
                         contentDescription = null,
-                        onClick = { facade.launch(Settings.TelegramIntent) },
+                        onClick = { facade.launch(Res.app.intent_telegram) },
                     )
                 }
             )
@@ -345,8 +344,8 @@ fun AboutUs() {
                 // Immersive layouts typically have a bottom app bar, so extra padding improves aesthetics.
                 // Non-immersive layouts only need vertical padding.
                 contentPadding = Padding(
-                    horizontal = if (strategy is SinglePaneStrategy) CP.large else CP.normal,
-                    CP.normal
+                    horizontal = if (strategy is SinglePaneStrategy) Res.space.large else Res.space.normal,
+                    Res.space.normal
                 ) + (WindowInsets.content.union(WindowInsets.systemBars)
                     .union(inAppNavBarInsets).only(
                         WindowInsetsSides.Vertical
@@ -367,14 +366,14 @@ fun AboutUs() {
                             color = colors.accent,
                             drawDivider = true,
                             style = AppTheme.typography.title3,
-                            contentPadding = Padding(vertical = CP.medium)
+                            contentPadding = Padding(vertical = Res.space.medium)
                         )
                     }
 
                     // apps
                     item(contentType = "our_apps") {
                         Row(
-                            horizontalArrangement = CP.SmallArrangement,
+                            horizontalArrangement = Res.layout.gap_small,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             val facade = LocalSystemFacade.current
@@ -400,12 +399,12 @@ fun AboutUs() {
                             color = colors.accent,
                             drawDivider = true,
                             style = AppTheme.typography.title3,
-                            contentPadding = Padding(vertical = CP.medium)
+                            contentPadding = Padding(vertical = Res.space.medium)
                         )
                     }
 
                     items(changelog, contentType = {"release"}){item ->
-                        Release(item, modifier = Modifier.padding(top = CP.normal))
+                        Release(item, modifier = Modifier.padding(top = Res.space.normal))
                     }
                 }
             )

@@ -19,9 +19,6 @@
 package com.zs.audiofy.library
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable as clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -38,14 +35,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.common.compose.ContentPadding
+import com.zs.audiofy.common.Res
+import com.zs.audiofy.common.gap_small
+
 import com.zs.audiofy.common.compose.emit
 import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
@@ -98,7 +96,7 @@ private fun Recent(
         Text(
             text = label,
             modifier = Modifier
-                .padding(top = ContentPadding.small)
+                .padding(top = Res.space.small)
                 .width(80.dp),
             style = AppTheme.typography.label3,
             maxLines = 2, // Allow at most 2 lines for label
@@ -125,7 +123,7 @@ fun Recents(
     val recents by state.recent.collectAsState()
     // Display the list with loading, empty, and content states
     LazyRow(
-        horizontalArrangement = ContentPadding.SmallArrangement,
+        horizontalArrangement = Res.layout.gap_small,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier,
         content = {

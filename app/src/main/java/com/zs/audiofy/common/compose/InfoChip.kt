@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
 import com.zs.audiofy.common.Res
 import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
@@ -35,7 +36,7 @@ fun InfoChip(
                 backgroundColor = color.copy(ContentAlpha.indication),
                 shape = shape,
             )
-            .padding(vertical = 2.dp, horizontal = ContentPadding.small),
+            .padding(vertical = 2.dp, horizontal = Res.space.small),
         content = {
             if (icon != null)
                 Icon(

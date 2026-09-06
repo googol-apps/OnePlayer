@@ -50,15 +50,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.chronometer
 import com.zs.audiofy.common.compose.lottie
 import com.zs.audiofy.common.compose.lottieAnimationPainter
 import com.zs.audiofy.common.compose.marque
 import com.zs.audiofy.common.shapes.RoundedPolygonShape
 import com.zs.audiofy.common.vectorResource
+import com.zs.audiofy.common.gap_x_small
 import com.zs.audiofy.console.RouteConsole
 import com.zs.audiofy.console.widget.Widget
 import com.zs.compose.foundation.ImageBrush
@@ -78,7 +78,7 @@ import com.zs.compose.theme.sharedElement
 import com.zs.compose.theme.text.Label
 import com.zs.core.playback.NowPlaying
 import com.zs.core.playback.Remote
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 private val WidgetShape = RoundedCornerShape(16.dp)
 private val ArtworkShape = RoundedPolygonShape(6, 0.3f)
@@ -114,7 +114,7 @@ fun GoldenDust(
             .background(bgColor, WidgetShape)
             .background(background, WidgetShape),
         contentColor = onAccent,
-        spacing = ContentPadding.small,
+        spacing = Res.space.small,
         padding = Widget.Padding,
         // Title
         heading = {
@@ -161,9 +161,9 @@ fun GoldenDust(
         subheading = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = CP.xSmallArrangement,
+                horizontalArrangement = Res.layout.gap_x_small,
                 modifier = Modifier
-                    .padding(top = CP.medium)
+                    .padding(top = Res.space.medium)
                     .fillMaxWidth(),
                 content = {
                     // SeekBackward
@@ -202,7 +202,7 @@ fun GoldenDust(
                         icon = vectorResource(Res.drawable.ic_keyboard_double_arrow_right),
                         contentDescription = null,
                         modifier = Modifier.sharedElement(RouteConsole.ID_BTN_SKIP_TO_NEXT) then Modifier.padding(
-                            end = CP.normal
+                            end = Res.space.normal
                         ) then IconModifier
                     )
 
@@ -220,7 +220,7 @@ fun GoldenDust(
         // progress
         footer = {
             Row(
-                horizontalArrangement = CP.xSmallArrangement,
+                horizontalArrangement = Res.layout.gap_x_small,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth(),
                 content = {
@@ -232,7 +232,7 @@ fun GoldenDust(
                         ),
                         contentDescription = null,
                         modifier = Modifier
-                            .padding(start = CP.small)
+                            .padding(start = Res.space.small)
                             .sharedElement(RouteConsole.ID_PLAYING_INDICATOR)
                             .lottie(),
                         tint = onAccent

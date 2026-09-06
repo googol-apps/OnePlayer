@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,9 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.shine
 import com.zs.audiofy.console.RouteConsole
 import com.zs.compose.foundation.ImageBrush
@@ -25,10 +23,8 @@ import com.zs.compose.foundation.visualEffect
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.Surface
 import com.zs.compose.theme.sharedBounds
-import com.zs.compose.theme.text.Label
 import com.zs.compose.theme.text.Text
 import com.zs.core.playback.NowPlaying
-import dev.chrisbanes.haze.HazeState
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -50,7 +46,7 @@ fun Iphone(
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
             Text(
                 textResource(Res.string.widget_update_in_progress),
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = ContentPadding.medium),
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = Res.space.medium),
                 style = AppTheme.typography.body2
             )
         }

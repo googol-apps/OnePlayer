@@ -43,7 +43,7 @@ import com.zs.compose.theme.Preference
 import com.zs.compose.theme.TextButton
 import com.zs.compose.theme.text.Label
 import com.zs.core.BuildConfig
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 context(_: RouteSettings, scope: ColumnScope)
 @Composable
@@ -61,14 +61,14 @@ fun AboutUs() {
             footer = {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(CP.small),
+                    horizontalArrangement = Arrangement.spacedBy(Res.space.small),
                     content = {
                         TextButton(
                             textResource(Res.string.update_audiofy),
                             onClick = { facade.initiateUpdateFlow(true) })
                         TextButton(
                             textResource(Res.string.join_the_beta),
-                            onClick = { facade.launch(Settings.JoinBetaIntent) },
+                            onClick = { facade.launch(Res.app.intent_join_beta) },
                             enabled = false
                         )
                     }
@@ -88,14 +88,14 @@ fun AboutUs() {
             icon = vectorResource(Res.drawable.ic_privacy_tip),
             modifier = Modifier
                 .clip(AppTheme.shapes.medium)
-                .clickable { facade.launch(Settings.PrivacyPolicyIntent) },
+                .clickable { facade.launch(Res.app.intent_privacy_policy) },
         )
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 24.dp),
-            horizontalArrangement = Arrangement.spacedBy(CP.small)
+            horizontalArrangement = Arrangement.spacedBy(Res.space.small)
         ) {
             val colors = ChipDefaults.chipColors(
                 backgroundColor = AppTheme.colors.background(1.dp),
@@ -106,7 +106,7 @@ fun AboutUs() {
                 leadingIcon = { Icon(vectorResource(Res.drawable.ic_rate_review_outline), null) },
                 onClick = {
                     when (BuildConfig.FLAVOR){
-                        BuildConfig.FLAVOR_COMMUNITY -> facade.launch(Settings.GithubIntent)
+                        BuildConfig.FLAVOR_COMMUNITY -> facade.launch(Res.app.intent_github)
                         else -> facade.launchAppStore()
                     }
                 },
@@ -117,7 +117,7 @@ fun AboutUs() {
             Chip(
                 content = { Label(textResource(Res.string.share_app_label)) },
                 leadingIcon = { Icon(vectorResource(Res.drawable.ic_share), null) },
-                onClick = { facade.launch(Settings.ShareAppIntent) },
+                onClick = { facade.launch(Res.app.intent_share_app) },
                 colors = colors,
                 shape = AppTheme.shapes.xSmall
             )

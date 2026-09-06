@@ -28,7 +28,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
@@ -50,7 +49,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.compose.LottieAnimatedButton
 import com.zs.audiofy.common.compose.background
 import com.zs.audiofy.common.compose.chronometer
@@ -63,7 +61,9 @@ import com.zs.audiofy.console.RouteConsole
 import com.zs.audiofy.console.widget.Widget
 import com.zs.audiofy.common.AppConfig
 import com.zs.audiofy.common.Res
+import com.zs.audiofy.common.gap_small
 import com.zs.audiofy.common.vectorResource
+import com.zs.audiofy.common.gap_x_small
 import com.zs.compose.foundation.UmbraGrey
 import com.zs.compose.foundation.textResource
 import com.zs.compose.theme.AppTheme
@@ -80,7 +80,7 @@ import com.zs.compose.theme.sharedElement
 import com.zs.compose.theme.text.Label
 import com.zs.core.playback.NowPlaying
 import com.zs.core.playback.Remote
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 private const val TAG = "RotatingGradient"
 
@@ -112,7 +112,7 @@ fun RotatingColorGradient(
     val contentColor = Color.UmbraGrey
     BaseListItem(
         contentColor = contentColor,
-        spacing = CP.small,
+        spacing = Res.space.small,
         padding = Widget.Padding,
         modifier = modifier
             .sharedBounds(RouteConsole.ID_BACKGROUND)
@@ -129,7 +129,7 @@ fun RotatingColorGradient(
                 style = AppTheme.typography.label3,
                 color = contentColor.copy(ContentAlpha.medium),
                 modifier = Modifier
-                    .padding(top = CP.normal)
+                    .padding(top = Res.space.normal)
                     .sharedElement(RouteConsole.ID_SUBTITLE),
             )
         },
@@ -181,9 +181,9 @@ fun RotatingColorGradient(
         // Controls
         subheading = {
             Row(
-                horizontalArrangement = CP.xSmallArrangement,
+                horizontalArrangement = Res.layout.gap_x_small,
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth().offset(x = -CP.medium),
+                modifier = Modifier.fillMaxWidth().offset(x = -Res.space.medium),
                 content = {
                     // Skip to Prev
                     IconButton(
@@ -220,7 +220,7 @@ fun RotatingColorGradient(
         // Progress
         footer = {
             Row(
-                horizontalArrangement = CP.SmallArrangement,
+                horizontalArrangement = Res.layout.gap_small,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth(),
                 content = {

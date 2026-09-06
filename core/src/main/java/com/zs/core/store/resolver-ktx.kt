@@ -184,7 +184,7 @@ internal suspend fun ComponentActivity.launchForResult(request: IntentSender): A
         // unregister later.
         val contract = ActivityResultContracts.StartIntentSenderForResult()
         val key = UUID.randomUUID().toString()
-        launcher = activityResultRegistry.register(key, contract) { it ->
+        launcher = activityResultRegistry.register(key, contract) {
             // unregister launcher
             launcher?.unregister()
             Log.d(TAG, "launchForResult: $it")

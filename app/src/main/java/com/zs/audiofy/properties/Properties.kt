@@ -50,9 +50,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.DialogWindowProvider
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.fadingEdge2
 import com.zs.audiofy.common.compose.shine
@@ -89,7 +88,7 @@ private inline fun LazyGridScope.Property(
         Text(
             style = AppTheme.typography.label3,
             color = color.copy(ContentAlpha.medium),
-            modifier = Modifier.padding(ContentPadding.normal, ContentPadding.small),
+            modifier = Modifier.padding(Res.space.normal, Res.space.small),
             text = buildAnnotatedString {
                 // Title
                 withStyle(TITLE_STYLE) {
@@ -105,7 +104,7 @@ private inline fun LazyGridScope.Property(
 }
 
 
-private val DETAILS_CONTENT_PADDING = PaddingValues(vertical = ContentPadding.normal)
+private val DETAILS_CONTENT_PADDING = PaddingValues(vertical = Res.space.normal)
 
 @Composable
 private fun Details(viewState: PropertiesViewState, modifier: Modifier = Modifier) {
@@ -255,7 +254,7 @@ fun Properties(viewState: PropertiesViewState) {
     Box(modifier = Modifier.padding(bottom = 10.dp)) {
         // content
         TwoPane(
-            spacing = ContentPadding.normal,
+            spacing = Res.space.normal,
             strategy = if (compact) VerticalTwoPaneStrategy(0.3f) else HorizontalTwoPaneStrategy(0.35f),
             modifier = Modifier
                 .requiredSizeIn(

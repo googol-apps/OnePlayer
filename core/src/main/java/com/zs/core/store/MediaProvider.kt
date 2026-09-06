@@ -403,7 +403,7 @@ interface MediaProvider {
     suspend fun fetchAlbumAudios(
         id: Long,
         filter: String? = null,
-        order: String = MediaProvider.COLUMN_NAME,
+        order: String = COLUMN_NAME,
         ascending: Boolean = true,
         offset: Int = 0,
         limit: Int = Int.MAX_VALUE

@@ -150,7 +150,7 @@ internal class MediaProviderImpl(context: Context) : MediaProvider {
             selection,
             transform = { c ->
                 List(c.count) {
-                    c.moveToPosition(it);
+                    c.moveToPosition(it)
                     // Get the file path
                     c.getString(0)
                 }
@@ -363,7 +363,7 @@ internal class MediaProviderImpl(context: Context) : MediaProvider {
             limit = limit,
             transform = { c ->
                 List(c.count) {
-                    c.moveToPosition(it);
+                    c.moveToPosition(it)
                     Audio(c)
                 }
             },
@@ -410,7 +410,7 @@ internal class MediaProviderImpl(context: Context) : MediaProvider {
             limit = limit,
             transform = { c ->
                 List(c.count) {
-                    c.moveToPosition(it);
+                    c.moveToPosition(it)
                     Video(c)
                 }
             },
@@ -438,7 +438,7 @@ internal class MediaProviderImpl(context: Context) : MediaProvider {
             limit = limit,
             transform = { c ->
                 List(c.count) {
-                    c.moveToPosition(it);
+                    c.moveToPosition(it)
                     Video(c)
                 }
             },
@@ -571,7 +571,7 @@ internal class MediaProviderImpl(context: Context) : MediaProvider {
             limit,
             transform = { c ->
                 List(c.count) {
-                    c.moveToPosition(it);
+                    c.moveToPosition(it)
                     Audio(c)
                 }
             },

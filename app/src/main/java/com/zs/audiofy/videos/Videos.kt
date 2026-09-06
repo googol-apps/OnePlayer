@@ -52,7 +52,7 @@ import com.zs.audiofy.common.Action
 import com.zs.audiofy.common.INFO
 import com.zs.audiofy.common.PLAYLIST_ADD
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.InfoChip
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.LocalSystemFacade
@@ -60,7 +60,6 @@ import com.zs.audiofy.common.compose.LottieAnimatedButton
 import com.zs.audiofy.common.compose.LottieAnimatedIcon
 import com.zs.audiofy.common.compose.OverflowMenu
 import com.zs.audiofy.common.compose.directory.Files
-import com.zs.audiofy.common.shapes.SuperellipseShape
 import com.zs.audiofy.common.vectorResource
 import com.zs.audiofy.console.RouteConsole
 import com.zs.audiofy.playlists.Playlists
@@ -79,7 +78,7 @@ import com.zs.core.common.PathUtils
 import com.zs.core.store.models.Video
 import dev.chrisbanes.haze.rememberHazeState
 import androidx.compose.foundation.combinedClickable as clickable
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 private const val TAG = "Videos"
 
@@ -95,9 +94,9 @@ private fun Video(
 ) {
     BaseListItem(
         trailing = actions,
-        spacing = CP.small,
+        spacing = Res.space.small,
         centerAlign = false,
-        padding = PaddingValues(start = CP.medium, end = 0.dp, top = CP.medium, bottom = CP.medium),
+        padding = PaddingValues(start = Res.space.medium, end = 0.dp, top = Res.space.medium, bottom = Res.space.medium),
                 // Title
         overline = {
             Label(
@@ -115,7 +114,7 @@ private fun Video(
                 overflow = TextOverflow.StartEllipsis,
                 maxLines = 1,
                 style = AppTheme.typography.label2,
-                modifier = Modifier.padding(vertical = CP.xSmall),
+                modifier = Modifier.padding(vertical = Res.space.x_small),
                 color = LocalContentColor.current.copy(ContentAlpha.medium)
             )
         },
@@ -157,7 +156,7 @@ private fun Video(
                     Label(
                         " ${DateUtils.formatElapsedTime(value.duration / 1000)} ",
                         modifier = Modifier
-                            .padding(end = CP.xSmall, bottom = CP.xSmall)
+                            .padding(end = Res.space.x_small, bottom = Res.space.x_small)
                             .background(Color.Black.copy(0.36f), AppTheme.shapes.small)
                             .align(Alignment.BottomEnd),
                         color = Color.SignalWhite,
@@ -171,7 +170,7 @@ private fun Video(
         modifier = Modifier.decorator(
             backgroundColor = AppTheme.colors.background(1.dp),
             shape = shape,
-            edgeInsets = EdgeInsets(horizontal = ContentPadding.normal)
+            edgeInsets = EdgeInsets(horizontal = Res.space.normal)
         )
             .then(modifier),
     )
@@ -215,9 +214,9 @@ fun Videos(viewState: VideosViewState) {
                 value = video,
                 shape = when (pos) {
                     0 -> Res.shape.section
-                    1 -> Res.shape.section_first_item
-                    2 -> Res.shape.section_middle_item
-                    else -> Res.shape.section_last_item
+                    1 -> Res.shape.section_top
+                    2 -> Res.shape.section_middle
+                    else -> Res.shape.section_bottom
                 },
                 modifier = Modifier
                     .animateItem()
@@ -246,7 +245,7 @@ fun Videos(viewState: VideosViewState) {
                             tint = AppTheme.colors.accent,
                             modifier = Modifier
                                 .minimumInteractiveComponentSize()
-                                .padding(end = ContentPadding.small)
+                                .padding(end = Res.space.small)
                         )
 
                     // show actions

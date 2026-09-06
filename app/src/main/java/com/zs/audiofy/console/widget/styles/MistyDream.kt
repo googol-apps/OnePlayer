@@ -51,9 +51,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.LottieAnimatedButton
 import com.zs.audiofy.common.compose.background
 import com.zs.audiofy.common.compose.chronometer
@@ -62,6 +61,7 @@ import com.zs.audiofy.common.compose.lottieAnimationPainter
 import com.zs.audiofy.common.compose.marque
 import com.zs.audiofy.common.shapes.SkewedRoundedRectangleShape
 import com.zs.audiofy.common.vectorResource
+import com.zs.audiofy.common.gap_x_small
 import com.zs.audiofy.console.RouteConsole
 import com.zs.audiofy.console.widget.Widget
 import com.zs.compose.foundation.SignalWhite
@@ -101,7 +101,7 @@ fun MistyDream(
     // Content
     BaseListItem(
         contentColor = contentColor,
-        spacing = ContentPadding.small,
+        spacing = Res.space.small,
         padding = Widget.Padding,
         modifier = modifier
             .sharedBounds(RouteConsole.ID_BACKGROUND)
@@ -167,7 +167,7 @@ fun MistyDream(
         // Controls
         subheading = {
             Row(
-                horizontalArrangement = ContentPadding.xSmallArrangement,
+                horizontalArrangement = Res.layout.gap_x_small,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth(),
                 content = {

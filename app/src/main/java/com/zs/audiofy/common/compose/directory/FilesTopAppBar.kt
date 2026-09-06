@@ -52,7 +52,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.zs.audiofy.common.gap_large
 import com.zs.audiofy.common.Res
+import com.zs.audiofy.common.gap_small
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.shine
 import com.zs.audiofy.common.vectorResource
@@ -72,7 +74,7 @@ import com.zs.compose.theme.minimumInteractiveComponentSize
 import com.zs.compose.theme.text.Label
 import com.zs.compose.theme.text.ProvideTextStyle
 import com.zs.compose.theme.text.Text
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 private val MIN_HEIGHT = 56.dp
 private val ARTWORK_WIDTH = 75.dp
@@ -109,7 +111,7 @@ fun FilesTopAppBar(
                 Spacer(
                     modifier = Modifier
                         .fillMaxSize()
-                        .graphicsLayer() {
+                        .graphicsLayer {
                             this.alpha =
                                 androidx.compose.ui.util.lerp(1f, 0f, fraction * 3f)
                             shadowElevation = lerp(12.dp, 0.dp, fraction / 0.5f).toPx()
@@ -134,7 +136,7 @@ fun FilesTopAppBar(
                         contentDescription = null,
                         modifier = Modifier
                             .minimumInteractiveComponentSize()
-                            .padding(horizontal = CP.small)
+                            .padding(horizontal = Res.space.small)
                             .layoutId(AppBarDefaults.ID_NAVICON)
                     )
                     // else show the back button
@@ -158,7 +160,7 @@ fun FilesTopAppBar(
                 )
 
                 //
-                val alphaModifier = Modifier.graphicsLayer() {
+                val alphaModifier = Modifier.graphicsLayer {
                     this.alpha = androidx.compose.ui.util.lerp(0f, 1f, (fraction - 0.25f) / 0.75f)
                 }
 
@@ -167,7 +169,7 @@ fun FilesTopAppBar(
                     modifier = Modifier
                         .then(alphaModifier)
                         .road(Alignment.TopStart, Alignment.TopStart)
-                        .offset(0.dp, MIN_HEIGHT - CP.xSmall),
+                        .offset(0.dp, MIN_HEIGHT - Res.space.x_small),
                     thickness = 1.dp
                 )
 
@@ -204,7 +206,7 @@ fun FilesTopAppBar(
                             lerp(
                                 IntOffset.Zero,
                                 IntOffset(
-                                    (ARTWORK_WIDTH + CP.large).roundToPx(),
+                                    (ARTWORK_WIDTH + Res.space.large).roundToPx(),
                                     (MIN_HEIGHT + 6.dp).roundToPx()
                                 ),
                                 fraction
@@ -217,14 +219,14 @@ fun FilesTopAppBar(
                     modifier = Modifier
                         .then(alphaModifier)
                         .road(Alignment.TopStart, Alignment.TopStart)
-                        .offset((ARTWORK_WIDTH + CP.large), ((MIN_HEIGHT + 6.dp) * 2 + 10.dp)),
-                    horizontalArrangement = CP.LargeArrangement,
+                        .offset((ARTWORK_WIDTH + Res.space.large), ((MIN_HEIGHT + 6.dp) * 2 + 10.dp)),
+                    horizontalArrangement = Res.layout.gap_large,
                     verticalAlignment = Alignment.CenterVertically,
                     content = {
                         // count
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = CP.SmallArrangement,
+                            verticalArrangement = Res.layout.gap_small,
                             content = {
                                 Icon(
                                     vectorResource(Res.drawable.ic_format_list_numbered),
@@ -245,7 +247,7 @@ fun FilesTopAppBar(
                         // Date
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = CP.SmallArrangement,
+                            verticalArrangement = Res.layout.gap_small,
                             content = {
                                 Icon(
                                     vectorResource(Res.drawable.ic_calendar_month),

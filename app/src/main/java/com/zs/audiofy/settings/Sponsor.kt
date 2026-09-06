@@ -30,10 +30,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.zs.audiofy.common.AppConfig
+import com.zs.audiofy.common.dancing_script
 import com.zs.audiofy.common.IAP_BUY_ME_COFFEE
 import com.zs.audiofy.common.IAP_NO_ADS
 import com.zs.audiofy.common.Res
@@ -53,14 +53,14 @@ import com.zs.compose.theme.text.Text
 import com.zs.core.BuildConfig
 import com.zs.core.billing.Paymaster
 import com.zs.core.billing.purchased
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 @Composable
 context(_: RouteSettings)
 fun Sponsor(modifier: Modifier = Modifier) {
     BaseListItem(
         modifier = modifier
-            .offset(y = -CP.normal)
+            .offset(y = -Res.space.normal)
             .background(AppTheme.colors.background(1.dp), Res.shape.section),
         centerAlign = true,
         contentColor = AppTheme.colors.onBackground,
@@ -70,7 +70,7 @@ fun Sponsor(modifier: Modifier = Modifier) {
                 text = textResource(Res.string.app_name),
                 style = AppTheme.typography.display3,
                 fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.DancingScriptFontFamily,
+                fontFamily = Res.font.dancing_script,
                 color = AppTheme.colors.onBackground
             )
         },
@@ -100,8 +100,8 @@ fun Sponsor(modifier: Modifier = Modifier) {
         // RateUs + Sponsor/Ad-free.
         footer = {
             Row(
-                modifier = Modifier.padding(top = CP.normal),
-                horizontalArrangement = Arrangement.spacedBy(CP.normal),
+                modifier = Modifier.padding(top = Res.space.normal),
+                horizontalArrangement = Arrangement.spacedBy(Res.space.normal),
                 verticalAlignment = Alignment.CenterVertically,
                 content = {
                     val facade = LocalSystemFacade.current
@@ -113,7 +113,7 @@ fun Sponsor(modifier: Modifier = Modifier) {
                         icon = vectorResource(Res.drawable.ic_rate_review_outline),
                         onClick = {
                             when (BuildConfig.FLAVOR){
-                                BuildConfig.FLAVOR_COMMUNITY -> facade.launch(Settings.GithubIntent)
+                                BuildConfig.FLAVOR_COMMUNITY -> facade.launch(Res.app.intent_github)
                                 else -> facade.launchAppStore()
                             }
                         },

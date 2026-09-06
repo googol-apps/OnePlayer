@@ -31,7 +31,6 @@ import com.zs.audiofy.common.compose.FilterDefaults
 import com.zs.audiofy.common.raw
 import com.zs.audiofy.common.AppConfig
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.settings.Settings
 import com.zs.compose.foundation.Rose
 import com.zs.compose.foundation.runCatching
 import com.zs.compose.theme.snackbar.SnackbarDuration
@@ -72,7 +71,7 @@ abstract class StoreViewModel<T>(
             flow3 = snapshotFlow(::filter),
             transform = { _, query, filter -> Triple(query, filter.first, filter.second) }
         ).debounceAfterFirst(300)
-            .onEach() { (query, ascending, order) -> refresh(query, ascending, order) }
+            .onEach { (query, ascending, order) -> refresh(query, ascending, order) }
             .catch { exception ->
                 Log.d(TAG, "provider: ${exception.stackTraceToString()}")
                 val action = report(exception.message ?: getText(Res.string.msg_unknown_error))

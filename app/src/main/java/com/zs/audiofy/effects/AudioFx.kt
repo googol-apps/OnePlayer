@@ -44,8 +44,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogWindowProvider
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
+import com.zs.audiofy.common.gap_small
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.shine
 import com.zs.audiofy.common.vectorResource
@@ -64,12 +64,12 @@ import com.zs.compose.theme.Switch
 import com.zs.compose.theme.TonalIconButton
 import com.zs.compose.theme.appbar.TopAppBar
 import com.zs.compose.theme.text.Label
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 private val TitleBarHeight = Modifier.height(48.dp)
 private val DialogSize = Modifier
     .widthIn(max = 400.dp)
-    .padding(start = CP.normal, end = CP.normal, bottom = 10.dp)
+    .padding(start = Res.space.normal, end = Res.space.normal, bottom = 10.dp)
 
 private val GridSize = Modifier.sizeIn(maxHeight = 150.dp)
 
@@ -117,7 +117,7 @@ fun AudioFx(viewState: AudioFxViewState) {
                     verticalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.fillMaxHeight(),
                     content = {
-                        val start = range.start;
+                        val start = range.start
                         val end = range.endInclusive
                         Label(
                             text = stringResource(id = Res.string.scr_effects_db_suffix_d, start / 1000),
@@ -135,7 +135,7 @@ fun AudioFx(viewState: AudioFxViewState) {
                 )
 
                 // bars
-                val padding = Modifier.padding(bottom = CP.medium)
+                val padding = Modifier.padding(bottom = Res.space.medium)
                 repeat(viewState.eqNumberOfBands) { band ->
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         val fx = viewState
@@ -165,8 +165,8 @@ fun AudioFx(viewState: AudioFxViewState) {
 
         val state = rememberLazyListState()
         LazyRow(
-            contentPadding = PaddingValues(horizontal = CP.normal, vertical = CP.medium),
-            horizontalArrangement = CP.SmallArrangement,
+            contentPadding = PaddingValues(horizontal = Res.space.normal, vertical = Res.space.medium),
+            horizontalArrangement = Res.layout.gap_small,
             content = {
                 val current = viewState.eqCurrentPreset
                 viewState.eqPresets.forEachIndexed { index, label ->
@@ -223,7 +223,7 @@ fun AudioFx(viewState: AudioFxViewState) {
                         TonalIconButton(
                             icon = vectorResource(Res.drawable.ic_save),
                             contentDescription = null,
-                            modifier = Modifier.scale(0.80f).padding(end = CP.small),
+                            modifier = Modifier.scale(0.80f).padding(end = Res.space.small),
                             onClick = {
                                 viewState.apply()
                                 navController.navigateUp()
@@ -242,10 +242,10 @@ fun AudioFx(viewState: AudioFxViewState) {
                         if (!viewState.isEqualizerReady) return@Surface
                         //
                         Column(
-                            verticalArrangement = CP.SmallArrangement,
+                            verticalArrangement = Res.layout.gap_small,
                             modifier = Modifier.padding(
-                                horizontal = CP.medium,
-                                vertical = CP.normal
+                                horizontal = Res.space.medium,
+                                vertical = Res.space.normal
                             ),
                             content = content
                         )

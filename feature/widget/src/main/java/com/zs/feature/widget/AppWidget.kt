@@ -40,7 +40,7 @@ private val NonePlaying = NowPlaying(null, null)
 
 private const val TAG = "AppWidget"
 
-private class GlanceWidget() : GlanceAppWidget() {
+private class GlanceWidget : GlanceAppWidget() {
     private lateinit var remote: Remote
 
     override val sizeMode: SizeMode = SizeMode.Exact

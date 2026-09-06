@@ -58,7 +58,7 @@ import kotlinx.coroutines.delay
  */
 @SuppressLint("UnsafeOptInUsageError")
 internal fun DynamicRendererFactory(context: Context): DefaultRenderersFactory? {
-    return runCatching() {
+    return runCatching {
         val codexClass =
             Class.forName("com.zs.feature.codex.CodexKt") // Assuming the functionis in a Kotlin file named Codex.kt
         val codexMethod = codexClass.getDeclaredMethod("Codex", Context::class.java)

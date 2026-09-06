@@ -439,7 +439,7 @@ val LocalSystemFacade =
  * The value can be null if no preference value has been set for the given key.
  */
 @Composable
-inline fun <S, O> preference(key: Key.Key1<S, O>): androidx.compose.runtime.State<O?> {
+inline fun <S, O> preference(key: Key.Key1<S, O>): State<O?> {
     val provider = LocalSystemFacade.current
     return provider.observeAsState(key = key)
 }
@@ -448,7 +448,7 @@ inline fun <S, O> preference(key: Key.Key1<S, O>): androidx.compose.runtime.Stat
  * @see [preference]
  */
 @Composable
-inline fun <S, O> preference(key: Key.Key2<S, O>): androidx.compose.runtime.State<O> {
+inline fun <S, O> preference(key: Key.Key2<S, O>): State<O> {
     val provider = LocalSystemFacade.current
     return provider.observeAsState(key = key)
 }
@@ -695,7 +695,7 @@ fun Modifier.resize(
 
 @Suppress("StateFlowValueCalledInComposition")
 @Composable
-public fun <T: Any> StateFlow<T?>.collectAsState(
+fun <T: Any> StateFlow<T?>.collectAsState(
     default: T,
     context: CoroutineContext = EmptyCoroutineContext
 ): State<T> =   produceState(value ?: default, this, context) {

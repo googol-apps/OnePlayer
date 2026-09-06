@@ -35,6 +35,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.center
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Brush.Companion.verticalGradient
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageShader
 import androidx.compose.ui.graphics.Paint
@@ -173,7 +174,7 @@ fun Modifier.source(surface: HazeState) = hazeSource(state = surface)
 val Colors.shine
     get() = BorderStroke(
         0.5.dp,
-        Brush.verticalGradient(
+        verticalGradient(
             listOf(
                 if (isLight) background else Color.Gray.copy(0.24f),
                 if (isLight) background.copy(0.3f) else Color.Gray.copy(0.075f),

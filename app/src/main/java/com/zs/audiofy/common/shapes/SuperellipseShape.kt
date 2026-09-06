@@ -25,7 +25,7 @@ import kotlin.math.sin
  * @param squareness A value between 0.0 and 1.0 that determines the shape's curvature.
  * - 0.0 results in a perfect circle or ellipse.
  */
-private class Superellipse constructor(squareness: Float, private val steps: Int) : Shape {
+private class Superellipse(squareness: Float, private val steps: Int) : Shape {
 
     private val squareness = squareness.coerceIn(0f, 1f)
 

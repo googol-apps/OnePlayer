@@ -11,9 +11,6 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.core.net.toUri
-import com.zs.audiofy.settings.Settings.PKG_MARKET_ID
-import com.zs.audiofy.settings.Settings.PREFIX_MARKET_FALLBACK
-import com.zs.audiofy.settings.Settings.PREFIX_MARKET_URL
 import com.zs.compose.theme.snackbar.SnackbarDuration
 import com.zs.core.billing.Product
 import com.zs.core.billing.Purchase
@@ -84,14 +81,14 @@ interface SystemFacade {
      * @param pkg the package name of the app to open on the App Store.
      */
     fun launchAppStore(pkg: String = AppConfig.APPLICATION_ID) {
-        val url = "$PREFIX_MARKET_URL$pkg"
+        val url = "$Res.app.market_url_prefix$pkg"
         // Create an Intent to open the Play Store app.
         val intent = Intent(Intent.ACTION_VIEW, url.toUri()).apply {
             // Set the package to explicitly target the Play Store app.
             // Don't add this activity to the history stack.
             // Open in a new document (tab or window).
             // Allow multiple instances of the task.
-            setPackage(PKG_MARKET_ID)
+            setPackage(Res.app.PKG_MARKET_ID)
             addFlags(
                 Intent.FLAG_ACTIVITY_NO_HISTORY
                         or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
@@ -102,7 +99,7 @@ interface SystemFacade {
         val res = kotlin.runCatching { launch(intent) }
         // If launching the app fails, use the fallback URL to open in a web browser.
         if (res.isFailure) {
-            val fallback = "${PREFIX_MARKET_FALLBACK}$pkg"
+            val fallback = "${Res.app.market_web_url_prefix}$pkg"
             launch(Intent(Intent.ACTION_VIEW, fallback.toUri()))
         }
     }

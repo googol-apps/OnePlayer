@@ -30,12 +30,13 @@ import androidx.constraintlayout.compose.ConstraintSetScope
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.Visibility
 import androidx.constraintlayout.compose.atMost
+import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.compose.dimensions
 import com.zs.audiofy.common.compose.hide
 import com.zs.audiofy.common.compose.horizontal
 import com.zs.audiofy.common.compose.linkTo
 import com.zs.compose.theme.WindowSize
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 
 @Stable
@@ -120,8 +121,8 @@ private fun CompactAudio(insets: DpRect) = object : Constraints(34) {
         // Collapse
         val (left, up, right, down) = insets
         constrain(COLLAPSE) {
-            end.linkTo(parent.end, CP.normal + right)
-            top.linkTo(parent.top, CP.normal + up)
+            end.linkTo(parent.end, Res.space.normal + right)
+            top.linkTo(parent.top, Res.space.normal + up)
         }
 
         // Options
@@ -129,7 +130,7 @@ private fun CompactAudio(insets: DpRect) = object : Constraints(34) {
             REPEAT_MODE, INFO, SHUFFLE, QUEUE, SPEED, SLEEP_TIMER, LIKED, MORE,
             chainStyle = ChainStyle.Packed(1f),
             constrainBlock = {
-                linkTo(parent.start, COLLAPSE.start, left + CP.normal, CP.small)
+                linkTo(parent.start, COLLAPSE.start, left + Res.space.normal, Res.space.small)
             }
         )
         constrain(options) {
@@ -138,8 +139,8 @@ private fun CompactAudio(insets: DpRect) = object : Constraints(34) {
 
         // Artwork
         constrain(ARTWORK) {
-            start.linkTo(parent.start, left + CP.normal)
-            top.linkTo(COLLAPSE.bottom, CP.normal)
+            start.linkTo(parent.start, left + Res.space.normal)
+            top.linkTo(COLLAPSE.bottom, Res.space.normal)
             dimensions = Dimension.value(86.dp)
         }
 
@@ -158,7 +159,7 @@ private fun CompactAudio(insets: DpRect) = object : Constraints(34) {
 
         // TITLE
         constrain(TITLE) {
-            linkTo(ARTWORK.end, PLAY_PAUSE.start, CP.medium, CP.medium)
+            linkTo(ARTWORK.end, PLAY_PAUSE.start, Res.space.medium, Res.space.medium)
             linkTo(ARTWORK.top, ARTWORK.bottom)
             width = Dimension.fillToConstraints
         }
@@ -174,7 +175,7 @@ private fun CompactAudio(insets: DpRect) = object : Constraints(34) {
             }
         )
         constrain(timeBar) {
-            linkTo(ARTWORK.bottom, parent.bottom, CP.large, down)
+            linkTo(ARTWORK.bottom, parent.bottom, Res.space.large, down)
             width = Dimension.fillToConstraints.atMost(230.dp)
             verticalBias = 0f
         }
@@ -182,7 +183,7 @@ private fun CompactAudio(insets: DpRect) = object : Constraints(34) {
         // Extra info
         constrain(EXTRA_INFO) {
             start.linkTo(timeBar.start)
-            bottom.linkTo(timeBar.top, -CP.small)
+            bottom.linkTo(timeBar.top, -Res.space.small)
         }
 
         // Make these invisible
@@ -202,8 +203,8 @@ private fun SmallAudio(insets: DpRect) = object : Constraints(44) {
         val (left, up, right, down) = insets
         // Collapse
         constrain(COLLAPSE) {
-            end.linkTo(parent.end, right + CP.normal)
-            top.linkTo(parent.top, up + CP.normal)
+            end.linkTo(parent.end, right + Res.space.normal)
+            top.linkTo(parent.top, up + Res.space.normal)
         }
 
         // Options
@@ -211,8 +212,8 @@ private fun SmallAudio(insets: DpRect) = object : Constraints(44) {
             QUEUE, SPEED, SLEEP_TIMER, LIKED, MORE,
             chainStyle = ChainStyle.Packed(1f),
             constrainBlock = {
-                end.linkTo(COLLAPSE.start, CP.normal)
-                start.linkTo(parent.start, CP.normal)
+                end.linkTo(COLLAPSE.start, Res.space.normal)
+                start.linkTo(parent.start, Res.space.normal)
             }
         )
         constrain(options) {
@@ -221,8 +222,8 @@ private fun SmallAudio(insets: DpRect) = object : Constraints(44) {
 
         // Artwork
         constrain(ARTWORK) {
-            start.linkTo(parent.start, left + CP.normal)
-            top.linkTo(options.bottom, CP.small)
+            start.linkTo(parent.start, left + Res.space.normal)
+            top.linkTo(options.bottom, Res.space.small)
             width = Dimension.percent(0.3f)
             height = Dimension.ratio("1:1")
         }
@@ -234,7 +235,7 @@ private fun SmallAudio(insets: DpRect) = object : Constraints(44) {
 
         // Title
         constrain(TITLE) {
-            linkTo(ARTWORK.end, INFO.start, CP.normal, CP.normal)
+            linkTo(ARTWORK.end, INFO.start, Res.space.normal, Res.space.normal)
             top.linkTo(ARTWORK.top)
             width = Dimension.fillToConstraints
         }
@@ -255,14 +256,14 @@ private fun SmallAudio(insets: DpRect) = object : Constraints(44) {
             }
         )
         constrain(timeBar) {
-            top.linkTo(ARTWORK.bottom, CP.large)
+            top.linkTo(ARTWORK.bottom, Res.space.large)
             width = Dimension.fillToConstraints
         }
 
         // Extra-Info
         constrain(EXTRA_INFO) {
             start.linkTo(SEEK_BAR.start)
-            bottom.linkTo(SEEK_BAR.top, -CP.small)
+            bottom.linkTo(SEEK_BAR.top, -Res.space.small)
         }
 
         // Controls
@@ -274,7 +275,7 @@ private fun SmallAudio(insets: DpRect) = object : Constraints(44) {
             }
         )
         constrain(controls) {
-            linkTo(timeBar.bottom, parent.bottom, CP.small, down + CP.small)
+            linkTo(timeBar.bottom, parent.bottom, Res.space.small, down + Res.space.small)
             verticalBias = 0f
         }
     }
@@ -292,14 +293,14 @@ private fun PortraitAudio(insets: DpRect) = object : Constraints(44) {
         val (left, up, right, down) = insets
         // Collapse
         constrain(COLLAPSE) {
-            top.linkTo(parent.top, margin = up + CP.large)
-            end.linkTo(parent.end, margin = right + CP.large)
+            top.linkTo(parent.top, margin = up + Res.space.large)
+            end.linkTo(parent.end, margin = right + Res.space.large)
         }
 
         // Artwork
         constrain(ARTWORK) {
-            linkTo(parent.start, parent.end, CP.xLarge + left, CP.xLarge + right)
-            linkTo(COLLAPSE.bottom, SUBTITLE.top, CP.normal, CP.normal)
+            linkTo(parent.start, parent.end, Res.space.x_large + left, Res.space.x_large + right)
+            linkTo(COLLAPSE.bottom, SUBTITLE.top, Res.space.normal, Res.space.normal)
             width = Dimension.fillToConstraints
             height = Dimension.ratio("1:1")
         }
@@ -307,13 +308,13 @@ private fun PortraitAudio(insets: DpRect) = object : Constraints(44) {
         // Options
         val options = horizontal(
             QUEUE, SPEED, SLEEP_TIMER, LIKED, MORE,
-            spacing = CP.medium,
+            spacing = Res.space.medium,
             constrainBlock = {
                 linkTo(TITLE.start, COLLAPSE.end)
             }
         )
         constrain(options) {
-            bottom.linkTo(parent.bottom, down + CP.normal)
+            bottom.linkTo(parent.bottom, down + Res.space.normal)
         }
 
         // Controls
@@ -325,7 +326,7 @@ private fun PortraitAudio(insets: DpRect) = object : Constraints(44) {
             }
         )
         constrain(controls) {
-            bottom.linkTo(options.top, CP.normal)
+            bottom.linkTo(options.top, Res.space.normal)
         }
 
         // TimeBar
@@ -337,14 +338,14 @@ private fun PortraitAudio(insets: DpRect) = object : Constraints(44) {
             }
         )
         constrain(timeBar) {
-            bottom.linkTo(controls.top, CP.normal)
+            bottom.linkTo(controls.top, Res.space.normal)
             width = Dimension.fillToConstraints
         }
 
         // Extra-Info
         constrain(EXTRA_INFO) {
             start.linkTo(SEEK_BAR.start)
-            bottom.linkTo(SEEK_BAR.top, -CP.small)
+            bottom.linkTo(SEEK_BAR.top, -Res.space.small)
         }
 
         // Info
@@ -355,14 +356,14 @@ private fun PortraitAudio(insets: DpRect) = object : Constraints(44) {
 
         // Title
         constrain(TITLE) {
-            linkTo(parent.start, INFO.start, left + CP.xLarge, CP.normal)
-            bottom.linkTo(EXTRA_INFO.top, CP.normal)
+            linkTo(parent.start, INFO.start, left + Res.space.x_large, Res.space.normal)
+            bottom.linkTo(EXTRA_INFO.top, Res.space.normal)
             width = Dimension.fillToConstraints
         }
 
         // Subtitle
         constrain(SUBTITLE) {
-            linkTo(TITLE.start, TITLE.end, endMargin = CP.large)
+            linkTo(TITLE.start, TITLE.end, endMargin = Res.space.large)
             bottom.linkTo(TITLE.top)
             width = Dimension.fillToConstraints
             horizontalBias = 0f
@@ -382,15 +383,15 @@ private fun LandscapeAudio(insets: DpRect) = object : Constraints(44) {
         val (left, up, right, down) = insets
         val split = this.createGuidelineFromStart(0.45f)
         constrain(ARTWORK) {
-            linkTo(parent.start, split, left + CP.large, endMargin = CP.large)
-            linkTo(parent.top, parent.bottom, up + CP.small, down + CP.large)
+            linkTo(parent.start, split, left + Res.space.large, endMargin = Res.space.large)
+            linkTo(parent.top, parent.bottom, up + Res.space.small, down + Res.space.large)
             width = Dimension.fillToConstraints
             height = Dimension.ratio("1:1")
         }
 
         // Collapse
         constrain(COLLAPSE) {
-            end.linkTo(parent.end, right + CP.large)
+            end.linkTo(parent.end, right + Res.space.large)
             top.linkTo(ARTWORK.top)
         }
 
@@ -399,7 +400,7 @@ private fun LandscapeAudio(insets: DpRect) = object : Constraints(44) {
             QUEUE, SPEED, SLEEP_TIMER, LIKED, MORE,
             chainStyle = ChainStyle.Packed(1f),
             constrainBlock = {
-                linkTo(split, COLLAPSE.start, endMargin = CP.normal)
+                linkTo(split, COLLAPSE.start, endMargin = Res.space.normal)
             }
         )
         constrain(options) {
@@ -409,14 +410,14 @@ private fun LandscapeAudio(insets: DpRect) = object : Constraints(44) {
         // Subtitle
         constrain(SUBTITLE) {
             linkTo(split, TITLE.end)
-            top.linkTo(COLLAPSE.bottom, CP.large)
+            top.linkTo(COLLAPSE.bottom, Res.space.large)
             width = Dimension.fillToConstraints.atMost(160.dp)
             horizontalBias = 0f
         }
 
         // Title
         constrain(TITLE) {
-            linkTo(split, INFO.start, endMargin = CP.normal)
+            linkTo(split, INFO.start, endMargin = Res.space.normal)
             top.linkTo(SUBTITLE.bottom)
             width = Dimension.fillToConstraints
         }
@@ -438,14 +439,14 @@ private fun LandscapeAudio(insets: DpRect) = object : Constraints(44) {
             }
         )
         constrain(timeBar) {
-            linkTo(TITLE.bottom, parent.bottom, CP.normal, down)
+            linkTo(TITLE.bottom, parent.bottom, Res.space.normal, down)
             width = Dimension.fillToConstraints.atMost(230.dp)
             verticalBias = 0f
         }
         // Extra info
         constrain(EXTRA_INFO) {
             start.linkTo(timeBar.start)
-            bottom.linkTo(timeBar.top, -CP.small)
+            bottom.linkTo(timeBar.top, -Res.space.small)
         }
 
         // Controls
@@ -458,7 +459,7 @@ private fun LandscapeAudio(insets: DpRect) = object : Constraints(44) {
             }
         )
         constrain(controls) {
-            top.linkTo(timeBar.bottom, CP.normal)
+            top.linkTo(timeBar.bottom, Res.space.normal)
         }
     }
 }
@@ -473,15 +474,15 @@ private fun LargeAudio(insets: DpRect) = object : Constraints(44) {
         // Collapse
         val (left, up, right, down) = insets
         constrain(COLLAPSE) {
-            end.linkTo(parent.end, right + CP.large)
-            top.linkTo(parent.top, up + CP.large)
+            end.linkTo(parent.end, right + Res.space.large)
+            top.linkTo(parent.top, up + Res.space.large)
         }
         // Options
         val options = horizontal(
             QUEUE, SPEED, SLEEP_TIMER, LIKED, MORE,
             chainStyle = ChainStyle.Packed(1f),
             constrainBlock = {
-                linkTo(parent.start, COLLAPSE.start, endMargin = CP.large)
+                linkTo(parent.start, COLLAPSE.start, endMargin = Res.space.large)
             }
         )
         constrain(options) {
@@ -493,7 +494,7 @@ private fun LargeAudio(insets: DpRect) = object : Constraints(44) {
             SHUFFLE, SKIP_PREVIOUS, PLAY_PAUSE, SKIP_TO_NEXT, REPEAT_MODE,
             alignBy = PLAY_PAUSE,
             constrainBlock = {
-                linkTo(TITLE.end, COLLAPSE.end, startMargin = CP.normal)
+                linkTo(TITLE.end, COLLAPSE.end, startMargin = Res.space.normal)
             }
         )
         constrain(controls) {
@@ -502,9 +503,9 @@ private fun LargeAudio(insets: DpRect) = object : Constraints(44) {
 
         // Title
         constrain(TITLE) {
-            linkTo(parent.start, parent.end, startMargin = left + CP.xLarge)
-            bottom.linkTo(parent.bottom, down + CP.normal)
-            top.linkTo(controls.top, CP.normal)
+            linkTo(parent.start, parent.end, startMargin = left + Res.space.x_large)
+            bottom.linkTo(parent.bottom, down + Res.space.normal)
+            top.linkTo(controls.top, Res.space.normal)
             width = Dimension.percent(0.38f)
             horizontalBias = 0f
         }
@@ -527,7 +528,7 @@ private fun LargeAudio(insets: DpRect) = object : Constraints(44) {
             }
         )
         constrain(timeBar) {
-            bottom.linkTo(controls.top, CP.normal)
+            bottom.linkTo(controls.top, Res.space.normal)
             width = Dimension.fillToConstraints
             verticalBias = 0f
         }
@@ -535,12 +536,12 @@ private fun LargeAudio(insets: DpRect) = object : Constraints(44) {
         // Extra info
         constrain(EXTRA_INFO) {
             start.linkTo(timeBar.start)
-            bottom.linkTo(timeBar.top, -CP.small)
+            bottom.linkTo(timeBar.top, -Res.space.small)
         }
         // Artwork
         constrain(ARTWORK) {
-            linkTo(parent.start, COLLAPSE.end, left + CP.large, )
-            linkTo(COLLAPSE.bottom, timeBar.top,  CP.large, CP.large)
+            linkTo(parent.start, COLLAPSE.end, left + Res.space.large, )
+            linkTo(COLLAPSE.bottom, timeBar.top,  Res.space.large, Res.space.large)
             width = Dimension.fillToConstraints.atMost(260.dp)
             height = Dimension.ratio("1:1")
         }
@@ -574,29 +575,29 @@ private fun PortraitVideo(insets: DpRect,   only: Array<String>?,) = object : Co
 
 
         // Options
-        COLLAPSE.withChainParams(startMargin = CP.normal)
+        COLLAPSE.withChainParams(startMargin = Res.space.normal)
         val options = horizontal(
             EQUALIZER, QUEUE, SPEED, SLEEP_TIMER, LIKED, MORE, COLLAPSE,
             constrainBlock = {
-                linkTo(parent.start, parent.end, endMargin = CP.normal)
+                linkTo(parent.start, parent.end, endMargin = Res.space.normal)
             }
         )
         val (left, up, right, down) = insets
         constrain(options) {
-            top.linkTo(parent.top, up + CP.normal)
+            top.linkTo(parent.top, up + Res.space.normal)
             horizontalBias = 1f
         }
         // Title
-        TITLE.withChainParams(startMargin = CP.small, endMargin = CP.small)
+        TITLE.withChainParams(startMargin = Res.space.small, endMargin = Res.space.small)
         val title = horizontal(
             INDICATOR, TITLE, INFO,LOCK,
             alignBy = TITLE,
             constrainBlock = {
-                linkTo(parent.start, COLLAPSE.end, CP.normal + left)
+                linkTo(parent.start, COLLAPSE.end, Res.space.normal + left)
             }
         )
         constrain(title) {
-            bottom.linkTo(parent.bottom, CP.normal + down)
+            bottom.linkTo(parent.bottom, Res.space.normal + down)
             width = Dimension.fillToConstraints
             //horizontalChainWeight = 1f
         }
@@ -614,9 +615,9 @@ private fun PortraitVideo(insets: DpRect,   only: Array<String>?,) = object : Co
         val timeBar = when {
             only != null && only.contains(RouteConsole.ID_SEEK_BAR) && false -> {
                 constrain(SEEK_BAR) {
-                    linkTo(parent.start, parent.end, left + CP.large, right + CP.large)
-                    bottom.linkTo(title.top, CP.xLarge)
-                    //bottom.linkTo(parent.bottom, down + CP.xLarge)
+                    linkTo(parent.start, parent.end, left + Res.space.large, right + Res.space.large)
+                    bottom.linkTo(title.top, Res.space.x_large)
+                    //bottom.linkTo(parent.bottom, down + Res.space.xLarge)
                     width = Dimension.fillToConstraints
                 }
                 SEEK_BAR
@@ -626,11 +627,11 @@ private fun PortraitVideo(insets: DpRect,   only: Array<String>?,) = object : Co
                     SKIP_PREVIOUS, SEEK_BAR, SKIP_TO_NEXT, PLAY_PAUSE,
                     alignBy = SEEK_BAR,
                     constrainBlock = {
-                        linkTo(parent.start, parent.end, left + CP.normal, right + CP.normal)
+                        linkTo(parent.start, parent.end, left + Res.space.normal, right + Res.space.normal)
                     }
                 )
                 constrain(SEEK_BAR) {
-                    bottom.linkTo(title.top, CP.normal)
+                    bottom.linkTo(title.top, Res.space.normal)
                     width = Dimension.fillToConstraints
                 }
                 SEEK_BAR
@@ -639,7 +640,7 @@ private fun PortraitVideo(insets: DpRect,   only: Array<String>?,) = object : Co
         // Extra-Info
         constrain(EXTRA_INFO) {
             start.linkTo(SEEK_BAR.start, 6.dp)
-            bottom.linkTo(SEEK_BAR.top, -CP.small)
+            bottom.linkTo(SEEK_BAR.top, -Res.space.small)
         }
         // more
         val more = horizontal(
@@ -654,11 +655,11 @@ private fun PortraitVideo(insets: DpRect,   only: Array<String>?,) = object : Co
         }
 
         constrain(CUES){
-            linkTo(parent.start, parent.end, left + CP.normal, right + CP.normal)
+            linkTo(parent.start, parent.end, left + Res.space.normal, right + Res.space.normal)
             if (only != null)
-                bottom.linkTo(parent.bottom, down + CP.medium)
+                bottom.linkTo(parent.bottom, down + Res.space.medium)
             else
-                bottom.linkTo(more.top, CP.medium)
+                bottom.linkTo(more.top, Res.space.medium)
             horizontalBias = 0.5f
         }
 
@@ -697,17 +698,17 @@ private fun LargeVideo(insets: DpRect,   only: Array<String>?,) = object : Const
 
         // Collapse
         val (left, up, right, down) = insets
-        TITLE.withChainParams(startMargin = CP.small, endMargin = CP.xLarge)
-        COLLAPSE.withChainParams(startMargin = CP.normal)
+        TITLE.withChainParams(startMargin = Res.space.small, endMargin = Res.space.x_large)
+        COLLAPSE.withChainParams(startMargin = Res.space.normal)
         val options = horizontal(
             INDICATOR, TITLE, INFO, SHUFFLE, REPEAT_MODE, EQUALIZER, SPEED, SLEEP_TIMER, LIKED, MORE, COLLAPSE,
             alignBy = TITLE,
             constrainBlock = {
-                linkTo(parent.start, parent.end, CP.normal + left, CP.normal + right)
+                linkTo(parent.start, parent.end, Res.space.normal + left, Res.space.normal + right)
             }
         )
         constrain(options) {
-            top.linkTo(parent.top, CP.small + up)
+            top.linkTo(parent.top, Res.space.small + up)
             width = Dimension.fillToConstraints
         }
 
@@ -725,7 +726,7 @@ private fun LargeVideo(insets: DpRect,   only: Array<String>?,) = object : Const
             only != null && only.contains(RouteConsole.ID_SEEK_BAR) && false -> {
                 constrain(SEEK_BAR) {
                     linkTo(parent.start, parent.end, left + 45.dp, right + 45.dp)
-                    bottom.linkTo(parent.bottom, down + CP.xLarge)
+                    bottom.linkTo(parent.bottom, down + Res.space.x_large)
                     width = Dimension.fillToConstraints
                 }
                 SEEK_BAR
@@ -736,11 +737,11 @@ private fun LargeVideo(insets: DpRect,   only: Array<String>?,) = object : Const
                     LOCK,  SEEK_BAR,  SKIP_PREVIOUS, PLAY_PAUSE, SKIP_TO_NEXT, RESIZE_MODE, ROTATION_LOCK, QUEUE,
                     alignBy = SEEK_BAR,
                     constrainBlock = {
-                        linkTo(parent.start, parent.end, left + CP.normal, right + CP.normal)
+                        linkTo(parent.start, parent.end, left + Res.space.normal, right + Res.space.normal)
                     }
                 )
                 constrain(SEEK_BAR) {
-                    bottom.linkTo(parent.bottom, CP.xSmall + down)
+                    bottom.linkTo(parent.bottom, Res.space.x_small + down)
                     width = Dimension.fillToConstraints
                 }
                 SEEK_BAR
@@ -749,15 +750,15 @@ private fun LargeVideo(insets: DpRect,   only: Array<String>?,) = object : Const
         // Extra-Info
         constrain(EXTRA_INFO) {
             start.linkTo(SEEK_BAR.start, 6.dp)
-            bottom.linkTo(SEEK_BAR.top, -CP.small)
+            bottom.linkTo(SEEK_BAR.top, -Res.space.small)
         }
 
         constrain(CUES){
-            linkTo(parent.start, parent.end, left + CP.normal, right + CP.normal)
+            linkTo(parent.start, parent.end, left + Res.space.normal, right + Res.space.normal)
             if (only != null)
-                bottom.linkTo(parent.bottom, down + CP.medium)
+                bottom.linkTo(parent.bottom, down + Res.space.medium)
             else
-                bottom.linkTo(EXTRA_INFO.top, CP.medium)
+                bottom.linkTo(EXTRA_INFO.top, Res.space.medium)
             horizontalBias = 0.5f
         }
 

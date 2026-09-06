@@ -50,14 +50,14 @@ import com.zs.compose.theme.Surface
 import com.zs.compose.theme.text.Label
 import com.zs.core.store.MediaProvider
 import com.zs.core.store.models.Audio.Album
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 private val ColorSaver = object : Saver<Color, Int> {
-    override fun restore(value: Int): Color? {
+    override fun restore(value: Int): Color {
         return Color(value)
     }
 
-    override fun SaverScope.save(value: Color): Int? {
+    override fun SaverScope.save(value: Color): Int {
         return value.toArgb()
     }
 }
@@ -84,7 +84,7 @@ private fun NewlyAddedItem(
         onClick = onClick,
         modifier = modifier
     ) {
-        Column(modifier = Modifier.padding(horizontal = CP.normal, vertical = CP.medium).size(width = 110.dp, 190.dp)) {
+        Column(modifier = Modifier.padding(horizontal = Res.space.normal, vertical = Res.space.medium).size(width = 110.dp, 190.dp)) {
             AsyncImage(
                 MediaProvider.buildAlbumArtUri(value.id),
                 contentDescription = null,
@@ -101,7 +101,7 @@ private fun NewlyAddedItem(
             Label(
                 text = value.title,
                 modifier = Modifier
-                    .padding(top = CP.medium), // Add horizontal padding
+                    .padding(top = Res.space.medium), // Add horizontal padding
                 style = AppTheme.typography.label1,
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 2, // Allow at most 2 lines for label
@@ -135,7 +135,7 @@ fun NewlyAdded(
     val navController = LocalNavController.current
     // Display the list with loading, empty, and content states
     LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(CP.normal),
+        horizontalArrangement = Arrangement.spacedBy(Res.space.normal),
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier,
         content = {

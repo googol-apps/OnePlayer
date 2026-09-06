@@ -3,7 +3,7 @@ package com.zs.core
 import android.app.Activity
 import com.zs.core.market.AppMarketManager
 
-internal class AppMarketManagerImpl() : AppMarketManager {
+internal class AppMarketManagerImpl : AppMarketManager {
     override fun isFeatureInstalled(
         activity: Activity,
         name: String

@@ -178,7 +178,7 @@ class Playback : MediaLibraryService(), Callback, Player.Listener {
     override fun onCreate() {
         super.onCreate()
         playlists = Playlists(this)
-        preferences = getSharedPreferences("playback_prefs", Context.MODE_PRIVATE)
+        preferences = getSharedPreferences("playback_prefs", MODE_PRIVATE)
         // Init
         // Asynchronously restore the saved state of the service
         scope.launch {
@@ -201,9 +201,8 @@ class Playback : MediaLibraryService(), Callback, Player.Listener {
                     val value = preferences[PREF_KEY_ORDERS, ""].split(LIST_ITEM_DELIMITER)
                     if (value.isEmpty()) null else value.map(String::toInt).toIntArray()
                 }
-                (player as ExoPlayer).setShuffleOrder(
+                (player as ExoPlayer).shuffleOrder =
                     DefaultShuffleOrder(orders ?: IntArray(0), Random.nextLong())
-                )
 
                 if (index != C.INDEX_UNSET) {
                     // Now if the currentMediaItem is 3rd party uri.
@@ -363,13 +362,13 @@ class Playback : MediaLibraryService(), Callback, Player.Listener {
 
     // Update shuffle mode pref.
     override fun onShuffleModeEnabledChanged(shuffleModeEnabled: Boolean) {
-        scope.launch() { preferences[PREF_KEY_SHUFFLE_MODE] = shuffleModeEnabled }
+        scope.launch { preferences[PREF_KEY_SHUFFLE_MODE] = shuffleModeEnabled }
         session.notifyChildrenChanged(Remote.ROOT_QUEUE, 0, null)
     }
 
     // update repeat mode pref.
     override fun onRepeatModeChanged(repeatMode: Int) {
-        scope.launch() { preferences[PREF_KEY_REPEAT_MODE] = repeatMode }
+        scope.launch { preferences[PREF_KEY_REPEAT_MODE] = repeatMode }
     }
 
     // Called when the player's timeline changes, indicating a change in the playlist.
@@ -606,7 +605,7 @@ class Playback : MediaLibraryService(), Callback, Player.Listener {
                         Remote.EXTRA_EQUALIZER_PROPERTIES, null
                     )
                     // save in pref
-                    scope.launch() {
+                    scope.launch {
                         preferences[PREF_KEY_EQUALIZER_PROPERTIES] = properties
                         preferences[PREF_KEY_EQUALIZER_ENABLED] = isEqualizerEnabled
                         delay(100) // delay to detach old equalizer.
@@ -620,10 +619,10 @@ class Playback : MediaLibraryService(), Callback, Player.Listener {
                     SessionResult(SessionResult.RESULT_SUCCESS) {
                         putBoolean(
                             Remote.EXTRA_EQUALIZER_ENABLED,
-                            runBlocking() { preferences[PREF_KEY_EQUALIZER_ENABLED, false] })
+                            runBlocking { preferences[PREF_KEY_EQUALIZER_ENABLED, false] })
                         putString(
                             Remote.EXTRA_EQUALIZER_PROPERTIES,
-                            runBlocking() { preferences[PREF_KEY_EQUALIZER_PROPERTIES, ""] })
+                            runBlocking { preferences[PREF_KEY_EQUALIZER_PROPERTIES, ""] })
                     })
             }
             // Handle scrubbing mode commands

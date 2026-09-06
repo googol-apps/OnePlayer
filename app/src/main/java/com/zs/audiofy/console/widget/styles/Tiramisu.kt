@@ -44,9 +44,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.chronometer
 import com.zs.audiofy.common.compose.lottie
 import com.zs.audiofy.common.compose.lottieAnimationPainter
@@ -116,7 +115,7 @@ fun Tiramisu(
             val contentColor = Color.SignalWhite
             BaseListItem(
                 contentColor = contentColor,
-                spacing = ContentPadding.small,
+                spacing = Res.space.small,
                 padding = Widget.Padding,
                 centerAlign = true,
                 // title

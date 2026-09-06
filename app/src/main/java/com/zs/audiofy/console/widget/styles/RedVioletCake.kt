@@ -48,18 +48,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+
 import com.zs.audiofy.common.compose.LottieAnimatedButton
 import com.zs.audiofy.common.compose.chronometer
 import com.zs.audiofy.common.compose.lottie
 import com.zs.audiofy.common.compose.lottieAnimationPainter
 import com.zs.audiofy.common.compose.marque
 import com.zs.audiofy.common.vectorResource
+import com.zs.audiofy.common.gap_x_small
 import com.zs.audiofy.console.RouteConsole
 import com.zs.audiofy.console.widget.Widget
-import com.zs.compose.foundation.SignalWhite
 import com.zs.compose.foundation.foreground
 import com.zs.compose.foundation.textResource
 import com.zs.compose.foundation.thenIf
@@ -131,7 +130,7 @@ fun RedVioletCake(
             BaseListItem(
                 contentColor = contentColor,
                 modifier = Modifier.sharedBounds(RouteConsole.ID_BACKGROUND),
-                spacing = ContentPadding.small,
+                spacing = Res.space.small,
                 padding = Widget.Padding,
                 // Subtitle
                 heading = {
@@ -176,7 +175,7 @@ fun RedVioletCake(
                 // Controls
                 subheading = {
                     Row(
-                        horizontalArrangement = ContentPadding.xSmallArrangement,
+                        horizontalArrangement = Res.layout.gap_x_small,
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.fillMaxWidth(),
                         content = {
@@ -209,7 +208,7 @@ fun RedVioletCake(
                                 tint = contentColor
                             )
 
-                            Spacer(Modifier.width(ContentPadding.medium))
+                            Spacer(Modifier.width(Res.space.medium))
 
                             // Like Button
                             LottieAnimatedButton(
@@ -229,7 +228,7 @@ fun RedVioletCake(
                 // Progress
                 footer = {
                     Row(
-                        horizontalArrangement = ContentPadding.xSmallArrangement,
+                        horizontalArrangement = Res.layout.gap_x_small,
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.fillMaxWidth(),
                         content = {

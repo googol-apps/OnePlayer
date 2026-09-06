@@ -38,7 +38,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
@@ -47,9 +46,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.compose.ContentPadding
+import com.zs.audiofy.common.gap_small
+
 import com.zs.audiofy.common.compose.lottie
 import com.zs.audiofy.common.compose.lottieAnimationPainter
 import com.zs.audiofy.common.compose.marque
@@ -128,7 +127,7 @@ fun GradientGroves(
             .background(Color.White, WidgetShape)
             .background(colors.bg, WidgetShape),
         contentColor = contentColor,
-        spacing = ContentPadding.small,
+        spacing = Res.space.small,
         padding = Widget.Padding,
         // Title
         heading = {
@@ -171,10 +170,10 @@ fun GradientGroves(
         // controls
         subheading = {
             Row(
-                horizontalArrangement = ContentPadding.SmallArrangement,
+                horizontalArrangement = Res.layout.gap_small,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .padding(top = ContentPadding.medium)
+                    .padding(top = Res.space.medium)
                     .fillMaxWidth(),
                 content = {
                     val bgModifier = Modifier.background(AppTheme.colors.accent.copy(0.3f), CircleShape) then Widget.SmallIconBtn

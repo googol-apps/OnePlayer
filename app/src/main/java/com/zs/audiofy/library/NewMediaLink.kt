@@ -42,7 +42,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import com.zs.audiofy.R
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.vectorResource
 import com.zs.compose.foundation.textResource
@@ -61,7 +60,7 @@ import com.zs.compose.theme.text.OutlinedTextField
 import com.zs.compose.theme.text.Text
 import com.zs.compose.theme.text.TextFieldDefaults
 import androidx.compose.foundation.text.input.rememberTextFieldState as TextFieldValue
-import com.zs.audiofy.common.compose.ContentPadding as CP
+
 
 private val SchemeRegex = Regex("^(\\w+):")
 private val SchemeHighlight = OutputTransformation {
@@ -118,7 +117,7 @@ fun NewMediaLink(
                 color = LocalContentColor.current,
                 modifier = Modifier
                     .scale(0.9f)
-                    .padding(end = CP.small)
+                    .padding(end = Res.space.small)
             )
         },
         properties = DialogProperties(usePlatformDefaultWidth = height < width),
@@ -135,7 +134,7 @@ fun NewMediaLink(
                 "Let’s get streaming—enter your URL.",
                 style = AppTheme.typography.label3,
                 color = AppTheme.colors.accent,
-                modifier = Modifier.padding(horizontal = CP.large)
+                modifier = Modifier.padding(horizontal = Res.space.large)
             )
             // Link
             OutlinedTextField(
@@ -143,7 +142,7 @@ fun NewMediaLink(
                 shape = AppTheme.shapes.small,
                 placeholder = { Label("http://example.com/stream.mp3") },
                 modifier = Modifier
-                    .padding(horizontal = CP.normal, vertical = CP.small)
+                    .padding(horizontal = Res.space.normal, vertical = Res.space.small)
                     .fillMaxWidth(),
                 lineLimits = SingleLine,
                 keyboardOptions = KeyboardOptions.Default.copy(
@@ -185,7 +184,7 @@ fun NewMediaLink(
                 onClick = { onNewLink(link.text.toString()) },
                 modifier = Modifier
                     .align(Alignment.End)
-                    .padding(horizontal = CP.medium),
+                    .padding(horizontal = Res.space.medium),
                 enabled = !isError
             )
         }

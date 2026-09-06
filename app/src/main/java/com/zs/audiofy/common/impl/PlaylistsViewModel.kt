@@ -86,7 +86,7 @@ class PlaylistsViewModel(val playlists: Playlists) : KoinViewModel(), PlaylistsV
     override val favicon: ImageVector get() =  vectorResource(Res.drawable.ic_featured_playlist_outline)
     override var showEditDialog: Boolean by mutableStateOf(false)
 
-    override val primaryAction: Action? = ACTION_CREATE
+    override val primaryAction: Action = ACTION_CREATE
     override val actions: List<Action> by derivedStateOf {
         if (focused == null) return@derivedStateOf emptyList()
         buildList {
