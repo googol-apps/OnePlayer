@@ -12,6 +12,7 @@
 <resources>
     <!--Changelog-->
     <string-array name="changelog" translatable="false">
+        <item>@string/changelog_1_7_2</item>
         <item>@string/changelog_1_7_1</item>
         <item>@string/changelog_1_7_0</item>
         <item>@string/changelog_1_6_11</item>
@@ -46,7 +47,16 @@
     </string-array>
 
     <!--Points to the changelog of current version.-->
-    <string name="release_notes" translatable="false">@string/changelog_1_7_2</string>
+    <string name="release_notes" translatable="false">@string/changelog_1_7_3</string>
+
+    <!--1.7.3-->
+    <string name="changelog_1_7_3" translatable="false">
+    <b>What’s New <font color='green'>(v1.7.3)\n</font></b>
+    <font color='grey'>
+        \n Updated core dependencies to the latest stable versions for improved performance and compatibility.
+        \n Added a new Gold section to release_workflow.yml for enhanced release management.
+    </font>
+    </string>
 
     <!--1.7.2-->
     <string name="changelog_1_7_2" translatable="false">

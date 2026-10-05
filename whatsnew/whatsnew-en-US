@@ -1,5 +1,5 @@
-* Centralized application configuration via the new Res utility for streamlined UI and resource management.
-* Standardized layout spacing, modern shape naming conventions, and modernized UI components.
-* Upgraded core infrastructure including Gradle 9.7.1, AGP 9.4.0, and Coil 3.6.2.
+* Updated core dependencies to the latest stable versions for improved performance and compatibility.
+* Added a new Gold section to release_workflow.yml for enhanced release management.
 * Refined SystemFacade and gesture handling for improved performance and configuration reliability.
 * Optimized codebase by removing legacy utilities and redundant internal logic.
+
