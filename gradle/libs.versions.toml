@@ -1,13 +1,12 @@
 [versions]
 agp = "9.4.1"                # Android Gradle Plugin
-kotlin = "2.4.20"             # Kotlin language + Compose plugin
-media3 = "1.11.1"             # Media3 playback libraries
-toolkit = "3.10.0-dev"       # Prime Toolkit modules
-material_icons = "1.7.8"     # Material Icons for Compose
+kotlin = "2.4.21"            # Kotlin language + Compose plugin
+media3 = "1.11.1"            # Media3 playback libraries
+toolkit = "3.11.1-dev"       # Prime Toolkit modules
 coil = "3.6.3"               # Coil image loader
 room = "2.8.5"               # Room persistence library
 glance = "1.2.0"             # Glance widgets
-nav3 = "1.2.0"       # Navigation 3 experimental
+nav3 = "1.2.0"               # Navigation 3 experimental
 
 [plugins]
 # ─── Android Build Plugins ───
@@ -70,8 +69,6 @@ compose-foundation = {module = "androidx.compose.foundation:foundation"}
 compose-animation = {module = "androidx.compose.animation:animation-graphics"}
 
 # ─── Icons & Fonts ───
-material-icons-core = { module = "androidx.compose.material:material-icons-core", version.ref = "material_icons" } # Core icons
-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material_icons" } # Extended icons
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version = "6.7.1" } # Lottie animations
 google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version = "1.12.1" } # Google Fonts
 

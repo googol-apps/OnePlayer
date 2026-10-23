@@ -42,7 +42,7 @@ import com.zs.audiofy.common.compose.directory.Directory
 import com.zs.audiofy.common.fileSizeFormatted
 import com.zs.audiofy.common.vectorResource
 import com.zs.audiofy.videos.RouteVideos
-import com.zs.compose.foundation.decorator.EdgeInsets
+import com.zs.compose.foundation.unit.EdgeInsets
 import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.ContentAlpha

@@ -154,7 +154,7 @@ fun Artwork(
             shape = shape,
             border = if (border > 0.dp) BorderStroke(border, Color.White) else null,
             elevation = shadow,
-            roughness = 0.4f
+            noiseAlpha = 0.4f
         )
     )
 }

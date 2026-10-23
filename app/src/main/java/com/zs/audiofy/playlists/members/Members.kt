@@ -46,7 +46,7 @@ import com.zs.audiofy.common.compose.OverflowMenu
 import com.zs.audiofy.common.compose.directory.Files
 import com.zs.audiofy.common.shapes.PixelCircleShape
 import com.zs.audiofy.playlists.Playlists
-import com.zs.compose.foundation.decorator.EdgeInsets
+import com.zs.compose.foundation.unit.EdgeInsets
 import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.BaseListItem

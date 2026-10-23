@@ -41,7 +41,7 @@ import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.directory.Directory
 import com.zs.audiofy.common.compose.directory.DirectoryViewState
 import com.zs.audiofy.common.vectorResource
-import com.zs.compose.foundation.decorator.EdgeInsets
+import com.zs.compose.foundation.unit.EdgeInsets
 import com.zs.compose.foundation.decorator.decorator
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.ContentAlpha

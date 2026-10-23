@@ -12,6 +12,7 @@
 <resources>
     <!--Changelog-->
     <string-array name="changelog" translatable="false">
+        <item>@string/changelog_1_7_3</item>
         <item>@string/changelog_1_7_2</item>
         <item>@string/changelog_1_7_1</item>
         <item>@string/changelog_1_7_0</item>
@@ -47,7 +48,17 @@
     </string-array>
 
     <!--Points to the changelog of current version.-->
-    <string name="release_notes" translatable="false">@string/changelog_1_7_3</string>
+    <string name="release_notes" translatable="false">@string/changelog_1_7_4</string>
+
+    <!--1.7.4-->
+    <string name="changelog_1_7_4" translatable="false">
+    <b>What’s New <font color='green'>(v1.7.4)\n</font></b>
+      <font color='grey'>
+        \n Upgraded Kotlin (v2.4.21) and core Toolkit dependencies to the latest dev versions.
+        \n Refactored EdgeInsets package imports and UI delegate parameter naming across media screens.
+        \n General maintenance and build configuration cleanup.
+    </font>
+    </string>
 
     <!--1.7.3-->
     <string name="changelog_1_7_3" translatable="false">

@@ -56,8 +56,8 @@ import com.zs.audiofy.common.shapes.SunnyShape
 import com.zs.audiofy.editor.RouteEditor
 import com.zs.audiofy.playlists.Playlists
 import com.zs.audiofy.properties.RouteProperties
-import com.zs.compose.foundation.decorator.EdgeInsets
 import com.zs.compose.foundation.decorator.decorator
+import com.zs.compose.foundation.unit.EdgeInsets
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.BaseListItem
 import com.zs.compose.theme.LocalContentColor
