@@ -141,6 +141,9 @@ private val featured_products = arrayOf(
 val Product.isDynamicFeature
     inline get() = this.id == Paymaster.IAP_CODEX
 
+val Purchase.isDynamicFeature
+    inline get() = this.id == Paymaster.IAP_CODEX
+
 /**
  * Returns the name of the dynamic feature module associated with this product.
  *
