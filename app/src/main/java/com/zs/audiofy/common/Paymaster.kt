@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import com.zs.core.billing.Paymaster
 import com.zs.core.billing.Product
+import com.zs.core.billing.Purchase
 
 // Here extension methods to Paymaster are defined that are used within the app.
 /**
@@ -156,6 +157,13 @@ val Product.dynamicModuleName
         Paymaster.IAP_CODEX -> "codex"
         else -> error("$id is not a dynamic module.")
     }
+
+val Purchase.dynamicModuleName
+    inline get() = when(id){
+        Paymaster.IAP_CODEX -> "codex"
+        else -> TODO("Developer hasn' reg $id as dynamic module.")
+    }
+
 
 /**
  * @return - Indicates if the widget is free in the Play Console.

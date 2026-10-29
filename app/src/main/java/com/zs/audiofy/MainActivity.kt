@@ -185,14 +185,14 @@ class MainActivity : ComponentActivity(), SystemFacade, NavDestListener {
                 }
                 val details = paymaster.details.value.find { it.id == purchase.id }
                 // Skip if product details are unavailable or the product is not a dynamic feature
-                if (details == null || !details.isDynamicFeature) continue
+                //if (details == null || !details.isDynamicFeature) continue
                 // Skip if the dynamic feature is already installed
-                if (isFeatureInstalled(details.dynamicModuleName)) continue
+                if (isFeatureInstalled(purchase.dynamicModuleName)) continue
                 // Prompt the user to install the dynamic feature
                 val response = snackbarHostState.showSnackbar(
                     resources.getText2(
                         id = Res.string.msg_install_dynamic_module_ss,
-                        details.title
+                        details?.title ?: "N/A"
                     ),
                     duration = SnackbarDuration.Indefinite,
                     action = resources.getText2(Res.string.install),
@@ -203,7 +203,7 @@ class MainActivity : ComponentActivity(), SystemFacade, NavDestListener {
                     ),
                 )
                 if (response == SnackbarResult.ActionPerformed)
-                    initiateFeatureInstall(details.dynamicModuleName)
+                    initiateFeatureInstall(purchase.dynamicModuleName)
             }
         }
 
