@@ -184,8 +184,8 @@ class MainActivity : ComponentActivity(), SystemFacade, NavDestListener {
                     continue
                 }
                 val details = paymaster.details.value.find { it.id == purchase.id }
-                // Skip if product details are unavailable or the product is not a dynamic feature
-                //if (details == null || !details.isDynamicFeature) continue
+                // Skip if the product is not a dynamic feature
+                 if (!purchase.isDynamicFeature) continue
                 // Skip if the dynamic feature is already installed
                 if (isFeatureInstalled(purchase.dynamicModuleName)) continue
                 // Prompt the user to install the dynamic feature
