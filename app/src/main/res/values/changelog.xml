@@ -12,6 +12,7 @@
 <resources>
     <!--Changelog-->
     <string-array name="changelog" translatable="false">
+        <item>@string/changelog_1_7_4</item>
         <item>@string/changelog_1_7_3</item>
         <item>@string/changelog_1_7_2</item>
         <item>@string/changelog_1_7_1</item>
@@ -48,7 +49,16 @@
     </string-array>
 
     <!--Points to the changelog of current version.-->
-    <string name="release_notes" translatable="false">@string/changelog_1_7_4</string>
+    <string name="release_notes" translatable="false">@string/changelog_1_7_5</string>
+
+    <!--v1.7.4-->
+    <string name="changelog_1_7_5" translatable="false">
+        <b>What’s New <font color='green'>(v1.7.5)</font></b>
+        <font color='grey'>
+            \n🌟 <b>Feature Downloads</b>: Fixed an issue where download prompts for optional features were not displayed when product details were unavailable.
+            \n🌟 <b>General Improvements</b>: Performance optimizations and bug fixes.
+        </font>
+    </string>
 
     <!--1.7.4-->
     <string name="changelog_1_7_4" translatable="false">

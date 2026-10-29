@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <color name="ic_launcher_background">#0E0E0F</color>
+    <color name="ic_channel_background">#0E0E0F</color>
+    <color name="ic_banner_background">#0E0E0F</color>
+
+
     <style name="Theme.OnePLayer" parent="android:Theme.Material.Light.NoActionBar">
         <item name="isLightTheme">true</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>

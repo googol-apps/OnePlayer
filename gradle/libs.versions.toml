@@ -73,7 +73,7 @@ lottie-compose = { module = "com.airbnb.android:lottie-compose", version = "6.7.
 google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version = "1.12.1" } # Google Fonts
 
 # ─── Navigation ───
-nav2-compose = { module = "androidx.navigation:navigation-compose", version = "2.10.2" } # Navigation 2
+nav2-compose = { module = "androidx.navigation:navigation-compose", version = "2.9.8" } # Navigation 2
 nav3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "nav3" } # Navigation 3 runtime
 nav3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "nav3" }         # Navigation 3 UI
 nav3_viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version = "2.11.0" } # ViewModel integration
