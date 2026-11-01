@@ -20,8 +20,8 @@ plugins {
 //  Defines the core identity and compatibility parameters of the application.
 //  This lambda is applied to the [defaultConfig] block within the [android] section.
 private val config: Config.() -> Unit = {
-    versionCode = 46                                    // Internal version code
-    versionName = "1.7.6"                               // User-facing version name
+    versionCode = 47                                    // Internal version code
+    versionName = "1.7.7"                               // User-facing version name
     applicationId = "com.googol.android.apps.oneplayer" // Unique app ID
     minSdk = 28                                         // Minimum supported Android version
     targetSdk = 37                                      // Target SDK
@@ -72,7 +72,7 @@ composeCompiler {
 android {
     buildFeatures { compose = true } // Enable Compose and BuildConfig generation
     namespace = "com.zs.audiofy" // Unique namespace for the app
-    compileSdk = 37 // Compile against Android SDK level 36 → latest APIs available
+    compileSdk { version = release(37) { minorApiLevel = 2 } } // Compile against Android SDK level 36 → latest APIs available
     dynamicFeatures += setOf(":feature:codex")
     defaultConfig(config)
     packaging { // Exclude redundant license files from packaging

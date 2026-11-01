@@ -57,6 +57,7 @@ import com.zs.audiofy.editor.RouteEditor
 import com.zs.audiofy.playlists.Playlists
 import com.zs.audiofy.properties.RouteProperties
 import com.zs.compose.foundation.decorator.decorator
+import com.zs.compose.foundation.style.styleable
 import com.zs.compose.foundation.unit.EdgeInsets
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.BaseListItem
@@ -88,7 +89,7 @@ private fun Audio(
                 fontWeight = FontWeight.Bold
             )
         },
-        modifier = Modifier.decorator(
+        modifier = Modifier.styleable(
                 backgroundColor = AppTheme.colors.background(1.dp),
                 shape = shape,
                 edgeInsets = EdgeInsets(horizontal = Res.space.large)

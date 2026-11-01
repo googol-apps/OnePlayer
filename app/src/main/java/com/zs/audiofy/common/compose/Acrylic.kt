@@ -47,6 +47,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.layer.CompositingStrategy
 import androidx.compose.ui.graphics.layer.drawLayer
 import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.graphics.nativePaint
 import androidx.compose.ui.graphics.rememberGraphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -275,7 +276,7 @@ private fun Modifier.acrylic(containerColor: Color, accent: Color) =
             val paint = Paint().apply {
                 style = PaintingStyle.Stroke
                 // Add blur effect on the Paint (but check if it renders well on lines)
-                this.asFrameworkPaint().maskFilter =
+                this.nativePaint.maskFilter =
                     BlurMaskFilter(200f, BlurMaskFilter.Blur.NORMAL)
             }
             // Algorithm

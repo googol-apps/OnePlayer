@@ -2,7 +2,7 @@
 agp = "9.5.0"                # Android Gradle Plugin
 kotlin = "2.4.21"            # Kotlin language + Compose plugin
 media3 = "1.11.1"            # Media3 playback libraries
-toolkit = "3.11.1-dev"       # Prime Toolkit modules
+toolkit = "3.12.2-dev"       # Prime Toolkit modules
 coil = "3.6.3"               # Coil image loader
 room = "2.8.5"               # Room persistence library
 glance = "1.2.0"             # Glance widgets
@@ -59,7 +59,7 @@ unity_ads_mediation = { module = "com.unity3d.ads-mediation:mediation-sdk", vers
 unity_ads_adquality = { module = "com.unity3d.ads-mediation:adquality-sdk", version = "9.11.0" } # Ad quality SDK
 
 # ─── Jetpack Compose ───
-compose-bom = { module = "androidx.compose:compose-bom", version = "2026.09.00" } # BOM for Compose
+compose-bom = { module = "androidx.compose:compose-bom-beta", version = "2026.10.01" } # BOM for Compose
 compose-ui = { module = "androidx.compose.ui:ui" }                                # Core UI
 compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics" }              # Graphics utilities
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }                # Preview tooling

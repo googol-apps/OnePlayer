@@ -46,6 +46,7 @@ import com.zs.audiofy.common.gap_small
 
 import com.zs.audiofy.common.compose.emit
 import com.zs.compose.foundation.decorator.decorator
+import com.zs.compose.foundation.style.styleable
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.text.Text
 import com.zs.core.db.playlists.Playlist.Track
@@ -83,7 +84,7 @@ private fun Recent(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(66.dp)
-                .decorator(
+                .styleable(
                     backgroundColor = AppTheme.colors.background(1.dp),
                     elevation = 4.dp,
                     shape = RECENT_ICON_SHAPE,

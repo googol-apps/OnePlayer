@@ -549,7 +549,9 @@ class Playback : MediaLibraryService(), Callback, Player.Listener {
 
             // Apply equalizer properties only if they are not null or blank.
             if (properties.isNotBlank()) {
-                equalizer?.properties = Settings(properties)
+                runCatching {
+                    equalizer?.properties = Settings(properties)
+                }
             }
         }
     }
