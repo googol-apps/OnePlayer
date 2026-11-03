@@ -58,8 +58,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.DpRect
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -658,23 +661,21 @@ object RouteConsole : Route {
             primary = {
                 BoxWithConstraints {
                     val insets = when {
-                        strategy is VerticalTwoPaneStrategy -> insets.only(WindowInsetsSides.Top).toDpRect
-                        else -> insets.toDpRect
+                        strategy is VerticalTwoPaneStrategy -> WindowInsets.systemBars.only(WindowInsetsSides.Top)
+                        else ->  WindowInsets.systemBars
                     }
                     // Compute constraints
                     val isVideo = state.isVideo
+                    val ldr = LocalLayoutDirection.current
+                    val density = LocalDensity.current
                     // compute key
-                    var key = maxWidth.hashCode()
-                    key = 31 * key + maxHeight.hashCode()
-                    key = 31 * key + isVideo.hashCode()
-                    key = 31 * key + state.state.hashCode()
-                    key = 31 * key + insets.hashCode()
-                    key = 31 * key + visibility.hashCode()
-                    val constraints = remember(key) {
+                    val constraints = let {
                         // Update system bar style (auto vs hidden) depending on controller visibility
-                        facade.style += when (visibility) {
-                            VISIBLE, VISIBLE_ALWAYS -> WindowStyle.FLAG_SYSTEM_BARS_VISIBILITY_AUTO
-                            else -> WindowStyle.FLAG_SYSTEM_BARS_HIDDEN
+                        SideEffect {
+                            facade.style += when (visibility) {
+                                VISIBLE, VISIBLE_ALWAYS -> WindowStyle.FLAG_SYSTEM_BARS_VISIBILITY_AUTO
+                                else -> WindowStyle.FLAG_SYSTEM_BARS_HIDDEN
+                            }
                         }
 
                         // emit new value for visibilty.
@@ -700,9 +701,18 @@ object RouteConsole : Route {
                         }
                         val clazz = WindowSize(maxWidth, maxHeight)
                         // Compute the new ConstraintSet for layout adjustments
+                        val insets = with(density) {
+                            // Convert raw insets to dp values, considering layout direction
+                            DpRect(
+                                left = insets.getLeft(this, ldr).toDp(),
+                                right = insets.getRight(this, ldr).toDp(),
+                                top = insets.getTop(this).toDp(),
+                                bottom = insets.getBottom(this).toDp()
+                            )
+                        }
                         val c = calculateConstraintSet(clazz, insets, isVideo, excluded)
                         titleTextSize = c.titleTextSize
-                        return@remember c
+                        return@let c
                     }
                     val onColor = when (background) {
                         BG_STYLE_DARK -> Color.SignalWhite
@@ -713,19 +723,14 @@ object RouteConsole : Route {
                             constraints.constraints,
                             animateChangesSpec = DefaultAnimSpecs,
                             content = content,
-                            modifier = Modifier
-                                //.animateContentSize()
-                                .fillMaxSize()
-                                .then(
-                                    when (strategy) {
-                                        SinglePaneStrategy -> Modifier
-                                        is HorizontalTwoPaneStrategy -> Modifier.clip(
-                                            PrimaryHorizontal
-                                        )
+                            modifier = Modifier.fillMaxSize() then when (strategy) {
+                                SinglePaneStrategy -> Modifier
+                                is HorizontalTwoPaneStrategy -> Modifier.clip(
+                                    PrimaryHorizontal
+                                )
 
-                                        else -> Modifier.clip(PrimaryVertical)
-                                    }
-                                ),
+                                else -> Modifier.clip(PrimaryVertical)
+                            },
                         )
                     }
                 }
