@@ -25,6 +25,7 @@ import androidx.media3.common.text.Cue
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.PlayerControlView
 import androidx.media3.ui.SubtitleView
+import coil3.size.Dimension
 
 @JvmInline
 value class SubtitleView(val raw: View){
@@ -34,5 +35,10 @@ value class SubtitleView(val raw: View){
     @SuppressLint("UnsafeOptInUsageError")
     fun setCues(cues: List<Any>?){
         (raw as SubtitleView).setCues(cues as? List<Cue>)
+    }
+
+    @SuppressLint("UnsafeOptInUsageError")
+    fun setTextSize(value: Float){
+        (raw as SubtitleView).setFixedTextSize(androidx.annotation.Dimension.SP, value)
     }
 }
