@@ -8,13 +8,10 @@ room = "2.8.5"               # Room persistence library
 glance = "1.2.0"             # Glance widgets
 nav3 = "1.2.0"               # Navigation 3 experimental
 
-[plugins]
-# ─── Android Build Plugins ───
+[plugins] # ─── Android Build Plugins ───
 android-application = { id = "com.android.application", version.ref = "agp" }   # App module
 android-library = { id = "com.android.library", version.ref = "agp" }           # Library module
 android-dynamic-feature = { id = "com.android.dynamic-feature", version.ref = "agp" } # Dynamic features
-
-# ─── Kotlin Plugins ───
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }       # Kotlin Android support
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }# Compose compiler plugin
 
@@ -24,7 +21,6 @@ google-services = { id = "com.google.gms.google-services", version = "4.5.0" } #
 crashanlytics = { id = "com.google.firebase.crashlytics", version = "3.0.8" } # Crashlytics Gradle plugin
 
 [libraries]
-# ─── Core AndroidX ───
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.19.1" }           # Kotlin extensions
 androidx-splashscreen = { module = "androidx.core:core-splashscreen", version = "1.2.0" } # Splash API
 androidx-startup = { module = "androidx.startup:startup-runtime", version = "1.2.0" }   # App startup init
@@ -42,7 +38,6 @@ media3-session = { module = "androidx.media3:media3-session", version.ref = "med
 media3-ui = {module = "androidx.media3:media3-ui", version.ref = "media3"}
 mp3agic = { module = "com.mpatric:mp3agic", version = "0.9.1" }                            # MP3 tag parsing
 nextlib = { module = "io.github.anilbeesetti:nextlib-media3ext", version = "1.11.1-0.16.0" } # Media3 extensions
-
 
 # ─── Google Play Services ───
 play-app_update = { module = "com.google.android.play:app-update-ktx", version = "2.1.0" } # In-app updates
