@@ -12,6 +12,7 @@
 <resources>
     <!--Changelog-->
     <string-array name="changelog" translatable="false">
+        <item>@string/changelog_1_7_7</item>
         <item>@string/changelog_1_7_5</item>
         <item>@string/changelog_1_7_4</item>
         <item>@string/changelog_1_7_3</item>
@@ -50,7 +51,19 @@
     </string-array>
 
     <!--Points to the changelog of current version.-->
-    <string name="release_notes" translatable="false">@string/changelog_1_7_7</string>
+    <string name="release_notes" translatable="false">@string/changelog_1_7_8</string>
+
+    <!--v1.7.8-->
+    <string name="changelog_1_7_8" translatable="false">
+        <b>What’s New <font color='green'>(v1.7.8)</font></b>
+        <font color='grey'>
+            \n <b>Subtitles</b>: Added text size styling support for subtitles to improve readability.
+            \n <b>Player Layout</b>: Fixed an issue where content did not occupy full screen when the playback queue was hidden.
+            \n <b>Equalizer Stability</b>: Resolved potential crashes during audio equalizer initialization.
+            \n <b>Feature Downloads</b>: Fixed an issue where download prompts for optional features were not displayed when product details were unavailable.
+        </font>
+    </string>
+
 
     <!--v1.7.7-->
     <string name="changelog_1_7_7" translatable="false">
