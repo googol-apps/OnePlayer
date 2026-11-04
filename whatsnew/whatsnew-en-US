@@ -1,4 +1,4 @@
-1. <b>Subtitles</b>: Added text size styling support for subtitles to improve readability.
-2. <b>Player Layout</b>: Fixed an issue where content did not occupy full screen when the playback queue was hidden.
-3. <b>Equalizer Stability</b>: Resolved potential crashes during audio equalizer initialization.
-4. <b>Feature Downloads</b>: Fixed an issue where download prompts for optional features were not displayed when product details were unavailable.
+• Added subtitle font size scaling in settings for better readability
+• Fixed player full-screen layout when hiding playback queue
+• Resolved track selection conflicts and audio equalizer crashes
+• Improved optional feature download prompts and playback startup
