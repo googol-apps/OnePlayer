@@ -610,8 +610,10 @@ internal class RemoteImpl(private val context: Context) : Remote {
                 val name = provider.getTrackName(format)
                 // Create a track selection override object with the group and the track index
                 val params = TrackSelectionOverride(group.mediaTrackGroup, trackIndex)
+                // unique within this snapshot, even when format.id is null or duplicated
+                val id = "$index:$trackIndex:${format.id.orEmpty()}"
                 // Create a track info object with the name and the params
-                list.add(TrackInfo(name, params))
+                list.add(TrackInfo(id, name, params))
             }
         }
         // Return the list of track infos
@@ -626,7 +628,8 @@ internal class RemoteImpl(private val context: Context) : Remote {
         // get the current tracks and loop through the groups
         val groups = player.currentTracks.groups
         val provider = DefaultTrackNameProvider(context.resources)
-        for (group in groups) {
+        for (index in groups.indices) {
+            val group = groups[index]
             // skip the group if it is not of the given type
             if (group.type != type) continue
             // loop through the tracks in the group
@@ -638,8 +641,10 @@ internal class RemoteImpl(private val context: Context) : Remote {
                 val name = provider.getTrackName(format)
                 // create a track selection override object with the group and the track index
                 val params = TrackSelectionOverride(group.mediaTrackGroup, trackIndex)
+                // unique within this snapshot, even when format.id is null or duplicated
+                val id = "$index:$trackIndex:${format.id.orEmpty()}"
                 // create and return a track info object with the name and the params
-                return TrackInfo(name, params)
+                return TrackInfo(id, name, params)
             }
         }
         return null // no selection is made or possible

@@ -42,7 +42,7 @@ import kotlinx.coroutines.flow.StateFlow
  */
 interface Remote {
 
-    data class TrackInfo(val name: String, internal val params: TrackSelectionOverride)
+    data class TrackInfo(val id: String, val name: String, internal val params: TrackSelectionOverride)
 
     @SuppressLint("UnsafeOptInUsageError")
     companion object {

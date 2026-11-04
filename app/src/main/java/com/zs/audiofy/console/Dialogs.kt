@@ -419,7 +419,7 @@ fun MediaConfigDialog(
                     items(
                         items = data,
                         itemContent = {
-                            val selected  = checkedTrack?.name == it.name
+                            val selected  = checkedTrack?.id == it.id
                             SelectableChip(
                                 selected,
                                 colors = colors,
