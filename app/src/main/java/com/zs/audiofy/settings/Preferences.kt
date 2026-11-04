@@ -122,7 +122,6 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
         )
     }
 
-
     // Appearance
     item(contentType = RS.CONTENT_TYPE_HEADER) {
         Header(
@@ -222,6 +221,7 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             valueRange = 0.75f..1.5f,
             steps = 14,   // steps=(max−min)stepSize−1/ (2.0 - 0.7) / 0.1 - 1 =  12 steps
             icon = vectorResource(Res.drawable.ic_format_size),
+
             preview = {
                 Label(
                     text = if (it <= 0.75f)
@@ -318,7 +318,40 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             entries = entries,
             onRequestChange = { viewState.setBgPlaybackPolicy(it) },
             values = values,
-            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_middle)
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_bottom)
+        )
+    }
+
+    // Now Playing
+    item(contentType = RS.CONTENT_TYPE_HEADER) {
+        Header(
+            textResource(Res.string.now_playing),
+            style = AppTheme.typography.title3,
+            color = AppTheme.colors.accent,
+            contentPadding = RS.HeaderPadding
+        )
+    }
+
+    // subtitle font scale
+    // The font scale to use for the subtitle if -1 is used, the system default fontstyle size is used.
+    item(contentType = CONTENT_TYPE_PREF) {
+        val subtitleScale by preference(Res.key.subtitle_scale)
+        SliderPreference(
+            value = subtitleScale,
+            text = textResource(Res.string.pref_subtitle_scale),
+            valueRange = 0.6f..2.0f,
+            steps = 13,
+            icon = vectorResource(Res.drawable.ic_subtitles_twotone),
+            preview = {
+                Label(
+                    text = textResource(Res.string.postfix_x_f, it),
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            onRequestChange = { value: Float ->
+                viewState.set(Res.key.subtitle_scale, value)
+            },
+            modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_top)
         )
     }
     // FAB player long press behaviour
@@ -340,4 +373,5 @@ fun LazyListScope.preferences(viewState: SettingsViewState) {
             modifier = Modifier.background(AppTheme.colors.background(1.dp), Res.shape.section_bottom)
         )
     }
+
 }

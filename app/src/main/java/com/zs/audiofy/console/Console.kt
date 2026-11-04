@@ -83,6 +83,7 @@ import com.zs.audiofy.console.components.TimeBar
 import com.zs.audiofy.effects.RouteAudioFx
 import com.zs.audiofy.common.AppConfig
 import com.zs.audiofy.common.Res
+import com.zs.audiofy.common.compose.preference
 import com.zs.audiofy.common.vectorResource
 import com.zs.compose.foundation.SignalWhite
 import com.zs.compose.theme.AppTheme
@@ -109,6 +110,7 @@ import kotlinx.coroutines.delay
 
 import com.zs.audiofy.common.compose.rememberAnimatedVectorPainter as AnimVectorPainter
 import com.zs.compose.foundation.thenIf
+import com.zs.compose.theme.text.LocalTextStyle
 
 object RouteConsole : Route {
     // Component IDs
@@ -279,9 +281,11 @@ object RouteConsole : Route {
                 /*val cManager = remember {
                     facade.getDeviceService<CaptioningManager>(Context.CAPTIONING_SERVICE)
                 }*/
+                val fontScale by preference(Res.key.subtitle_scale)
                 Cues(
                     provider = { cues  },
                     modifier = Modifier.layoutId(ID_CUES),
+                    fontSize = LocalTextStyle.current.fontSize * fontScale
                 )
 
                 // Scrim

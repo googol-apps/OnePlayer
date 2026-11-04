@@ -356,5 +356,10 @@
         <font color='grey'>\n✨ Enjoy trusted updates, new features, and extra benefits by switching to the official Play Store version!</font>
     </string>
     <string name="get">Get</string>
-
+    <!---->
+    <string name="pref_subtitle_scale"><b>Subtitle</b>
+        \n<font color="grey" size="14">Adjust subtitle size to match your viewing preference.</font>
+    </string>
+    <!--The default value for some value provided by the dev in the app.-->
+    <string name="auto">Auto</string>
 </resources>

@@ -44,9 +44,8 @@ import com.zs.compose.theme.TextButton
 import com.zs.compose.theme.text.Label
 import com.zs.core.BuildConfig
 
-
-context(_: RouteSettings, scope: ColumnScope)
 @Composable
+context(_: RouteSettings, scope: ColumnScope)
 fun AboutUs() {
     with(scope){
         // The app version and check for updates.

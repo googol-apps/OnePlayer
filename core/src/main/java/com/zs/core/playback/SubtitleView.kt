@@ -20,6 +20,7 @@ package com.zs.core.playback
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.TypedValue
 import android.view.View
 import androidx.media3.common.text.Cue
 import androidx.media3.common.util.UnstableApi
@@ -39,6 +40,7 @@ value class SubtitleView(val raw: View){
 
     @SuppressLint("UnsafeOptInUsageError")
     fun setTextSize(value: Float){
-        (raw as SubtitleView).setFixedTextSize(androidx.annotation.Dimension.SP, value)
+        (raw as SubtitleView).setApplyEmbeddedFontSizes(false)
+        (raw as SubtitleView).setFixedTextSize(TypedValue.COMPLEX_UNIT_SP, value)
     }
 }

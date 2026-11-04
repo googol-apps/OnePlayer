@@ -2,6 +2,7 @@ package com.zs.audiofy.console
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.takeOrElse
 import androidx.compose.ui.viewinterop.AndroidView
@@ -11,7 +12,8 @@ import com.zs.core.playback.SubtitleView
 @Composable
 fun Cues(
     provider: () -> List<Any>?,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    fontSize: TextUnit = LocalTextStyle.current.fontSize.takeOrElse { 16.sp }
 ) {
     // for now set text stize to local text style. in the future make it dynamic
     val style = LocalTextStyle.current
@@ -25,7 +27,7 @@ fun Cues(
            val wrapper =  SubtitleView(view)
             val cues = provider()
             wrapper.setCues(cues)
-            wrapper.setTextSize(style.fontSize.takeOrElse { 15.sp }.value)
+            wrapper.setTextSize(fontSize.value)
         }
     )
 }

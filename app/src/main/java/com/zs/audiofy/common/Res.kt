@@ -67,6 +67,7 @@ import com.zs.audiofy.common.shapes.SuperellipseShape
 import com.zs.core.billing.Paymaster
 import com.zs.preferences.IntSaver
 import com.zs.preferences.booleanPreferenceKey
+import com.zs.preferences.floatPreferenceKey
 import com.zs.preferences.intPreferenceKey
 import com.zs.preferences.stringPreferenceKey
 
@@ -288,6 +289,7 @@ object Res {
             intPreferenceKey("Audiofy_launch_counter", 0)
         val use_accent_in_nav_bar = booleanPreferenceKey("use_accent_in_nav_bar", false)
         val app_config = stringPreferenceKey("${PREFIX}_app_config")
+        val subtitle_scale = floatPreferenceKey("${PREFIX}_subtitle_scale", defaultValue = 1.0f)
     }
 
     /**
