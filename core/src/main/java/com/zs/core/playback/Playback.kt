@@ -212,6 +212,10 @@ class Playback : MediaLibraryService(), Callback, Player.Listener {
                     )
                 }
             }
+            // IDEA - Dont select any text for the current track when app starts.
+            player.trackSelectionParameters = player.trackSelectionParameters.buildUpon()
+                .setTrackTypeDisabled(C.TRACK_TYPE_TEXT, true)
+                .build()
             // Regardless of whether errors occurred during state restoration or not, add the current
             // class as a player listener
             player.addListener(this@Playback)
