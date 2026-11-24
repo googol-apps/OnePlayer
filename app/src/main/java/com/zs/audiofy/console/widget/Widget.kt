@@ -57,7 +57,7 @@ import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_RED_VIOLET_CAKE
 import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_SKEWED_DYNAMIC
 import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_SNOW_CONE
 import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_TIRAMISU
-
+import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.compose.LocalNavController
 import com.zs.audiofy.common.compose.LocalSystemFacade
 import com.zs.audiofy.common.compose.preference
@@ -77,10 +77,8 @@ import com.zs.audiofy.console.widget.styles.SkewedDynamic
 import com.zs.audiofy.console.widget.styles.SnowCone
 import com.zs.audiofy.console.widget.styles.Tiramisu
 import com.zs.audiofy.console.widget.styles.WavyGradientDots
-import com.zs.audiofy.common.AppConfig
-import com.zs.audiofy.common.Res
+import com.zs.audiofy.settings.RouteSettings
 import com.zs.compose.theme.LocalNavAnimatedVisibilityScope
-import com.zs.core.BuildConfig
 import com.zs.core.billing.Paymaster
 import dev.chrisbanes.haze.HazeState
 import kotlinx.coroutines.launch
@@ -115,7 +113,6 @@ object Widget {
 
     // Represent the IDs of supported players.
     const val ID_FAB_PLAYER = "fab_player"
-    const val ID_CONFIG = "config"
     const val ID_PLACEHOLDER = "_place_holder"
     const val ID_FAB_VIDEO_PLAYER = "fab_video_player"
 
@@ -151,9 +148,7 @@ object Widget {
         }
         // State to track whether the widget is expanded or not.
         var expanded by remember { mutableStateOf(false) }
-        // Handler to collapse the widget when back is pressed.
-        var showConfigScreen by remember { mutableStateOf(false) }
-        val onDismissRequest = { if (showConfigScreen) showConfigScreen = false else expanded = false }
+        val onDismissRequest = { expanded = false }
         BackHandler(expanded && !isConsole, onDismissRequest)
         // Action handler
         val scope = rememberCoroutineScope()
@@ -166,7 +161,7 @@ object Widget {
                     REQUEST_CLOSE -> remote.clear()
                     REQUEST_SKIP_TO_PREVIOUS -> remote.skipToPrevious()
                     REQUEST_OPEN_CONSOLE -> navController.navigate(RouteConsole())
-                    REQUEST_SHOW_CONFIG -> showConfigScreen = !showConfigScreen // toggle config.
+                    REQUEST_SHOW_CONFIG -> navController.navigate(RouteSettings())
                     else -> remote.seekTo(code)
                 }
             }
@@ -220,7 +215,7 @@ object Widget {
                         // expand the player to show the full-screen view instead.
                         expanded = true
                     // show config screen always in playstore version.
-                    else -> showConfigScreen = BuildConfig.FLAVOR != BuildConfig.FLAVOR_COMMUNITY
+                    else -> {}
                 }
             }
         )
@@ -230,7 +225,6 @@ object Widget {
             // choose target appropriately.
             targetState = when {
                 isConsole -> ID_PLACEHOLDER
-                showConfigScreen -> ID_CONFIG
                 state.isVideo -> ID_FAB_VIDEO_PLAYER
                 !expanded -> ID_FAB_PLAYER
                 else -> widget
@@ -240,7 +234,6 @@ object Widget {
                 // Provide the current scope for navigation animations.
                 CompositionLocalProvider(LocalNavAnimatedVisibilityScope provides this) {
                     when (id) {
-                        ID_CONFIG -> Config(state, surface, onRequest)
                         ID_PLACEHOLDER -> Spacer(FabSize)
                         ID_FAB_PLAYER -> FabPlayer(state, onRequest, clickable)
                         ID_FAB_VIDEO_PLAYER -> FabVideoPlayer(state, runBlocking { remote.getViewProvider() }, onRequest, clickable)

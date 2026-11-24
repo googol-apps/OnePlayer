@@ -211,6 +211,11 @@ object RouteSettings : Route {
                             }
                             item { Upgrades() }
                         }
+
+                        // widgets
+                        if (BuildConfig.FLAVOR != BuildConfig.FLAVOR_COMMUNITY)
+                            item { Widgets() }
+
                         // App Preferences and Flags
                         preferences(viewState)
                         // AboutUs

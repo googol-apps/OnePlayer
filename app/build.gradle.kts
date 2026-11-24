@@ -125,7 +125,7 @@ android {
 
         // Debug build configuration
         debug {
-            applicationIdSuffix = ".debug"   // Allows installing debug + release side by side
+           // applicationIdSuffix = ".debug"   // Allows installing debug + release side by side
             resValue("string", "launcher_label", "Debug") // Custom launcher label
             versionNameSuffix = "-debug"     // Append suffix to version name
         }
