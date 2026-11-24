@@ -209,7 +209,7 @@ object RouteSettings : Route {
                                     contentPadding = HeaderPadding
                                 )
                             }
-                            item { Upgrades() }
+                            item { Upgrades(modifier = Modifier.padding(vertical = Res.space.medium)) }
                         }
 
                         // widgets

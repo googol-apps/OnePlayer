@@ -1,4 +1,4 @@
-package com.zs.audiofy.console.widget
+package com.zs.audiofy.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.produceState
@@ -36,15 +36,15 @@ import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_SNOW_CONE
 import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_TIRAMISU
 import com.zs.audiofy.common.IAP_WIDGETS_PLATFORM
 import com.zs.audiofy.common.Res
-import com.zs.audiofy.common.WindowStyle
-
 import com.zs.audiofy.common.compose.LocalSystemFacade
 import com.zs.audiofy.common.compose.background
 import com.zs.audiofy.common.compose.preference
+import com.zs.audiofy.common.compose.rememberAcrylicSurface
 import com.zs.audiofy.common.compose.shine
 import com.zs.audiofy.common.isFreemium
 import com.zs.audiofy.common.richDesc
 import com.zs.audiofy.common.vectorResource
+import com.zs.audiofy.console.widget.Widget
 import com.zs.audiofy.console.widget.styles.DiskDynamo
 import com.zs.audiofy.console.widget.styles.ElongatedBeat
 import com.zs.audiofy.console.widget.styles.GoldenDust
@@ -57,12 +57,14 @@ import com.zs.audiofy.console.widget.styles.SkewedDynamic
 import com.zs.audiofy.console.widget.styles.SnowCone
 import com.zs.audiofy.console.widget.styles.Tiramisu
 import com.zs.audiofy.console.widget.styles.WavyGradientDots
+import com.zs.compose.foundation.Background
 import com.zs.compose.theme.AppTheme
 import com.zs.compose.theme.Button
 import com.zs.compose.theme.ButtonDefaults
 import com.zs.compose.theme.ContentAlpha
 import com.zs.compose.theme.Icon
 import com.zs.compose.theme.IconButton
+import com.zs.compose.theme.LocalSharedAnimsEnabled
 import com.zs.compose.theme.None
 import com.zs.compose.theme.SplitButtonLayout
 import com.zs.compose.theme.TrailingSplitButton
@@ -73,11 +75,10 @@ import com.zs.core.billing.Product
 import com.zs.core.billing.Purchase
 import com.zs.core.billing.purchased
 import com.zs.core.playback.NowPlaying
-import dev.chrisbanes.haze.HazeState
 import kotlinx.coroutines.flow.combine
 
 
-private typealias Purchasable = Pair<Purchase?, Product?>?
+private typealias Purchasable = Pair<Purchase?, Product?>
 
 private const val TAG = "Config"
 
@@ -125,18 +126,15 @@ private fun bundleKeyOf(key: String): String {
     }
 }
 
-
+private val NonePlaying = NowPlaying(null, null)
 private val SplitButtonShape = RoundedCornerShape(8.dp) to CircleShape
 
 /**
  * Represents the widget preview flyout
  */
-context(_: Widget)
 @Composable
-fun Config(
-    state: NowPlaying,
-    surface: HazeState,
-    onRequest: (code: Float) -> Unit,
+context(_: RouteSettings)
+fun Widgets(
     modifier: Modifier = Modifier
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier.pointerInput(Unit, {})) {
@@ -146,30 +144,16 @@ fun Config(
             mutableIntStateOf(WIDGETS.indexOf(selected))
         }
 
-        when (WIDGETS[index]) {
-            Paymaster.IAP_PLATFORM_WIDGET_DISK_DYNAMO -> DiskDynamo(state, onRequest)
-            Paymaster.IAP_PLATFORM_WIDGET_ELONGATE_BEAT -> ElongatedBeat(state, onRequest)
-            Paymaster.IAP_COLOR_CROFT_GOLDEN_DUST -> GoldenDust(state, onRequest)
-            Paymaster.IAP_COLOR_CROFT_GRADIENT_GROVES -> GradientGroves(state, onRequest)
-            Paymaster.IAP_PLATFORM_WIDGET_IPHONE -> MistyTunes(state, surface, onRequest)
-            Paymaster.IAP_COLOR_CROFT_MISTY_DREAM -> MistyDream(state, onRequest)
-            Paymaster.IAP_PLATFORM_WIDGET_RED_VIOLET_CAKE ->
-                RedVioletCake(state, onRequest)
-
-            Paymaster.IAP_COLOR_CROFT_ROTATING_GRADIENT ->
-                RotatingColorGradient(state, onRequest)
-
-            Paymaster.IAP_PLATFORM_WIDGET_SKEWED_DYNAMIC ->
-                SkewedDynamic(state, onRequest)
-
-            Paymaster.IAP_PLATFORM_WIDGET_SNOW_CONE -> SnowCone(state, onRequest)
-            Paymaster.IAP_PLATFORM_WIDGET_TIRAMISU -> Tiramisu(state, onRequest)
-            Paymaster.IAP_COLOR_CROFT_WAVY_GRADIENT_DOTS ->
-                WavyGradientDots(state, onRequest)
+        val facade = LocalSystemFacade.current
+        val surface = rememberAcrylicSurface() // just placeholder state.
+        val onRequest ={code: Float -> }
+        val state by produceState(NonePlaying) {
+            val remote = (facade as? MainActivity)?.remote ?: return@produceState
+            remote.state.collect { value = it ?: NonePlaying }
         }
 
-        // BottomBar
-        val facade = LocalSystemFacade.current
+        // purchase etc.
+
         val activity = facade as? MainActivity ?: return@Column
         val paymaster = activity.paymaster
         val widget: Purchasable? by produceState(null, index) {
@@ -189,12 +173,37 @@ fun Config(
             }.collect { value = it }
         }
 
+        CompositionLocalProvider(LocalSharedAnimsEnabled provides false) {
+            when (WIDGETS[index]) {
+                Paymaster.IAP_PLATFORM_WIDGET_DISK_DYNAMO -> DiskDynamo(state, onRequest)
+                Paymaster.IAP_PLATFORM_WIDGET_ELONGATE_BEAT -> ElongatedBeat(state, onRequest)
+                Paymaster.IAP_COLOR_CROFT_GOLDEN_DUST -> GoldenDust(state, onRequest)
+                Paymaster.IAP_COLOR_CROFT_GRADIENT_GROVES -> GradientGroves(state, onRequest)
+                Paymaster.IAP_PLATFORM_WIDGET_IPHONE -> MistyTunes(state, surface, onRequest)
+                Paymaster.IAP_COLOR_CROFT_MISTY_DREAM -> MistyDream(state, onRequest)
+                Paymaster.IAP_PLATFORM_WIDGET_RED_VIOLET_CAKE ->
+                    RedVioletCake(state, onRequest)
+
+                Paymaster.IAP_COLOR_CROFT_ROTATING_GRADIENT ->
+                    RotatingColorGradient(state, onRequest)
+
+                Paymaster.IAP_PLATFORM_WIDGET_SKEWED_DYNAMIC ->
+                    SkewedDynamic(state, onRequest)
+
+                Paymaster.IAP_PLATFORM_WIDGET_SNOW_CONE -> SnowCone(state, onRequest)
+                Paymaster.IAP_PLATFORM_WIDGET_TIRAMISU -> Tiramisu(state, onRequest)
+                Paymaster.IAP_COLOR_CROFT_WAVY_GRADIENT_DOTS ->
+                    WavyGradientDots(state, onRequest)
+            }
+        }
+
+        // BottomBar
+
         TopAppBar(
-            shape = CircleShape,
-            elevation = 8.dp,
-            modifier = Modifier.padding(top = Res.space.medium),
-            border = AppTheme.colors.shine,
-            background = AppTheme.colors.background(surface),
+            shape = Res.shape.section_bottom,
+            elevation = 0.dp,
+            modifier = Modifier.padding(top = Res.space.small),
+            background = Background(AppTheme.colors.background(1.dp)),
             windowInsets = WindowInsets.None,
             title = {
                 SplitButtonLayout(
@@ -291,19 +300,5 @@ fun Config(
                 )
             }
         )
-
-        // The DisposableEffect is used here to manage the visibility of the app's navigation bar
-        // when this composable enters or leaves the composition.
-        DisposableEffect(Unit) {
-            // When the composable is first displayed (or when the effect is launched),
-            // this code hides the app's navigation bar by updating the window style.
-            facade.style = facade.style + WindowStyle.FLAG_APP_NAV_BAR_HIDDEN
-            // The onDispose block is executed when the composable is removed from the screen
-            // (e.g., when the user navigates away).
-            onDispose {
-                // This restores the default behavior of the navigation bar, making it visible again.
-                facade.style = facade.style + WindowStyle.FLAG_APP_NAV_BAR_VISIBILITY_AUTO
-            }
-        }
     }
 }
