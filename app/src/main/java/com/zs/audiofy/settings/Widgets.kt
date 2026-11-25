@@ -68,7 +68,6 @@ import com.zs.compose.theme.Button
 import com.zs.compose.theme.ButtonDefaults
 import com.zs.compose.theme.ContentAlpha
 import com.zs.compose.theme.Icon
-import com.zs.compose.theme.IconButton
 import com.zs.compose.theme.LocalSharedAnimsEnabled
 import com.zs.compose.theme.None
 import com.zs.compose.theme.SplitButtonLayout
@@ -141,9 +140,7 @@ private val SplitButtonShape = RoundedCornerShape(8.dp) to CircleShape
  */
 @Composable
 context(_: RouteSettings)
-fun Widgets(
-    modifier: Modifier = Modifier
-) {
+fun Widgets(modifier: Modifier = Modifier) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier.pointerInput(Unit, {})) {
         // viewpager
         val selected by preference(Res.key.glance_widget)
@@ -153,7 +150,7 @@ fun Widgets(
 
         val facade = LocalSystemFacade.current
         val surface = rememberAcrylicSurface() // just placeholder state.
-        val onRequest ={code: Float -> facade.showToast(Res.string.msg_widget_preview_only) }
+        val onRequest ={ code: Float -> facade.showSnackbar(Res.string.msg_widget_preview_only) }
         val state by produceState(NonePlaying) {
             val remote = (facade as? MainActivity)?.remote ?: return@produceState
             remote.state.collect { value = it ?: NonePlaying }
@@ -194,7 +191,7 @@ fun Widgets(
             action = action@{
                 if (bundle?.first.purchased)
                     return@action Spacer(Modifier)
-                Button(onClick = { facade.initiatePurchaseFlow(bundle?.first?.id ?: "") }) {
+                Button(onClick = { facade.initiatePurchaseFlow(bundle?.second?.id ?: "") }) {
                     Icon(
                         vectorResource(Res.drawable.ic_lock_open),
                         contentDescription = null
@@ -263,21 +260,22 @@ fun Widgets(
                         )
                     },
                     trailingButton = {
-                        val (purchase, _) = bundle ?: return@SplitButtonLayout
-                        val key = bundleKeyOf(WIDGETS[index])
                         TrailingSplitButton(
                             shapes = AppTheme.shapes.small to AppTheme.shapes.large,
                             content = {
                                 Icon(
-                                    vectorResource(Res.drawable.ic_shop_two),
+                                    vectorResource(Res.drawable.ic_info),
                                     contentDescription = null
                                 )
                             },
                             onClick = {
-                                if (!purchase.purchased)
-                                    activity.initiatePurchaseFlow(key)
-                                else
-                                    activity.showToast(Res.string.msg_settings_upgrade_unlocked)
+                                val info = widget?.second?.richDesc
+                                if (info != null)
+                                    activity.showSnackbar(
+                                        info,
+                                        icon = ImageVector.vectorResource(activity.theme, activity.resources, Res.drawable.ic_info, ),
+                                        duration = SnackbarDuration.Indefinite
+                                    )
                             },
                         )
                     }
@@ -313,21 +311,6 @@ fun Widgets(
                         )
                     },
                     modifier = Modifier.scale(0.85f)
-                )
-
-                IconButton(
-                    vectorResource(Res.drawable.ic_info),
-                    contentDescription = null,
-                    modifier = Widget.SmallIconBtn,
-                    onClick = {
-                        val info = widget?.second?.richDesc
-                        if (info != null)
-                            activity.showSnackbar(
-                                info,
-                                icon = ImageVector.vectorResource(activity.theme, activity.resources, Res.drawable.ic_info, ),
-                                duration = SnackbarDuration.Indefinite
-                            )
-                    }
                 )
             }
         )
