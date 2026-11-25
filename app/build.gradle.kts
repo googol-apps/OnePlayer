@@ -95,7 +95,7 @@ android {
     flavorDimensions += "edition"
     productFlavors {
         // STANDARD (Default monetized edition: ads + telemetry + in-app purchases enabled)
-        create("standard") { dimension = "edition"; }
+        create("standard") { dimension = "edition"; isDefault = true }
         // COMMUNITY (Open-source edition: minimal free build, no ads, no telemetry, no purchases)
         create("community") { dimension = "edition"; versionNameSuffix = "-foss" }
         // PLUS (Privacy-friendly edition: ads + in-app purchases, but telemetry disabled)

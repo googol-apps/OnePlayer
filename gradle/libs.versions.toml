@@ -2,7 +2,7 @@
 agp = "9.5.2"                # Android Gradle Plugin
 kotlin = "2.4.21"            # Kotlin language + Compose plugin
 media3 = "1.11.1"            # Media3 playback libraries
-toolkit = "3.12.3-dev"       # Prime Toolkit modules
+toolkit = "3.12.4-dev"       # Prime Toolkit modules
 coil = "3.6.3"               # Coil image loader
 room = "2.8.5"               # Room persistence library
 glance = "1.2.0"             # Glance widgets

@@ -1,6 +1,7 @@
 package com.zs.audiofy.settings
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -19,7 +20,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.zs.audiofy.MainActivity
 import com.zs.audiofy.common.IAP_COLOR_CROFT_GOLDEN_DUST
 import com.zs.audiofy.common.IAP_COLOR_CROFT_GRADIENT_GROVES
@@ -37,10 +42,10 @@ import com.zs.audiofy.common.IAP_PLATFORM_WIDGET_TIRAMISU
 import com.zs.audiofy.common.IAP_WIDGETS_PLATFORM
 import com.zs.audiofy.common.Res
 import com.zs.audiofy.common.compose.LocalSystemFacade
-import com.zs.audiofy.common.compose.background
 import com.zs.audiofy.common.compose.preference
 import com.zs.audiofy.common.compose.rememberAcrylicSurface
 import com.zs.audiofy.common.compose.shine
+import com.zs.audiofy.common.ellipsize
 import com.zs.audiofy.common.isFreemium
 import com.zs.audiofy.common.richDesc
 import com.zs.audiofy.common.vectorResource
@@ -70,6 +75,8 @@ import com.zs.compose.theme.SplitButtonLayout
 import com.zs.compose.theme.TrailingSplitButton
 import com.zs.compose.theme.appbar.TopAppBar
 import com.zs.compose.theme.snackbar.SnackbarDuration
+import com.zs.compose.theme.text.Header
+import com.zs.compose.theme.text.Label
 import com.zs.core.billing.Paymaster
 import com.zs.core.billing.Product
 import com.zs.core.billing.Purchase
@@ -146,14 +153,13 @@ fun Widgets(
 
         val facade = LocalSystemFacade.current
         val surface = rememberAcrylicSurface() // just placeholder state.
-        val onRequest ={code: Float -> }
+        val onRequest ={code: Float -> facade.showToast(Res.string.msg_widget_preview_only) }
         val state by produceState(NonePlaying) {
             val remote = (facade as? MainActivity)?.remote ?: return@produceState
             remote.state.collect { value = it ?: NonePlaying }
         }
 
         // purchase etc.
-
         val activity = facade as? MainActivity ?: return@Column
         val paymaster = activity.paymaster
         val widget: Purchasable? by produceState(null, index) {
@@ -173,6 +179,32 @@ fun Widgets(
             }.collect { value = it }
         }
 
+        // Header
+        Header(
+            drawDivider = true,
+            text = buildAnnotatedString {
+                append((bundle?.second?.title ?: "Widgets").ellipsize(16))
+                append("\n")
+                withStyle(SpanStyle(fontSize = 11.sp)){
+                    append(widget?.second?.title ?: "N/A")
+                }
+            },
+            style = AppTheme.typography.body2,
+            contentPadding = RouteSettings.HeaderPadding,
+            action = action@{
+                if (bundle?.first.purchased)
+                    return@action Spacer(Modifier)
+                Button(onClick = { facade.initiatePurchaseFlow(bundle?.first?.id ?: "") }) {
+                    Icon(
+                        vectorResource(Res.drawable.ic_lock_open),
+                        contentDescription = null
+                    )
+                    Label(bundle?.second?.formattedPrice ?: "N/A")
+                }
+            }
+        )
+
+        // Widgets
         CompositionLocalProvider(LocalSharedAnimsEnabled provides false) {
             when (WIDGETS[index]) {
                 Paymaster.IAP_PLATFORM_WIDGET_DISK_DYNAMO -> DiskDynamo(state, onRequest)
@@ -198,7 +230,6 @@ fun Widgets(
         }
 
         // BottomBar
-
         TopAppBar(
             shape = Res.shape.section_bottom,
             elevation = 0.dp,
@@ -289,7 +320,7 @@ fun Widgets(
                     contentDescription = null,
                     modifier = Widget.SmallIconBtn,
                     onClick = {
-                        val info = bundle?.second?.richDesc
+                        val info = widget?.second?.richDesc
                         if (info != null)
                             activity.showSnackbar(
                                 info,

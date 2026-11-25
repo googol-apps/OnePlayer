@@ -362,4 +362,5 @@
     </string>
     <!--The default value for some value provided by the dev in the app.-->
     <string name="auto">Auto</string>
+    <string name="msg_widget_preview_only">This is a showcase preview. Buttons will work only after the widget has been applied.</string>
 </resources>
