@@ -59,7 +59,11 @@
     <string name="changelog_1_8_0" translatable="false">
         <b>What’s New <font color='green'>(v1.8.0)</font></b>
         <font color='grey'>
-            \n
+            \n • Improved Play Store compatibility checks.
+            \n • New and improved widget preview experience.
+            \n • Added dedicated Widgets settings section.
+            \n • Cleaner widget controls and purchase flow fixes.
+            \n • General bug fixes and improvements.
         </font>
     </string>
 

@@ -1,4 +1,5 @@
-• Added subtitle font size scaling in settings for better readability
-• Fixed player full-screen layout when hiding playback queue
-• Resolved track selection conflicts and audio equalizer crashes
-• Improved optional feature download prompts and playback startup
+• Improved Play Store compatibility checks.
+• New and improved widget preview experience.
+• Added dedicated Widgets settings section.
+• Cleaner widget controls and purchase flow fixes.
+• General bug fixes and improvements.
